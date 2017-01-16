@@ -14,4 +14,6 @@ QA Software installed on this docker image:
 - Chroemdriver (most recent)
 - Firefox (todo)
 
+- Xvfb
+
 This docker image will be rebuilt every time this repository is committed to.
