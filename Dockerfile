@@ -54,8 +54,7 @@ ENV CHROME_BIN /usr/bin/google-chrome
 
 
 # Install most recent stable chromedriver
-#RUN CHROMEDRIVER_VERSION=`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE` \
-RUN CHROMEDRIVER_VERSION=2.28 \
+RUN CHROMEDRIVER_VERSION=`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE` \
     && mkdir -p /opt/chromedriver-$CHROMEDRIVER_VERSION \
     && curl -sS -o /tmp/chromedriver_linux64.zip http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip \
     && unzip -qq /tmp/chromedriver_linux64.zip -d /opt/chromedriver-$CHROMEDRIVER_VERSION \
