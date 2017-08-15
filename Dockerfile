@@ -22,7 +22,7 @@ RUN set -x \
     && apt-get update \
     && apt-get install -y \
         xvfb \
-        google-chrome-beta
+        google-chrome-stable
 
 ADD xvfb-chrome /usr/bin/xvfb-chrome
 RUN ln -sf /usr/bin/xvfb-chrome /usr/bin/google-chrome
