@@ -17,18 +17,20 @@ SERVERNUM=99
 AUTHFILE=
 ERRORFILE=/dev/null
 STARTWAIT=3
+SCREEN_WIDTH=${SCREEN_WIDTH:-'1280'}
+SCREEN_HEIGHT=${SCREEN_HEIGHT:-'800'}
+# XVFBARGS="-screen 0, ${SCREEN_WIDTH}x${SCREEN_HEIGHT}x24"
+=======
 #SCREEN_WIDTH=${SCREEN_WIDTH:-'1280'}
 #SCREEN_HEIGHT=${SCREEN_HEIGHT:-'800'}
 #XVFBARGS="-screen 0, ${SCREEN_WIDTH}x${SCREEN_HEIGHT}x24"
 # SCREEN_WIDTH=${SCREEN_WIDTH:-'1600'}
 # SCREEN_HEIGHT=${SCREEN_HEIGHT:-'1200'}
-SCREEN_WIDTH=${SCREEN_WIDTH:-'1920'}
-SCREEN_HEIGHT=${SCREEN_HEIGHT:-'1080'}
-XVFBARGS="-screen 0, ${SCREEN_WIDTH}x${SCREEN_HEIGHT}x24"
+
 LISTENTCP="-nolisten tcp"
 XAUTHPROTO=.
 
-echo "Using screen size ${SCREEN_WIDTH}x${SCREEN_HEIGHT}"
+#echo "Using screen size ${SCREEN_WIDTH}x${SCREEN_HEIGHT}"
 # Query the terminal to establish a default number of columns to use for
 # displaying messages to the user.  This is used only as a fallback in the event
 # the COLUMNS variable is not set.  ($COLUMNS can react to SIGWINCH while the

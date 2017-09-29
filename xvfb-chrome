@@ -10,7 +10,7 @@ _kill_procs() {
 trap _kill_procs SIGTERM
 
 # Use the width/height/depth
-#XVFB_WHD=${XVFB_WHD:-1024x768x16}
+XVFB_WHD=${XVFB_WHD:-1024x768x16}
 #XVFB_WHD=${XVFB_WHD:-1600x1200x32}
 #XVFB_WHD=${XVFB_WHD:-1920x1080x32}
 #XVFB_WHD=${XVFB_WHD:-1920x1080x16}
