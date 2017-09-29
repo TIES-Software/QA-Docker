@@ -18,7 +18,6 @@ Xvfb :99 -ac -screen 1 $XVFB_WHD +extension RANDR -nolisten tcp &
 xvfb=$!
 
 export DISPLAY=:99
-echo "xvfb-chrome file is setting the screen size $XVFB_WHD"
 
 google-chrome-stable --no-sandbox $@ &
 chproc=$!
