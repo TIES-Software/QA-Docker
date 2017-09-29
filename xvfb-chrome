@@ -11,7 +11,8 @@ trap _kill_procs SIGTERM
 
 # Use the width/height/depth
 #XVFB_WHD=${XVFB_WHD:-1024x768x16}
-XVFB_WHD=${XVFB_WHD:-1600x1200x32}
+#XVFB_WHD=${XVFB_WHD:-1600x1200x32}
+XVFB_WHD=${XVFB_WHD:-1920x1080x32}
 
 # Start Xvfb on display port 99
 Xvfb :99 -ac -screen 1 $XVFB_WHD +extension RANDR -nolisten tcp &
