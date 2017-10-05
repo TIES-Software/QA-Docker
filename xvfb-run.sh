@@ -80,7 +80,7 @@ find_free_servernum() {
 
     i=$SERVERNUM
     while [ -f /tmp/.X$i-lock ]; do
-        i=$(($i + 1))
+        i=$(($i 1))
     done
     echo $i
 }
@@ -99,7 +99,7 @@ clean_up() {
 }
 
 # Parse the command line.
-ARGS=$(getopt --options +ae:f:hn:lp:s:w: \
+ARGS=$(getopt --optionsae:f:hn:lp:s:w: \
        --long auto-servernum,error-file:,auth-file:,help,server-num:,listen-tcp,xauth-protocol:,server-args:,wait: \
        --name "$PROGNAME" -- "$@")
 GETOPT_STATUS=$?
@@ -151,7 +151,7 @@ trap clean_up EXIT
 # If the user did not specify an X authorization file to use, set up a temporary
 # directory to house one.
 if [ -z "$AUTHFILE" ]; then
-    XVFB_RUN_TMPDIR="$(mktemp -d -t $PROGNAME.XXXXXX)"
+     XVFB_RUN_TMPDIR="$(mktemp -d -t $PROGNAME.XXXXXX)"
     # Create empty file to avoid xauth warning
     AUTHFILE=$(touch "$XVFB_RUN_TMPDIR/Xauthority")
 fi
@@ -172,7 +172,7 @@ EOF
         break
     elif [ -n "$AUTONUM" ]; then
         # The display is in use so try another one (if '-a' was specified).
-        SERVERNUM=$((SERVERNUM + 1))
+        SERVERNUM=$((SERVERNUM 1))
         SERVERNUM=$(find_free_servernum)
         continue
     fi
@@ -181,7 +181,7 @@ EOF
 done
 
 # Start the command and save its exit status.
-set +e
+sete
 DISPLAY=:$SERVERNUM XAUTHORITY=$AUTHFILE "$@" 2>&1
 RETVAL=$?
 set -e
