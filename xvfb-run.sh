@@ -99,7 +99,7 @@ clean_up() {
 }
 
 # Parse the command line.
-ARGS=$(getopt --optionsae:f:hn:lp:s:w: \
+ARGS=$(getopt --options +ae:f:hn:lp:s:w: \
        --long auto-servernum,error-file:,auth-file:,help,server-num:,listen-tcp,xauth-protocol:,server-args:,wait: \
        --name "$PROGNAME" -- "$@")
 GETOPT_STATUS=$?
