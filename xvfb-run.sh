@@ -17,13 +17,10 @@ SERVERNUM=99
 AUTHFILE=
 ERRORFILE=/dev/null
 STARTWAIT=3
-SCREEN_WIDTH=${SCREEN_WIDTH:-'1280'}
-SCREEN_HEIGHT=${SCREEN_HEIGHT:-'800'}
-XVFBARGS="-screen 0, ${SCREEN_WIDTH}x${SCREEN_HEIGHT}x24"
+XVFBARGS="-screen 0 640x480x8"
 LISTENTCP="-nolisten tcp"
 XAUTHPROTO=.
 
-echo "Using screen size ${SCREEN_WIDTH}x${SCREEN_HEIGHT}"
 # Query the terminal to establish a default number of columns to use for
 # displaying messages to the user.  This is used only as a fallback in the event
 # the COLUMNS variable is not set.  ($COLUMNS can react to SIGWINCH while the
@@ -80,7 +77,7 @@ find_free_servernum() {
 
     i=$SERVERNUM
     while [ -f /tmp/.X$i-lock ]; do
-        i=$(($i 1))
+        i=$(($i + 1))
     done
     echo $i
 }
@@ -151,9 +148,9 @@ trap clean_up EXIT
 # If the user did not specify an X authorization file to use, set up a temporary
 # directory to house one.
 if [ -z "$AUTHFILE" ]; then
-     XVFB_RUN_TMPDIR="$(mktemp -d -t $PROGNAME.XXXXXX)"
+    XVFB_RUN_TMPDIR="$(mktemp -d -t $PROGNAME.XXXXXX)"
     # Create empty file to avoid xauth warning
-    AUTHFILE=$(touch "$XVFB_RUN_TMPDIR/Xauthority")
+    AUTHFILE=$(tempfile -n "$XVFB_RUN_TMPDIR/Xauthority")
 fi
 
 # Start Xvfb.
@@ -172,7 +169,7 @@ EOF
         break
     elif [ -n "$AUTONUM" ]; then
         # The display is in use so try another one (if '-a' was specified).
-        SERVERNUM=$((SERVERNUM 1))
+        SERVERNUM=$((SERVERNUM + 1))
         SERVERNUM=$(find_free_servernum)
         continue
     fi
@@ -181,7 +178,7 @@ EOF
 done
 
 # Start the command and save its exit status.
-sete
+set +e
 DISPLAY=:$SERVERNUM XAUTHORITY=$AUTHFILE "$@" 2>&1
 RETVAL=$?
 set -e
