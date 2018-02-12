@@ -56,7 +56,7 @@ RUN set -x \
 # Install most recent stable chromedriver
 RUN chrome_driver_version=`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE` \
     && mkdir -p /opt/chromedriver-$chrome_driver_version \
-    && curl -sS -o /tmp/chromedriver_linux64.zip http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip \
+    && curl -sS -o /tmp/chromedriver_linux64.zip http://chromedriver.storage.googleapis.com/$chrome_driver_version/chromedriver_linux64.zip \
     && unzip -qq /tmp/chromedriver_linux64.zip -d /opt/chromedriver-$chrome_driver_version \
     && rm /tmp/chromedriver_linux64.zip \
     && chmod +x /opt/chromedriver-$chrome_driver_version/chromedriver \
