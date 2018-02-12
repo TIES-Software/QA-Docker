@@ -21,13 +21,13 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
 RUN set -x \
     && apt-get update \
     && apt-get install -y \
-        xvfb \
+#        xvfb \
         google-chrome-stable
 
-ADD xvfb-chrome /usr/bin/xvfb-chrome
-RUN ln -sf /usr/bin/xvfb-chrome /usr/bin/google-chrome
+#ADD xvfb-chrome /usr/bin/xvfb-chrome
+#RUN ln -sf /usr/bin/xvfb-chrome /usr/bin/google-chrome
 
-ENV CHROME_BIN /usr/bin/google-chrome
+#ENV CHROME_BIN /usr/bin/google-chrome
 
 
 # Install most recent Firefox
@@ -54,7 +54,7 @@ ENV CHROME_BIN /usr/bin/google-chrome
 
 
 # Install most recent stable chromedriver
-RUN CHROMEDRIVER_VERSION=`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE` \
+RUN chrome_driver_version=`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE` \
     && mkdir -p /opt/chromedriver-$CHROMEDRIVER_VERSION \
     && curl -sS -o /tmp/chromedriver_linux64.zip http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip \
     && unzip -qq /tmp/chromedriver_linux64.zip -d /opt/chromedriver-$CHROMEDRIVER_VERSION \
@@ -64,5 +64,5 @@ RUN CHROMEDRIVER_VERSION=`curl -sS chromedriver.storage.googleapis.com/LATEST_RE
 
 
 #setup Xvfb
-ADD xvfb-run.sh /usr/bin/xvfb-run
-RUN chmod u+x /usr/bin/xvfb-run
+#ADD xvfb-run.sh /usr/bin/xvfb-run
+#RUN chmod u+x /usr/bin/xvfb-run
