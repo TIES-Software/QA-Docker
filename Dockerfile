@@ -37,11 +37,10 @@ RUN apt-get update && apt-get install -y \
 	ca-certificates \
 	curl \
   	gnupg \
-    python-pip \
-#python-dev build-essential \
     --no-install-recommends \
-    python \
     python-pip \
+    python \
+    python-setuptools  \
     unzip \
     wget \
     libgconf-2-4 \
@@ -56,7 +55,6 @@ RUN apt-get update && apt-get install -y \
 
 # step 8
 RUN pip install pytest \
-    --upgrade setuptools \
     selenium \
     behave
 
