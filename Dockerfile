@@ -23,11 +23,6 @@
 # step 1 Base docker image
 FROM debian:sid
 
-# step 8
-RUN pip install pytest \
-        selenium \
-        behave
-
 
 # step 2
 LABEL name="chrome-headless" \
@@ -42,6 +37,8 @@ RUN apt-get update && apt-get install -y \
 	ca-certificates \
 	curl \
   	gnupg \
+    python-pip \
+#python-dev build-essential \
     --no-install-recommends \
     python \
     python-pip \
@@ -56,6 +53,11 @@ RUN apt-get update && apt-get install -y \
 	&& apt-get purge --auto-remove -y curl gnupg \
 	&& rm -rf /var/lib/apt/lists/*
 
+
+# step 8
+RUN pip install pytest \
+    selenium \
+    behave
 
 # step 4 Add Chrome as a user
 RUN groupadd -r chrome && useradd -r -g chrome -G audio,video chrome \
