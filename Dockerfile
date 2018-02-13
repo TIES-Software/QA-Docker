@@ -37,12 +37,12 @@ RUN apt-get update && apt-get install -y \
 	ca-certificates \
 	curl \
   	gnupg \
+    --no-install-recommends \
     python \
     python-pip \
     unzip \
     wget \
     libgconf-2-4
-	--no-install-recommends \
 	&& curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
 	&& echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list \
 	&& apt-get update && apt-get install -y \
@@ -68,7 +68,6 @@ ENTRYPOINT [ "google-chrome-stable" ]
 RUN pip install pytest \
         selenium \
         behave
-
 
 # step 9 Define default command.
 CMD ["bash"]
