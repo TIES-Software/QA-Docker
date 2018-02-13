@@ -63,12 +63,6 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
   && rm -rf /var/lib/apt/lists/* /var/cache/apt/* \
   echo ${CHROME_VERSION:-google-chrome-stable}
 
-#=================================
-# Chrome Launch Script Wrapper
-#=================================
-COPY wrap_chrome_binary /opt/bin/wrap_chrome_binary
-RUN /opt/bin/wrap_chrome_binary
-
 #============================================
 # Chrome webdriver
 #============================================
