@@ -20,20 +20,28 @@
 # Basic use: open Chrome, navigate to http://localhost:9222/
 #
 
-# Base docker image
+# step 1 Base docker image
 FROM debian:sid
 
+
+# step 2
 LABEL name="chrome-headless" \
 			maintainer="Justin Ribeiro <justin@justinribeiro.com>" \
 			version="1.4" \
 			description="Google Chrome Headless in a container"
 
 # Install deps + add Chrome Stable + purge all the things
+# step 3
 RUN apt-get update && apt-get install -y \
 	apt-transport-https \
 	ca-certificates \
 	curl \
   	gnupg \
+    python \
+    python-pip \
+    unzip \
+    wget \
+    libgconf-2-4
 	--no-install-recommends \
 	&& curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
 	&& echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list \
@@ -43,30 +51,24 @@ RUN apt-get update && apt-get install -y \
 	&& apt-get purge --auto-remove -y curl gnupg \
 	&& rm -rf /var/lib/apt/lists/*
 
-# Add Chrome as a user
+# step 4 Add Chrome as a user
 RUN groupadd -r chrome && useradd -r -g chrome -G audio,video chrome \
     && mkdir -p /home/chrome && chown -R chrome:chrome /home/chrome
 
-# Run Chrome non-privileged
+# # step 5 Run Chrome non-privileged
 USER chrome
 
-# Expose port 9222
+# step 6 Expose port 9222
 EXPOSE 9222
 
-# Autorun chrome headless with no GPU
+# step 7 Autorun chrome headless with no GPU
 ENTRYPOINT [ "google-chrome-stable" ]
-RUN apt-get update && apt-get install -y \
-        python \
-        python-pip \
-        curl \
-        unzip \
-        wget \
-        libgconf-2-4
 
+# step 8
 RUN pip install pytest \
         selenium \
         behave
 
 
-# Define default command.
+# step 9 Define default command.
 CMD ["bash"]
