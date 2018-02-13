@@ -25,10 +25,10 @@ FROM debian:sid
 
 
 # step 2
-LABEL name="chrome-headless" \
-			maintainer="Justin Ribeiro <justin@justinribeiro.com>" \
-			version="1.4" \
-			description="Google Chrome Headless in a container"
+#LABEL name="chrome-headless" \
+#			maintainer="Justin Ribeiro <justin@justinribeiro.com>" \
+#			version="1.4" \
+#			description="Google Chrome Headless in a container"
 
 # Install deps + add Chrome Stable + purge all the things
 # step 3
@@ -36,7 +36,7 @@ RUN apt-get update && apt-get install -y \
 	apt-transport-https \
 	ca-certificates \
 	curl \
-  	gnupg \
+ 	gnupg \
     --no-install-recommends \
     python-pip \
     python \
@@ -44,47 +44,20 @@ RUN apt-get update && apt-get install -y \
     unzip \
     wget \
     libgconf-2-4
-#	&& curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
-#	&& echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list \
-#	&& apt-get update && apt-get install -y \
-#	google-chrome-stable \
-#    --only-upgrade install google-chrome-stable \
-#	&& apt-get purge --auto-remove -y curl gnupg \
-#	&& rm -rf /var/lib/apt/lists/*
-
-# Chrome Browser
-ARG CHROME_VERSION="google-chrome-stable"
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
-  && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list \
-  && apt-get update -qqy \
-  && apt-get -qqy install \
-    ${CHROME_VERSION:-google-chrome-stable} \
-  && rm /etc/apt/sources.list.d/google-chrome.list \
-  && rm -rf /var/lib/apt/lists/* /var/cache/apt/* \
-  echo ${CHROME_VERSION:-google-chrome-stable}
-
-#============================================
-# Chrome webdriver
-#============================================
-# can specify versions by CHROME_DRIVER_VERSION
-# Latest released version will be used by default
-#============================================
-ARG CHROME_DRIVER_VERSION="latest"
-RUN CD_VERSION=$(if [ ${CHROME_DRIVER_VERSION:-latest} = "latest" ]; then echo $(wget -qO- https://chromedriver.storage.googleapis.com/LATEST_RELEASE); else echo $CHROME_DRIVER_VERSION; fi) \
-    && echo "Using chromedriver version: "$CD_VERSION \
-    && wget --no-verbose -O /tmp/chromedriver_linux64.zip https://chromedriver.storage.googleapis.com/$CD_VERSION/chromedriver_linux64.zip \
-    && rm -rf /opt/selenium/chromedriver \
-    && unzip /tmp/chromedriver_linux64.zip -d /opt/selenium \
-    && rm /tmp/chromedriver_linux64.zip \
-    && mv /opt/selenium/chromedriver /opt/selenium/chromedriver-$CD_VERSION \
-    && chmod 755 /opt/selenium/chromedriver-$CD_VERSION \
-    && ln -fs /opt/selenium/chromedriver-$CD_VERSION /usr/bin/chromedriver
-
+	&& curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
+	&& echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list \
+	&& apt-get update && apt-get install -y \
+	google-chrome-stable \
+    --only-upgrade install google-chrome-stable \
+	&& apt-get purge --auto-remove -y curl gnupg \
+	&& rm -rf /var/lib/apt/lists/*
 
 # step 8
 RUN pip install pytest \
     selenium \
     behave
+
+FROM selenium/standalone-chrome
 
 # step 4 Add Chrome as a user
 RUN groupadd -r chrome && useradd -r -g chrome -G audio,video chrome \
