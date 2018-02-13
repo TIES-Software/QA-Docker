@@ -43,7 +43,7 @@ RUN apt-get update && apt-get install -y \
     python-setuptools  \
     unzip \
     wget \
-    libgconf-2-4 \
+    libgconf-2-4
 #	&& curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
 #	&& echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list \
 #	&& apt-get update && apt-get install -y \
@@ -93,11 +93,11 @@ RUN pip install pytest \
     behave
 
 # step 4 Add Chrome as a user
-#RUN groupadd -r chrome && useradd -r -g chrome -G audio,video chrome \
-#    && mkdir -p /home/chrome && chown -R chrome:chrome /home/chrome
+RUN groupadd -r chrome && useradd -r -g chrome -G audio,video chrome \
+    && mkdir -p /home/chrome && chown -R chrome:chrome /home/chrome
 
 # step 5 Run Chrome non-privileged
-#USER chrome
+USER chrome
 
 # step 6 Expose port 9222
 EXPOSE 9222
