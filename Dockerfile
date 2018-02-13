@@ -51,11 +51,17 @@ RUN apt-get update && apt-get install -y \
 	&& apt-get purge --auto-remove -y curl gnupg \
 	&& rm -rf /var/lib/apt/lists/*
 
+# step 8
+RUN pip install pytest \
+        selenium \
+        behave
+
+
 # step 4 Add Chrome as a user
 RUN groupadd -r chrome && useradd -r -g chrome -G audio,video chrome \
     && mkdir -p /home/chrome && chown -R chrome:chrome /home/chrome
 
-# # step 5 Run Chrome non-privileged
+# step 5 Run Chrome non-privileged
 USER chrome
 
 # step 6 Expose port 9222
@@ -63,11 +69,6 @@ EXPOSE 9222
 
 # step 7 Autorun chrome headless with no GPU
 ENTRYPOINT [ "google-chrome-stable" ]
-
-# step 8
-RUN pip install pytest \
-        selenium \
-        behave
 
 # step 9 Define default command.
 CMD ["bash"]
