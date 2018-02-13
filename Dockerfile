@@ -56,6 +56,7 @@ RUN apt-get update && apt-get install -y \
 
 # step 8
 RUN pip install pytest \
+    --upgrade setuptools \
     selenium \
     behave
 
