@@ -25,8 +25,7 @@ RUN unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
 ENV DISPLAY=:99
 
 # step 8
-RUN pip install
-    behave
+RUN pip install behave
 
 # step 9 Define default command.
 CMD ["bash"]
