@@ -1,8 +1,16 @@
-FROM ubuntu
-FROM python:2.7
+FROM debian:jessie
 
-# install selenium
-RUN pip install selenium==3.8.0
+RUN apt-get update && apt-get install -y \
+        python \
+        python-pip \
+        curl \
+        unzip \
+        wget \
+        libgconf-2-4
+
+RUN pip install pytest \
+        selenium \
+        behave
 
 RUN apt-get update && apt-get install -y \
 	apt-transport-https \
