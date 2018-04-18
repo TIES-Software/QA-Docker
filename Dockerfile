@@ -23,12 +23,11 @@ RUN echo 'installing chromedriver'
 RUN apt-get install -yqq unzip
 RUN system_type=$(uname -m)
 RUN echo $system_type
-RUN wget -O /tmp/chromedriver/LATEST_RELEASE http://chromedriver.storage.googleapis.com/LATEST_RELEASE
-RUN if [ $system_type == i686 ]; then set bit=32; elif [ $system_type == x86_64 ]; then set bit=64; fi
-RUN echo $bit
-RUN cat /tmp/chromedriver/LATEST_RELEASE ; chrome_ver=$(cat /tmp/chromedriver/LATEST_RELEASE)
+RUN chrome_ver="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`"
 RUN echo $chrome_ver
-RUN wget -O /tmp/chromedriver/chromedriver.zip 'http://chromedriver.storage.googleapis.com/'echo $chrome_ver'/chromedriver_linux'$b'.zip'
+RUN if [ $system_type == i686 ]; then bit=32; elif [ $system_type == x86_64 ]; then bit=64; fi
+RUN echo $bit
+RUN wget -O /tmp/chromedriver/chromedriver.zip 'http://chromedriver.storage.googleapis.com/'$chrome_ver'/chromedriver_linux'$bit'.zip'
 RUN unzip -o /tmp/chromedriver/chromedriver.zip chromedriver -d /usr/local/bin/
 RUN echo 'chromedriver install steps complete, may NOT be successful'
 
