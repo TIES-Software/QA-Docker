@@ -22,7 +22,7 @@ RUN apt-get install -y google-chrome-stable
 
 # install chromedriver
 RUN system_type=$(uname -m) \
-    && echo $system_type
+    && echo $system_type \
     && chrome_ver="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`" \
     && if [ $system_type == i686 ]; then bit=32; elif [ $system_type == x86_64 ]; then bit=64; fi \
     && echo $bit \
