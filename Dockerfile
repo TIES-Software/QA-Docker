@@ -33,6 +33,7 @@ RUN if [ $system_type == i686 ]; then bit=32; elif [ $system_type == x86_64 ]; t
 RUN echo $bit
 RUN mkdir -p /tmp/chromedriver
 RUN curl http://chromedriver.storage.googleapis.com/$chrome_ver/chromedriver_linux$bit.zip > /tmp/chromedriver/chromedriver.zip
+RUN echo ls -l /tmp/chromedriver
 RUN unzip -qqo /tmp/chromedriver/chromedriver -d /usr/local/bin/
 RUN rm -rf /tmp/chromedriver
 RUN echo 'chromedriver install steps complete, may NOT be successful'
