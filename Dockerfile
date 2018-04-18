@@ -16,7 +16,7 @@ RUN pip install pytest \
 
 # install google chrome
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
-    && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+    && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list' \
     && apt-get -y update \
     && apt-get install -y google-chrome-stable \
 
@@ -28,6 +28,7 @@ RUN system_type=$(uname -m) \
     && mkdir -p /tmp/chromedriver \
     && curl http://chromedriver.storage.googleapis.com/$chrome_ver/chromedriver_linux$bit.zip > /tmp/chromedriver/chromedriver.zip \
     && unzip -qqo /tmp/chromedriver/chromedriver chromedriver -d /usr/local/bin/ \
+    && ls -l \
     && cp chromedriver-3 chromedriver \
     && rm -rf chromedriver-3 \
     && rm -rf /tmp/chromedriver
