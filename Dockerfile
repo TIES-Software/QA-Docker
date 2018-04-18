@@ -35,7 +35,7 @@ RUN chrome_ver="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_REL
 RUN echo $chrome_ver
 RUN if [ $system_type == i686 ]; then bit=32; elif [ $system_type == x86_64 ]; then bit=64; fi
 RUN echo $bit
-RUN curl -sS -o /tmp/chromedriver/chromedriver.zip http://chromedriver.storage.googleapis.com/$chrome_ver/chromedriver_linux$bit.zip
+RUN curl http://chromedriver.storage.googleapis.com/$chrome_ver/chromedriver_linux$bit.zip > /tmp/chromedriver/chromedriver.zip
 RUN unzip -o /tmp/chromedriver/chromedriver.zip chromedriver -d /usr/local/bin/
 RUN echo 'chromedriver install steps complete, may NOT be successful'
 
