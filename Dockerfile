@@ -29,9 +29,6 @@ RUN system_type=$(uname -m) \
     && mkdir -p /tmp/chromedriver \
     && curl http://chromedriver.storage.googleapis.com/$chrome_ver/chromedriver_linux$bit.zip > /tmp/chromedriver/chromedriver.zip \
     && unzip -qqo /tmp/chromedriver/chromedriver chromedriver -d /usr/local/bin/ \
-    && ls -l \
-    && cp chromedriver-3 chromedriver \
-    && rm -rf chromedriver-3 \
     && rm -rf /tmp/chromedriver
 
 # set display port to avoid crash
