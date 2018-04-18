@@ -6,17 +6,13 @@ RUN apt-get update && apt-get install -y \
         curl \
         unzip \
         wget \
+        apt-transport-https \
+    	ca-certificates \
         libgconf-2-4
 
 RUN pip install pytest \
         selenium \
         behave
-
-RUN apt-get update && apt-get install -y \
-	apt-transport-https \
-	ca-certificates \
-    unzip \
-    wget
 
 # install google chrome
 RUN echo 'install chrome'
@@ -37,7 +33,7 @@ RUN if [ $system_type == i686 ]; then bit=32; elif [ $system_type == x86_64 ]; t
 RUN echo $bit
 RUN mkdir -p /tmp/chromedriver
 RUN curl http://chromedriver.storage.googleapis.com/$chrome_ver/chromedriver_linux$bit.zip > /tmp/chromedriver/chromedriver.zip
-RUN unzip -o /tmp/chromedriver/chromedriver.zip chromedriver -d /usr/local/bin/
+RUN unzip -qqo /tmp/chromedriver/chromedriver -d /usr/local/bin/
 RUN rm -rf /tmp/chromedriver
 RUN echo 'chromedriver install steps complete, may NOT be successful'
 
