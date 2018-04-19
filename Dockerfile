@@ -31,18 +31,12 @@ RUN system_type=$(uname -m) \
     && unzip -qqo /tmp/chromedriver/chromedriver chromedriver -d /usr/local/bin/ \
     && rm -rf /tmp/chromedriver
 
-# set display port to avoid crash
-ENV DISPLAY=:99
-
-ARG CHROME_DRIVER_DIR=/usr/local/bin
-ARG FIREFOX_BINARY_PATH=/usr/local/bin
-ARG PROD_ID='test'
-ARG ROSTER_USER='ci+rosterview@feepay.com'
-
-ENV CHROME_DRIVER_DIR=$CHROME_DRIVER_DIR
-ENV FIREFOX_BINARY_PATH=$FIREFOX_BINARY_PATH
-ENV PROD_ID=$PROD_ID
-ENV ROSTER_USER=$ROSTER_USER
+# set ENV Variables
+ENV DISPLAY=:99 \
+    && CHROME_DRIVER_DIR=/usr/local/bin \
+    && FIREFOX_BINARY_PATH=/usr/local/bin \
+    && PROD_ID='test' \
+    && ROSTER_USER='ci+rosterview@feepay.com'
 
 RUN chmod +x /usr/local/bin/chromedriver
 
