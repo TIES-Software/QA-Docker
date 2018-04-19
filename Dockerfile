@@ -34,5 +34,17 @@ RUN system_type=$(uname -m) \
 # set display port to avoid crash
 ENV DISPLAY=:99
 
+ARG CHROME_DRIVER_DIR=/usr/local/bin
+ARG FIREFOX_BINARY_PATH=/usr/local/bin
+ARG PROD_ID='test'
+ARG ROSTER_USER='ci+rosterview@feepay.com'
+
+ENV CHROME_DRIVER_DIR=$CHROME_DRIVER_DIR
+ENV FIREFOX_BINARY_PATH=$FIREFOX_BINARY_PATH
+ENV PROD_ID=$PROD_ID
+ENV ROSTER_USER=$ROSTER_USER
+
+RUN chmod +x /usr/local/bin/chromedriver
+
 # Define default command.
 CMD ["bash"]
