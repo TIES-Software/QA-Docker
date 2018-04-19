@@ -33,8 +33,8 @@ RUN system_type=$(uname -m) \
 
 # set ENV Variables
 ENV DISPLAY=:99 \
-    && CHROME_DRIVER_DIR=/usr/local/bin \
-    && FIREFOX_BINARY_PATH=/usr/local/bin \
+    && CHROME_DRIVER_DIR='/usr/local/bin' \
+    && FIREFOX_BINARY_PATH='/usr/local/bin' \
     && PROD_ID='test' \
     && ROSTER_USER='ci+rosterview@feepay.com'
 
