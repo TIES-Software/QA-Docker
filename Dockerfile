@@ -29,16 +29,17 @@ RUN system_type=$(uname -m) \
     && mkdir -p /tmp/chromedriver \
     && curl http://chromedriver.storage.googleapis.com/$chrome_ver/chromedriver_linux$bit.zip > /tmp/chromedriver/chromedriver.zip \
     && unzip -qqo /tmp/chromedriver/chromedriver chromedriver -d /usr/local/bin/ \
-    && rm -rf /tmp/chromedriver
+    && rm -rf /tmp/chromedriver \
+    && chmod +x /usr/local/bin/chromedriver
 
 # set ENV Variables
-ENV DISPLAY=:99 \
-    && CHROME_DRIVER_DIR='/usr/local/bin' \
-    && FIREFOX_BINARY_PATH='/usr/local/bin' \
-    && PROD_ID='test' \
-    && ROSTER_USER='ci+rosterview@feepay.com'
+ENV DISPLAY=:99
+ENV CHROME_DRIVER_DIR="/usr/local/bin"
+ENV FIREFOX_BINARY_PATH="/usr/local/bin"
+ENV PROD_ID="test"
+ENV ROSTER_USER="ci+rosterview@feepay.com"
 
-RUN chmod +x /usr/local/bin/chromedriver
+
 
 # Define default command.
 CMD ["bash"]
