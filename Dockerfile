@@ -6,63 +6,40 @@ RUN apt-get update && apt-get install -y \
         curl \
         unzip \
         wget \
+        apt-transport-https \
+    	ca-certificates \
         libgconf-2-4
 
 RUN pip install pytest \
         selenium \
         behave
 
-# Install most recent Chrome
-
-# RUN echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' > /etc/apt/sources.list.d/chrome.list
-RUN echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' > /etc/apt/sources.list.d/chrome.list
+# install google chrome
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+RUN apt-get -y update
+RUN apt-get install -y google-chrome-stable
 
-RUN set -x \
-    && apt-get update \
-    && apt-get install -y \
-        xvfb \
-        google-chrome-stable
+# install chromedriver
+RUN system_type=$(uname -m) \
+    && echo $system_type \
+    && chrome_ver="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`" \
+    && if [ $system_type = 'i686' ]; then bit='32'; elif [ $system_type = 'x86_64' ]; then bit='64'; fi \
+    && echo $bit \
+    && mkdir -p /tmp/chromedriver \
+    && curl http://chromedriver.storage.googleapis.com/$chrome_ver/chromedriver_linux$bit.zip > /tmp/chromedriver/chromedriver.zip \
+    && unzip -qqo /tmp/chromedriver/chromedriver chromedriver -d /usr/local/bin/ \
+    && rm -rf /tmp/chromedriver \
+    && chmod +x /usr/local/bin/chromedriver
 
-ADD xvfb-chrome /usr/bin/xvfb-chrome
-RUN ln -sf /usr/bin/xvfb-chrome /usr/bin/google-chrome
-
-ENV CHROME_BIN /usr/bin/google-chrome
-
-
-# Install most recent Firefox
-
-#RUN set -x \
-#    && apt-get update \
-#    && apt-get install -y \
-#        pkg-mozilla-archive-keyring
-
-#RUN echo 'deb http://mozilla.debian.net/ jessie-backports firefox-esr' >> /etc/apt/sources.list.d/jessie-backports.list
-
-#RUN set -x \
-#    && apt-get update \
-#    && apt-get install -y \
-#        xvfb \
-#    && apt-get install -y -t \
-#        jessie-backports \
-#        firefox-esr
-
-#ADD xvfb-firefox /usr/bin/xvfb-firefox
-#RUN ln -sf /usr/bin/xvfb-firefox /usr/bin/firefox
-
-#ENV FIREFOX_BIN /usr/bin/firefox
+# set ENV Variables
+ENV DISPLAY=:99
+ENV CHROME_DRIVER_DIR="/usr/local/bin"
+ENV FIREFOX_BINARY_PATH="/usr/local/bin"
+ENV PROD_ID="test"
+ENV ROSTER_USER="ci+rosterview@feepay.com"
 
 
-# Install most recent stable chromedriver
-RUN CHROMEDRIVER_VERSION=`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE` \
-    && mkdir -p /opt/chromedriver-$CHROMEDRIVER_VERSION \
-    && curl -sS -o /tmp/chromedriver_linux64.zip http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip \
-    && unzip -qq /tmp/chromedriver_linux64.zip -d /opt/chromedriver-$CHROMEDRIVER_VERSION \
-    && rm /tmp/chromedriver_linux64.zip \
-    && chmod +x /opt/chromedriver-$CHROMEDRIVER_VERSION/chromedriver \
-    && ln -fs /opt/chromedriver-$CHROMEDRIVER_VERSION/chromedriver /usr/local/bin/chromedriver
 
-
-#setup Xvfb
-ADD xvfb-run.sh /usr/bin/xvfb-run
-RUN chmod u+x /usr/bin/xvfb-run
+# Define default command.
+CMD ["bash"]
