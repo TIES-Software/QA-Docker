@@ -15,8 +15,8 @@ RUN pip install pytest \
         behave
 
 FROM tiessoftware/feepay_tests:updates
-ENV CHROME_VERSION
-ENV CHROME_INSTALL_CMD
+ENV CHROME_VERSION='beta'
+ENV CHROME_INSTALL_CMD='google-chrome-beta'
 #COPY --from=base .
 
 RUN echo $CHROME_VERSION
