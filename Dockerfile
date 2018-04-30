@@ -15,12 +15,12 @@ RUN pip install pytest \
         behave
 
 FROM tiessoftware/feepay_tests:updates
-ARG CHROME_VERSION
-ARG CHROME_INSTALL_CMD
+ENV CHROME_VERSION
+ENV CHROME_INSTALL_CMD
 #COPY --from=base .
 
 RUN echo $CHROME_VERSION
-RUN if [ $CHROME_VERSION = 'beta' ]; then CHROME_INSTALL_CMD='google-chrome-beta'; elif [ $CHROME_VERSION = 'previous' ]; then CHROME_INSTALL_CMD='google-chrome'; elif [ $CHROME_VERSION = 'unstable' ]; then CHROME_INSTALL_CMD='google-chrome-unstable'; else CHROME_INSTALL_CMD='google-chrome-stable'; fi
+RUN if [ $CHROME_VERSION = 'beta' ]; then CHROME_INSTALL_CMD='google-chrome-beta'; elif [ $CHROME_VERSION = 'previous' ]; then CHROME_INSTALL_CMD='google-chrome-stable'; elif [ $CHROME_VERSION = 'unstable' ]; then CHROME_INSTALL_CMD='google-chrome-unstable'; else CHROME_INSTALL_CMD='google-chrome-stable'; fi
 RUN echo $CHROME_INSTALL_CMD
 
 
