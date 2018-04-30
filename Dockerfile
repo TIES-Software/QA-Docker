@@ -14,9 +14,8 @@ RUN pip install pytest \
         selenium \
         behave
 
-FROM tiessoftware/feepay_tests:updates
-ENV CHROME_VERSION='beta'
-ENV CHROME_INSTALL_CMD='google-chrome-beta'
+ARG CHROME_VERSION=current
+ENV CHROME_INSTALL_CMD=google-chrome-stable
 #COPY --from=base .
 
 RUN echo $CHROME_VERSION
@@ -25,10 +24,10 @@ RUN echo $CHROME_INSTALL_CMD
 
 
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/$CHROME_INSTALL_CMD.list'
+RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/${CHROME_INSTALL_CMD}.list'
 RUN apt-get -y update
 RUN echo $CHROME_INSTALL_CMD
-RUN apt-get install -y $CHROME_INSTALL_CMD
+RUN apt-get install -y ${CHROME_INSTALL_CMD}
 
 RUN system_type=$(uname -m) \
     && echo $system_type \
@@ -40,6 +39,8 @@ RUN system_type=$(uname -m) \
     && unzip -qqo /tmp/chromedriver/chromedriver chromedriver -d /usr/local/bin/ \
     && rm -rf /tmp/chromedriver \
     && chmod +x /usr/local/bin/chromedriver
+
+FROM tiessoftware/feepay_tests:updates
 
 # Define default command.
 CMD ["bash"]
