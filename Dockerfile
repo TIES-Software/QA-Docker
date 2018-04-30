@@ -19,13 +19,13 @@ ARG CHROME_VERSION
 ARG CHROME_INSTALL_CMD
 #COPY --from=base .
 
-RUN if [ $CHROME_VERSION = 'beta' ]; then CHROME_INSTALL_CMD='google-chrome-beta'; elif [ $CHROME_VERSION = 'previous' ]; then CHROME_INSTALL_CMD='google-chrome'; elif [ $CHROME_VERSION = 'unstable' ]; then CHROME_INSTALL_CMD='google-chrome-unstable'; else CHROME_INSTALL_CMD='google-chrome-stable'; fi
 RUN echo $CHROME_VERSION
+RUN if [ $CHROME_VERSION = 'beta' ]; then CHROME_INSTALL_CMD='google-chrome-beta'; elif [ $CHROME_VERSION = 'previous' ]; then CHROME_INSTALL_CMD='google-chrome'; elif [ $CHROME_VERSION = 'unstable' ]; then CHROME_INSTALL_CMD='google-chrome-unstable'; else CHROME_INSTALL_CMD='google-chrome-stable'; fi
 RUN echo $CHROME_INSTALL_CMD
 
 
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/$CHROME_INSTALL_CMD.list'
 RUN apt-get -y update
 RUN echo $CHROME_INSTALL_CMD
 RUN apt-get install -y $(CHROME_INSTALL_CMD)
