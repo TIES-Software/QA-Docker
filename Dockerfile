@@ -1,5 +1,11 @@
 FROM debian:jessie
 
+ARG CHROME_VERSION=current
+ARG CHROME_INSTALL_CMD=google-chrome-stable
+ARG CHROME_RELEASE=stable
+ARG CHROME_REPO=main
+ENV DISPLAY=:99
+
 RUN apt-get update && apt-get install -y \
         python \
         python-pip \
@@ -13,13 +19,6 @@ RUN apt-get update && apt-get install -y \
 RUN pip install pytest \
         selenium \
         behave
-
-ARG CHROME_VERSION=current
-ARG CHROME_INSTALL_CMD=google-chrome-stable
-ARG CHROME_RELEASE=stable
-ARG CHROME_REPO=main
-ENV DISPLAY=:99
-#COPY --from=base .
 
 RUN echo $CHROME_VERSION
 RUN if [ $CHROME_VERSION = 'previous' ]; then CHROME_RELEASE='bionic'; fi
@@ -47,6 +46,8 @@ RUN system_type=$(uname -m) \
     && unzip -qqo /tmp/chromedriver/chromedriver chromedriver -d /usr/local/bin/ \
     && rm -rf /tmp/chromedriver \
     && chmod +x /usr/local/bin/chromedriver
+
+RUN google-chrome --version
 
 FROM tiessoftware/feepay_tests:updates
 
