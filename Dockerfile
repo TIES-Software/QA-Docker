@@ -10,8 +10,6 @@ RUN apt-get update && apt-get install -y \
     	ca-certificates \
         libgconf-2-4
 
-RUN apt-get -y update
-
 RUN pip install pytest \
         selenium \
         behave
@@ -26,8 +24,8 @@ ENV DISPLAY=:99
 RUN echo $CHROME_VERSION
 RUN if [ $CHROME_VERSION = 'previous' ]; then $CHROME_RELEASE='bionic'; fi
 RUN if [ $CHROME_VERSION = 'previous' ]; then $CHROME_REPO='universe'; fi
-RUN if [ $CHROME_VERSION = 'beta' ]; then CHROME_INSTALL_CMD='google-chrome-beta'; fi
 RUN if [ $CHROME_VERSION = 'previous' ]; then CHROME_INSTALL_CMD='chromium-browser'; fi
+RUN if [ $CHROME_VERSION = 'beta' ]; then CHROME_INSTALL_CMD='google-chrome-beta'; fi
 RUN if [ $CHROME_VERSION = 'unstable' ]; then CHROME_INSTALL_CMD='google-chrome-unstable'; fi
 RUN echo $CHROME_INSTALL_CMD
 RUN echo $CHROME_RELEASE
@@ -35,7 +33,9 @@ RUN echo $CHROME_REPO
 
 
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ ${CHROME_RELEASE} ${CHROME_REPO}" >> /etc/apt/sources.list.d/${CHROME_INSTALL_CMD}.list'
+#RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ ${CHROME_RELEASE} ${CHROME_REPO}" >> /etc/apt/sources.list.d/${CHROME_INSTALL_CMD}.list'
+RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ ${CHROME_RELEASE} ${CHROME_REPO}" >> /etc/apt/sources.list.d/google.list'
+RUN apt-get -y update
 RUN apt-get install -y ${CHROME_INSTALL_CMD}
 
 RUN system_type=$(uname -m) \
