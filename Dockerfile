@@ -22,19 +22,11 @@ ENV DISPLAY=:99
 #COPY --from=base .
 
 RUN echo $CHROME_VERSION
-RUN if [ $CHROME_VERSION = 'previous' ];
-        then $CHROME_RELEASE='bionic'; fi
-
-RUN if [ $CHROME_VERSION = 'previous' ];
-        then $CHROME_REPO='universe'; fi
-
-RUN if [ $CHROME_VERSION = 'beta' ];
-        then CHROME_INSTALL_CMD='google-chrome-beta'; fi
-RUN if [ $CHROME_VERSION = 'previous' ];
-        then CHROME_INSTALL_CMD='chromium-browser'; fi
-RUN if [ $CHROME_VERSION = 'unstable' ];
-        then CHROME_INSTALL_CMD='google-chrome-unstable'; fi
-
+RUN if [ $CHROME_VERSION = 'previous' ]; then $CHROME_RELEASE='bionic'; fi
+RUN if [ $CHROME_VERSION = 'previous' ]; then $CHROME_REPO='universe'; fi
+RUN if [ $CHROME_VERSION = 'beta' ]; then CHROME_INSTALL_CMD='google-chrome-beta'; fi
+RUN if [ $CHROME_VERSION = 'previous' ]; then CHROME_INSTALL_CMD='chromium-browser'; fi
+RUN if [ $CHROME_VERSION = 'unstable' ]; then CHROME_INSTALL_CMD='google-chrome-unstable'; fi
 RUN echo $CHROME_INSTALL_CMD
 
 
