@@ -15,16 +15,31 @@ RUN pip install pytest \
         behave
 
 ARG CHROME_VERSION=current
-ENV CHROME_INSTALL_CMD=google-chrome-stable
+ARG CHROME_INSTALL_CMD=google-chrome-stable
+ARG CHROME_RELEASE=stable
+ARG CHROME_REPO=main
+ENV DISPLAY=:99
 #COPY --from=base .
 
 RUN echo $CHROME_VERSION
-RUN if [ $CHROME_VERSION = 'beta' ]; then CHROME_INSTALL_CMD='google-chrome-beta'; elif [ $CHROME_VERSION = 'previous' ]; then CHROME_INSTALL_CMD='google-chrome-stable'; elif [ $CHROME_VERSION = 'unstable' ]; then CHROME_INSTALL_CMD='google-chrome-unstable'; else CHROME_INSTALL_CMD='google-chrome-stable'; fi
+RUN if [ $CHROME_VERSION = 'previous' ];
+        then $CHROME_RELEASE='bionic'; fi
+
+RUN if [ $CHROME_VERSION = 'previous' ];
+        then $CHROME_REPO='universe'; fi
+
+RUN if [ $CHROME_VERSION = 'beta' ];
+        then CHROME_INSTALL_CMD='google-chrome-beta'; fi
+RUN if [ $CHROME_VERSION = 'previous' ];
+        then CHROME_INSTALL_CMD='chromium-browser'; fi
+RUN if [ $CHROME_VERSION = 'unstable' ];
+        then CHROME_INSTALL_CMD='google-chrome-unstable'; fi
+
 RUN echo $CHROME_INSTALL_CMD
 
 
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/${CHROME_INSTALL_CMD}.list'
+RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ ${CHROME_RELEASE} ${CHROME_REPO}" >> /etc/apt/sources.list.d/${CHROME_INSTALL_CMD}.list'
 RUN apt-get -y update
 RUN echo $CHROME_INSTALL_CMD
 RUN apt-get install -y ${CHROME_INSTALL_CMD}
