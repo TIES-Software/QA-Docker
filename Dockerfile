@@ -35,7 +35,7 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
 RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ ${CHROME_RELEASE} ${CHROME_REPO}" >> /etc/apt/sources.list.d/google.list'
 RUN apt-get -y update
 RUN apt-get install -y ${CHROME_INSTALL_CMD}
-
+RUN sh cp /usr/bin/chromium-browser /usr/local/bin
 RUN system_type=$(uname -m) \
     && echo $system_type \
     && chrome_ver="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`" \
@@ -47,7 +47,8 @@ RUN system_type=$(uname -m) \
     && rm -rf /tmp/chromedriver \
     && chmod +x /usr/local/bin/chromedriver
 
-RUN google-chrome --version
+RUN echo google-chrome --version
+RUN echo /usr/local/bin/chromium-browser --version
 
 FROM tiessoftware/feepay_tests:updates
 
