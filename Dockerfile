@@ -48,8 +48,9 @@ RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ ${CHROM
 RUN apt-get -y update
 RUN apt-get install -y ${CHROME_INSTALL_CMD}
 
-RUN system_type=$(uname -m) \
-    && echo $system_type
+RUN system_type=$(uname -m)
+RUN echo $system_type
+RUN echo $CHROME_DRIVER_VER
 RUN if [ $CHROME_DRIVER_VER = "latest" ]; then chrome_ver="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`"; fi
 RUN if [ !$CHROME_DRIVER_VER = "latest" ]; then chrome_ver="http://chromedriver.storage.googleapis.com/index.html?path=${DRIVER_VER}"; fi
 RUN echo $chrome_ver
