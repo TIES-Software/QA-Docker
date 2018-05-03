@@ -34,7 +34,7 @@ RUN if [ $CHROME_VERSION='unstable' ]; then CHROME_INSTALL_CMD='google-chrome-un
 # Selenium chromedriver version parameters to setup
 RUN echo $CHROME_DRIVER_VER
 RUN if [ $CHROME_DRIVER_VER='latest']; then DRIVER_URL=http://chromedriver.storage.googleapis.com/LATEST_RELEASE; fi
-RUN if [ ! $CHROME_DRIVER_VER='latest']; then CHROME_DRIVER_VER=DRIVER_VER
+RUN if [ ! $CHROME_DRIVER_VER='latest']; then CHROME_DRIVER_VER=DRIVER_VER; fi
 RUN if [ ! $CHROME_DRIVER_VER='latest' ]; then DRIVER_URL='https://chromedriver.storage.googleapis.com/index.html?path=${CHROME_DRIVER_VER}/'; fi
 
 # display in log file for trouble shooting
