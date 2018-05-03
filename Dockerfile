@@ -48,6 +48,7 @@ RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ ${CHROM
 RUN apt-get -y update
 RUN apt-get install -y ${CHROME_INSTALL_CMD}
 
+RUN echo $DRIVER_URL
 RUN system_type=$(uname -m) \
     && echo $system_type \
     && chrome_ver="`wget -qO- ${DRIVER_URL}`" \
