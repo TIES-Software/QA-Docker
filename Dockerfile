@@ -25,11 +25,11 @@ RUN pip install pytest \
 
 # Chrome BROWSER version parameters to setup
 RUN echo $CHROME_VERSION
-RUN if [ $CHROME_VERSION='previous' ]; then CHROME_RELEASE='bionic'; fi
-RUN if [ $CHROME_VERSION='previous' ]; then CHROME_REPO='universe'; fi
-RUN if [ $CHROME_VERSION='previous' ]; then CHROME_INSTALL_CMD='chromium-browser'; fi
-RUN if [ $CHROME_VERSION='beta' ]; then CHROME_INSTALL_CMD='google-chrome-beta'; fi
-RUN if [ $CHROME_VERSION='unstable' ]; then CHROME_INSTALL_CMD='google-chrome-unstable'; fi
+RUN if [ $CHROME_VERSION = "previous" ]; then CHROME_RELEASE='bionic'; fi
+RUN if [ $CHROME_VERSION = "previous" ]; then CHROME_REPO='universe'; fi
+RUN if [ $CHROME_VERSION = "previous" ]; then CHROME_INSTALL_CMD='chromium-browser'; fi
+RUN if [ $CHROME_VERSION = "beta" ]; then CHROME_INSTALL_CMD='google-chrome-beta'; fi
+RUN if [ $CHROME_VERSION = "unstable" ]; then CHROME_INSTALL_CMD='google-chrome-unstable'; fi
 
 # Selenium chromedriver version parameters to setup
 # RUN if [ $CHROME_DRIVER_VER='latest']; then DRIVER_URL=http://chromedriver.storage.googleapis.com/LATEST_RELEASE; fi
@@ -52,7 +52,7 @@ RUN system_type=$(uname -m)
 RUN echo $system_type
 RUN echo $CHROME_DRIVER_VER
 RUN if [ $CHROME_DRIVER_VER = "latest" ]; then chrome_ver="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`"; fi
-RUN if [ !$CHROME_DRIVER_VER = "latest" ]; then chrome_ver="http://chromedriver.storage.googleapis.com/index.html?path=${DRIVER_VER}"; fi
+RUN if [ ! $CHROME_DRIVER_VER = "latest" ]; then chrome_ver="http://chromedriver.storage.googleapis.com/index.html?path=${DRIVER_VER}"; fi
 RUN echo $chrome_ver
 RUN if [ $system_type = 'i686' ]; then bit='32'; elif [ $system_type = 'x86_64' ]; then bit='64'; fi
 RUN echo $bit
