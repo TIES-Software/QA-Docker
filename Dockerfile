@@ -49,15 +49,16 @@ RUN apt-get -y update
 RUN apt-get install -y ${CHROME_INSTALL_CMD}
 
 RUN system_type=$(uname -m) \
-    && echo $system_type \
-    && if [ $CHROME_DRIVER_VER = "latest" ]; then chrome_ver="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`"; fi \
-    && if [ !$CHROME_DRIVER_VER = "latest" ]; then chrome_ver="http://chromedriver.storage.googleapis.com/index.html?path=${DRIVER_VER}"; fi \
-    && echo $chrome_ver \
-    && if [ $system_type = 'i686' ]; then bit='32'; elif [ $system_type = 'x86_64' ]; then bit='64'; fi \
-    && echo $bit \
-    && mkdir -p /tmp/chromedriver \
-    && curl "${chrome_ver}/chromedriver_linux$bit.zip" > /tmp/chromedriver/chromedriver.zip \
-    && unzip -qqo /tmp/chromedriver/chromedriver chromedriver -d /usr/local/bin/ \
+    && echo $system_type
+RUN if [ $CHROME_DRIVER_VER = "latest" ]; then chrome_ver="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`"; fi
+RUN if [ !$CHROME_DRIVER_VER = "latest" ]; then chrome_ver="http://chromedriver.storage.googleapis.com/index.html?path=${DRIVER_VER}"; fi
+RUN echo $chrome_ver
+RUN if [ $system_type = 'i686' ]; then bit='32'; elif [ $system_type = 'x86_64' ]; then bit='64'; fi
+RUN echo $bit
+RUN mkdir -p /tmp/chromedriver
+RUN echo $chrome_ver
+RUN curl "${chrome_ver}/chromedriver_linux$bit.zip" > /tmp/chromedriver/chromedriver.zip
+RUN unzip -qqo /tmp/chromedriver/chromedriver chromedriver -d /usr/local/bin/ \
     && rm -rf /tmp/chromedriver \
     && chmod +x /usr/local/bin/chromedriver
 
