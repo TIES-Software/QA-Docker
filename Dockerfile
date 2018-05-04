@@ -37,7 +37,7 @@ RUN echo $CHROME_VERSION \
    && apt-get -y update \
    && apt-get install -y ${CHROME_INSTALL_CMD}
 
-Get selenium chromedriver TODO: Read from http://chromedriver.chromium.org/downloads
+# Get selenium chromedriver TODO: Read from http://chromedriver.chromium.org/downloads
 RUN system_type=$(uname -m) \
    && RUN echo $system_type \
    && echo $CHROME_DRIVER_VER \
