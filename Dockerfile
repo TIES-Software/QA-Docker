@@ -193,47 +193,50 @@ USER root
 # COPY test/requirements.txt /test/
 RUN apt -qqy update \
   && apt -qqy --no-install-recommends install \
-    python3 \
-    python3-pip \
-    python3-dev \
-    python3-openssl \
-    libssl-dev libffi-dev \
-  && pip3 install --no-cache --upgrade pip==9.0.3 \
-  && pip3 install --no-cache setuptools \
-  && pip3 install --no-cache numpy \
-  && pip3 install --no-cache --requirement /test/requirements.txt \
-  && rm -rf /var/lib/apt/lists/* \
-  && apt -qyy clean
-RUN cd /usr/local/bin \
-  && { [ -e easy_install ] || ln -s easy_install-* easy_install; } \
-  && ln -s idle3 idle \
-  && ln -s pydoc3 pydoc \
-  && ln -s python3 python \
-  && ln -s python3-config python-config \
-  && ln -s /usr/bin/python3 /usr/bin/python \
-  && python --version \
-  && pip --version
+    python \
+    python-pip \
+    # python3 \
+    # python3-pip \
+    # python3-dev \
+    # python3-openssl \
+#
+#     libssl-dev libffi-dev \
+#   && pip3 install --no-cache --upgrade pip==9.0.3 \
+#   && pip3 install --no-cache setuptools \
+#   && pip3 install --no-cache numpy \
+#   && pip3 install --no-cache --requirement /test/requirements.txt \
+#   && rm -rf /var/lib/apt/lists/* \
+#   && apt -qyy clean
+# RUN cd /usr/local/bin \
+#   && { [ -e easy_install ] || ln -s easy_install-* easy_install; } \
+#   && ln -s idle3 idle \
+#   && ln -s pydoc3 pydoc \
+#   && ln -s python3 python \
+#   && ln -s python3-config python-config \
+#   && ln -s /usr/bin/python3 /usr/bin/python \
+#   && python --version \
+#   && pip --version
 
-#====================
-# Supervisor install
-#====================
-# TODO: Upgrade to supervisor stable 4.0 as soon as is released
-# Check every now and then if version 4 is finally the stable one
-#  https://pypi.python.org/pypi/supervisor
-#  https://github.com/Supervisor/supervisor
-# RUN apt -qqy update \
-#   && apt -qqy install \
-#     supervisor \
-# 2017-10-21 commit: 3f04badc3237f0, supervisor/version.txt: 4.0.0.dev0
-# 2017-05-30 commit: 946d9cf3be4db3, supervisor/version.txt: 4.0.0.dev0
-# 2017-03-07 commit: 23925d017f8ecc, supervisor/version.txt: 4.0.0.dev0
-# 2017-01-05 commit: 8be5bc15e83f0f, supervisor/version.txt: 4.0.0.dev0
-ENV RUN_DIR="/var/run/sele"
-RUN SHA="3f04badc3237f0d86fa88208455d8560c20bc2e7" \
-  && pip install --no-cache \
-      "https://github.com/Supervisor/supervisor/zipball/${SHA}" \
-  && rm -rf /var/lib/apt/lists/* \
-  && apt -qyy clean
+# #====================
+# # Supervisor install
+# #====================
+# # TODO: Upgrade to supervisor stable 4.0 as soon as is released
+# # Check every now and then if version 4 is finally the stable one
+# #  https://pypi.python.org/pypi/supervisor
+# #  https://github.com/Supervisor/supervisor
+# # RUN apt -qqy update \
+# #   && apt -qqy install \
+# #     supervisor \
+# # 2017-10-21 commit: 3f04badc3237f0, supervisor/version.txt: 4.0.0.dev0
+# # 2017-05-30 commit: 946d9cf3be4db3, supervisor/version.txt: 4.0.0.dev0
+# # 2017-03-07 commit: 23925d017f8ecc, supervisor/version.txt: 4.0.0.dev0
+# # 2017-01-05 commit: 8be5bc15e83f0f, supervisor/version.txt: 4.0.0.dev0
+# ENV RUN_DIR="/var/run/sele"
+# RUN SHA="3f04badc3237f0d86fa88208455d8560c20bc2e7" \
+#   && pip install --no-cache \
+#       "https://github.com/Supervisor/supervisor/zipball/${SHA}" \
+#   && rm -rf /var/lib/apt/lists/* \
+#   && apt -qyy clean
 
 #================
 # Font libraries
@@ -254,19 +257,19 @@ RUN SHA="3f04badc3237f0d86fa88208455d8560c20bc2e7" \
 #  https://github.com/SeleniumHQ/docker-selenium/issues/383#issuecomment-278367069
 # Layer size: small: 36.28 MB (with --no-install-recommends)
 # Layer size: small: 36.28 MB
-RUN apt -qqy update \
-  && apt -qqy --no-install-recommends install \
-    libfontconfig \
-    libfreetype6 \
-    xfonts-cyrillic \
-    xfonts-scalable \
-    fonts-liberation \
-    fonts-ipafont-gothic \
-    fonts-wqy-zenhei \
-    ttf-ubuntu-font-family \
-  && rm -rf /var/lib/apt/lists/* \
-  && apt -qyy clean
-
+# RUN apt -qqy update \
+#   && apt -qqy --no-install-recommends install \
+#     libfontconfig \
+#     libfreetype6 \
+#     xfonts-cyrillic \
+#     xfonts-scalable \
+#     fonts-liberation \
+#     fonts-ipafont-gothic \
+#     fonts-wqy-zenhei \
+#     ttf-ubuntu-font-family \
+#   && rm -rf /var/lib/apt/lists/* \
+#   && apt -qyy clean
+#
 #===================================================
 # Run the following commands as non-privileged user
 #===================================================
