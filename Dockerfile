@@ -63,20 +63,21 @@ RUN pip install pytest \
 #  https://www.google.de/linuxrepositories/
 ARG EXPECTED_CHROME_VERSION="66.0.3359.139"
 ENV CHROME_URL="https://dl.google.com/linux/direct" \
-    CHROME_BASE_DEB_PATH="/home/seluser/chrome-deb/google-chrome" \
+    CHROME_BASE_DEB_PATH="/tmp/chrome-deb/google-chrome" \
     GREP_ONLY_NUMS_VER="[0-9.]{2,20}"
 
 LABEL selenium_chrome_version "${EXPECTED_CHROME_VERSION}"
 
+
 # Layer size: huge: 196.3 MB
 RUN apt -qqy update \
-  && mkdir -p chrome-deb \
+  && mkdir -p /tmp/chrome-deb \
   && wget -nv "${CHROME_URL}/google-chrome-stable_current_amd64.deb" \
           -O "./chrome-deb/google-chrome-stable_current_amd64.deb" \
   && apt -qyy --no-install-recommends install \
         "${CHROME_BASE_DEB_PATH}-stable_current_amd64.deb" \
   && rm "${CHROME_BASE_DEB_PATH}-stable_current_amd64.deb" \
-  && rm -rf ./chrome-deb \
+  && rm -rf ./tmp/chrome-deb \
   && apt -qyy autoremove \
   && rm -rf /var/lib/apt/lists/* \
   && apt -qyy clean \
@@ -110,6 +111,8 @@ RUN  wget -nv -O chromedriver_linux${CPU_ARCH}.zip ${CHROME_DRIVER_URL} \
            chromedriver \
   && sudo ln -s /home/seluser/chromedriver /usr/bin
 
+RUN echo google-chrome --version
+RUN echo /usr/local/bin/chromium-browser --version
 
 FROM tiessoftware/feepay_tests:updates
 
