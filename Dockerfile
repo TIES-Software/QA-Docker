@@ -62,8 +62,8 @@ RUN pip install pytest \
 # TODO: Use Google fingerprint to verify downloads
 #  https://www.google.de/linuxrepositories/
 ARG EXPECTED_CHROME_VERSION="66.0.3359.139"
-ENV CHROME_URL="https://dl.google.com/linux/direct" \
-    CHROME_BASE_DEB_PATH="/tmp/chrome_deb" \
+ENV CHROME_URL="https://dl.google.com/linux/direct/" \
+    CHROME_BASE_DEB_PATH="/tmp/chrome_deb/google-chrome" \
     GREP_ONLY_NUMS_VER="[0-9.]{2,20}"
 
 LABEL selenium_chrome_version "${EXPECTED_CHROME_VERSION}"
@@ -71,13 +71,19 @@ LABEL selenium_chrome_version "${EXPECTED_CHROME_VERSION}"
 
 # Layer size: huge: 196.3 MB
 RUN apt -qqy update \
-  && mkdir -p /tmp/chrome_deb \
+  && mkdir -p /tmp \
   && cd /tmp \
-  && wget -nv ${CHROME_URL}/google-chrome-stable_current_amd64.deb \
-          -O /tmp/chrome-deb/google-chrome-stable_current_amd64.deb \
+  && wget -nv "${CHROME_URL}google-chrome-stable_current_amd64.deb" \
+          -O "${CHROME_BASE_DEB_PATH}google-chrome-stable_current_amd64.deb" \
   && apt -qyy --no-install-recommends install \
-          /tmp/chrome-deb/google-chrome-stable_current_amd64.deb \
-  && rm -f /tmp/chrome-deb/google-chrome-stable_current_amd64.deb \
+        "${CHROME_BASE_DEB_PATH}-stable_current_amd64.deb" \
+  && rm "${CHROME_BASE_DEB_PATH}-stable_current_amd64.deb" \
+
+
+
+  # && wget -nv ${CHROME_URL}/google-chrome-stable_current_amd64.deb -O /tmp/chrome-deb/google-chrome-stable_current_amd64.deb \
+  # && apt -qyy --no-install-recommends install /tmp/chrome-deb/google-chrome-stable_current_amd64.deb \
+  # && rm -f /tmp/chrome-deb/google-chrome-stable_current_amd64.deb \
  # && rm -rf /tmp/chrome_deb\
   && apt -qyy autoremove \
   && rm -rf /var/lib/apt/lists/* \
@@ -102,7 +108,7 @@ ENV CHROME_DRIVER_FILE="chromedriver_linux${CPU_ARCH}.zip"
 ENV CHROME_DRIVER_URL="https://${CHROME_DRIVER_BASE}/${CHROME_DRIVER_VERSION}/${CHROME_DRIVER_FILE}"
 # Gets latest chrome driver version. Or you can hard-code it, e.g. 2.15
 # Layer size: small: 6.932 MB
-RUN  wget -nv -O chromedriver_linux${CPU_ARCH}.zip ${CHROME_DRIVER_URL} \
+RUN wget -nv -O chromedriver_linux${CPU_ARCH}.zip ${CHROME_DRIVER_URL} \
   && unzip chromedriver_linux${CPU_ARCH}.zip \
   && rm chromedriver_linux${CPU_ARCH}.zip \
   && mv chromedriver \
