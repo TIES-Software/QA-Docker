@@ -71,13 +71,13 @@ LABEL selenium_chrome_version "${EXPECTED_CHROME_VERSION}"
 
 # Layer size: huge: 196.3 MB
 RUN apt -qqy update \
-  && mkdir -p /tmp/chrome-deb \
+  && mkdir -p /tmp/chrome-deb/google-chrome \
   && wget -nv "${CHROME_URL}/google-chrome-stable_current_amd64.deb" \
           -O "./chrome-deb/google-chrome-stable_current_amd64.deb" \
   && apt -qyy --no-install-recommends install \
         "${CHROME_BASE_DEB_PATH}-stable_current_amd64.deb" \
   && rm "${CHROME_BASE_DEB_PATH}-stable_current_amd64.deb" \
-  && rm -rf ./tmp/chrome-deb \
+  && rm -rf /tmp/chrome-deb/google-chrome \
   && apt -qyy autoremove \
   && rm -rf /var/lib/apt/lists/* \
   && apt -qyy clean \
