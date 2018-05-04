@@ -40,13 +40,13 @@ RUN system_type=$(uname -m) \
     && RUN echo $system_type \
     && echo $CHROME_DRIVER_VER \
     && if [ $CHROME_DRIVER_VER = "latest" ]; then chrome_ver="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`"; fi \
-    && if [ ! $CHROME_DRIVER_VER = "latest" ]; then chrome_ver="http://chromedriver.storage.googleapis.com/index.html?path=${DRIVER_VER}"; fi \
+    && if [ ! $CHROME_DRIVER_VER = "latest" ]; then chrome_ver="${DRIVER_VER}"; fi \
     && echo $chrome_ver \
     && if [ $system_type = "i686" ]; then bit='32'; elif [ $system_type = 'x86_64' ]; then bit='64'; fi \
     && echo $bit \
     && mkdir -p /tmp/chromedriver \
     && echo $chrome_ver \
-    && curl "${chrome_ver}/chromedriver_linux$bit.zip" > /tmp/chromedriver/chromedriver.zip \
+    && curl "https://chromedriver.storage.googleapis.com/${chrome_ver}/chromedriver_linux${bit}.zip" > /tmp/chromedriver/chromedriver.zip \
     && unzip -qqo /tmp/chromedriver/chromedriver chromedriver -d /usr/local/bin/ \
     && rm -rf /tmp/chromedriver \
     && chmod +x /usr/local/bin/chromedriver
