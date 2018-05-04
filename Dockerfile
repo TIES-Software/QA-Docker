@@ -31,7 +31,7 @@ RUN echo $CHROME_VERSION \
    && if [ $CHROME_VERSION = "beta" ]; then CHROME_INSTALL_CMD='google-chrome-beta'; fi \
    && if [ $CHROME_VERSION = "unstable" ]; then CHROME_INSTALL_CMD='google-chrome-unstable'; fi \
    && echo $CHROME_INSTALL_CMD $CHROME_RELEASE $CHROME_REPO $CHROME_DRIVER_VER \
-   && "wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub" | apt-key add - \
+   && wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
    && if [ $CHROME_VERSION = 'current' ]; then 'sh -c echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ ${CHROME_RELEASE} ${CHROME_REPO}" >> /etc/apt/sources.list.d/google-chrome-${CHROME_RELEASE}.list'; fi \
    && if [ $CHROME_VERSION = 'previous' ]; then 'sh -c echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ ${CHROME_RELEASE} ${CHROME_REPO}" >> /etc/apt/sources.list.d/google-chrome-${CHROME_RELEASE}.list'; fi \
    && apt-get -y update \
