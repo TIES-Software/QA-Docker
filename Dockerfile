@@ -73,7 +73,7 @@ LABEL selenium_chrome_version "${EXPECTED_CHROME_VERSION}"
 RUN apt -qqy update \
   && mkdir -p /tmp/chrome-deb/google-chrome \
   && wget -nv "${CHROME_URL}/google-chrome-stable_current_amd64.deb" \
-          -O "./chrome-deb/google-chrome-stable_current_amd64.deb" \
+          -O "tmp/chrome-deb/google-chrome-stable_current_amd64.deb" \
   && apt -qyy --no-install-recommends install \
         "${CHROME_BASE_DEB_PATH}-stable_current_amd64.deb" \
   && rm "${CHROME_BASE_DEB_PATH}-stable_current_amd64.deb" \
