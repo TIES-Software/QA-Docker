@@ -74,11 +74,11 @@ RUN apt -qqy update \
   && mkdir -p /tmp/chrome_deb \
   && cd /tmp \
   && wget -nv ${CHROME_URL}"/google-chrome-stable_current_amd64.deb" \
-          -O "./chrome-deb/google-chrome-stable_current_amd64.deb" \
+          -O /tmp/chrome-deb/google-chrome-stable_current_amd64.deb \
   && apt -qyy --no-install-recommends install \
-  "/tmp/chrome-deb/google-chrome-stable_current_amd64.deb" \
-  && rm   "/tmp/chrome-deb/google-chrome-stable_current_amd64.deb" \
-  && rm -rf /tmp/chrome_deb\
+          /tmp/chrome-deb/google-chrome-stable_current_amd64.deb \
+  && rm -f /tmp/chrome-deb/google-chrome-stable_current_amd64.deb \
+ # && rm -rf /tmp/chrome_deb\
   && apt -qyy autoremove \
   && rm -rf /var/lib/apt/lists/* \
   && apt -qyy clean \
