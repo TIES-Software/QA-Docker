@@ -189,7 +189,8 @@ USER root
 # After install, make some useful symlinks that are expected to exist
 # Layer size: big.: 138.9 MB (with --no-install-recommends)
 # Layer size: huge: 309.9 MB
-COPY test/requirements.txt /test/
+# djo commented out
+# COPY test/requirements.txt /test/
 RUN apt -qqy update \
   && apt -qqy --no-install-recommends install \
     python3 \
