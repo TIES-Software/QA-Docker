@@ -74,7 +74,7 @@ RUN apt -qqy update \
   && mkdir -p /tmp \
   && cd /tmp \
   && wget -nv "${CHROME_URL}google-chrome-stable_current_amd64.deb" \
-          -O "${CHROME_BASE_DEB_PATH}google-chrome-stable_current_amd64.deb" \
+          -O "${CHROME_BASE_DEB_PATH}-stable_current_amd64.deb" \
   && apt -qyy --no-install-recommends install \
         "${CHROME_BASE_DEB_PATH}-stable_current_amd64.deb" \
   && rm "${CHROME_BASE_DEB_PATH}-stable_current_amd64.deb" \
