@@ -35,7 +35,7 @@ RUN echo $CHROME_VERSION \
    && if [ $CHROME_VERSION = 'current' ]; then sh -c echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ ${CHROME_RELEASE} ${CHROME_REPO}" >> /etc/apt/sources.list.d/google-chrome-${CHROME_RELEASE}.list ; fi \
  #  && if [ $CHROME_VERSION = 'previous' ]; then sh -c echo "deb [arch=amd64] http://security.ubuntu.com/ubuntu/pool/${CHROME_REPO}/c/chromium-browser/chromium-browser ${CHROME_RELEASE} ${CHROME_REPO}" >> /etc/apt/sources.list.d/google-chrome-${CHROME_RELEASE}.list; fi \
    && if [ $CHROME_VERSION = 'previous' ]; then curl -O /tmp/chrome-deb http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu1_amd64.deb \
-   && apt install /tmp/chrome-deb/chromium-browser-l10n_65.0.3325.181-0ubuntu1_all.deb; fi
+   && apt install /tmp/chrome-deb/chromium-browser-l10n_65.0.3325.181-0ubuntu1_all.deb; fi \
    && if [ $CHROME_VERSION = 'current' ]; then apt-get -y update \
    && apt-get install -y ${CHROME_INSTALL_CMD}; fi
 
