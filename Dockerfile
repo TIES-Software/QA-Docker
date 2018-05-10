@@ -34,8 +34,9 @@ RUN echo $CHROME_VERSION \
    && wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
    && if [ $CHROME_VERSION = 'current' ]; then sh -c echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ ${CHROME_RELEASE} ${CHROME_REPO}" >> /etc/apt/sources.list.d/google-chrome-${CHROME_RELEASE}.list ; fi \
  #  && if [ $CHROME_VERSION = 'previous' ]; then sh -c echo "deb [arch=amd64] http://security.ubuntu.com/ubuntu/pool/${CHROME_REPO}/c/chromium-browser/chromium-browser ${CHROME_RELEASE} ${CHROME_REPO}" >> /etc/apt/sources.list.d/google-chrome-${CHROME_RELEASE}.list; fi \
-   && if [ $CHROME_VERSION = 'previous' ]; then curl http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu1_amd64.deb --output /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu1_amd64.deb \
-   && apt install /tmp/chrome-deb/previous.deb; fi \
+   if [ $CHROME_VERSION = 'previous' ]; then sh -c echo http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu1_amd64.deb >> /etc/apt/sources.list.d/google-chrome-${CHROME_RELEASE}.list; fi \
+   if [ $CHROME_VERSION = 'previous' ]; then curl http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu1_amd64.deb --output /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu1_amd64.deb \
+   && dpkg -i /path/to/filename.deb /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu1_amd64.deb; fi \
    && if [ $CHROME_VERSION = 'current' ]; then apt-get -y update \
    && apt-get install -y ${CHROME_INSTALL_CMD}; fi
 
