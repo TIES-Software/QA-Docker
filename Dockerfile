@@ -34,7 +34,7 @@ RUN apt-get update && apt-get install -y \
         libdbus-1-3 \
         libgdk-pixbuf2.0-0 \
         libgtk-3-0 \
-        chromium-codecs-ffmpeg-extra 
+        chromium-codecs-ffmpeg-extra
 #        chromium-codecs-ffmpeg
 
 RUN pip install pytest \
@@ -56,8 +56,8 @@ RUN echo $CHROME_VERSION \
    && mkdir chrome-deb \
    && cd chrome-deb \
    && sh -c echo http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb >> /etc/apt/sources.list.d/google-chrome-${CHROME_RELEASE}.list; fi \
-   && if [ $CHROME_VERSION = 'previous' ]; then curl http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb --output /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb \
-   && dpkg -i /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb; fi \
+   && curl http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb --output /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb
+   && dpkg -i /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb; fi
    && if [ $CHROME_VERSION = 'current' ]; then apt-get -y update \
    && apt-get install -y ${CHROME_INSTALL_CMD}; fi
 
