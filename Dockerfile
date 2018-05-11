@@ -62,7 +62,7 @@ RUN echo $CHROME_VERSION \
    && apt-get install -y ${CHROME_INSTALL_CMD}; fi \
    # Get selenium chromedriver TODO: Read from http://chromedriver.chromium.org/downloads
    && system_type=$(uname -m) \
-   && RUN echo $system_type \
+   && echo $system_type \
    && echo $CHROME_DRIVER_VER \
    && if [ $CHROME_DRIVER_VER = "latest" ]; then chrome_ver="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`"; fi \
    && if [ ! $CHROME_DRIVER_VER = "latest" ]; then chrome_ver="${DRIVER_VER}"; fi \
