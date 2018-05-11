@@ -1,5 +1,5 @@
 # FROM debian:jessie
-FROM FROM ubuntu:14.04
+FROM ubuntu:14.04
 
 ARG CHROME_VERSION=current
 ARG CHROME_INSTALL_CMD=google-chrome-stable
