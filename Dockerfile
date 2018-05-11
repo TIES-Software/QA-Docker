@@ -39,6 +39,7 @@ RUN pip install pytest \
         selenium \
         behave
 
+
 # Chrome BROWSER version parameters to setup & install
 RUN echo $CHROME_VERSION \
    && if [ $CHROME_VERSION = "previous" ]; then CHROME_RELEASE='bionic'; fi \
@@ -53,9 +54,9 @@ RUN echo $CHROME_VERSION \
    && mkdir chrome-deb \
    && cd chrome-deb \
 #   && sh -c echo http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu1_amd64.deb >> /etc/apt/sources.list.d/google-chrome-${CHROME_RELEASE}.list; fi \
-   && sh -c echo http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-chromedriver_65.0.3325.181-0ubuntu0.17.10.1_amd64.deb >> /etc/apt/sources.list.d/google-chrome-${CHROME_RELEASE}.list; fi \
-   && if [ $CHROME_VERSION = 'previous' ]; then curl http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-chromedriver_65.0.3325.181-0ubuntu0.17.10.1_amd64.deb --output /tmp/chrome-deb/chromium-chromedriver_65.0.3325.181-0ubuntu0.17.10.1_amd64.deb \
-   && dpkg -i /tmp/chrome-deb/chromium-chromedriver_65.0.3325.181-0ubuntu0.17.10.1_amd64.deb; fi \
+   && sh -c echo http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-chromedriver_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb >> /etc/apt/sources.list.d/google-chrome-${CHROME_RELEASE}.list; fi \
+   && if [ $CHROME_VERSION = 'previous' ]; then curl http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-chromedriver_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb --output /tmp/chrome-deb/chromium-chromedriver_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb \
+   && dpkg -i /tmp/chrome-deb/chromium-chromedriver_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb; fi \
    && if [ $CHROME_VERSION = 'current' ]; then apt-get -y update \
    && apt-get install -y ${CHROME_INSTALL_CMD}; fi
 
