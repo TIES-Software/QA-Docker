@@ -56,13 +56,12 @@ RUN echo $CHROME_VERSION \
    && mkdir chrome-deb \
    && cd chrome-deb \
    && sh -c echo http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb >> /etc/apt/sources.list.d/google-chrome-${CHROME_RELEASE}.list; fi \
-   && curl http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb --output /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb
-   && dpkg -i /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb; fi
+   && curl http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb --output /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb \
+   && dpkg -i /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb; fi \
    && if [ $CHROME_VERSION = 'current' ]; then apt-get -y update \
-   && apt-get install -y ${CHROME_INSTALL_CMD}; fi
-
-# Get selenium chromedriver TODO: Read from http://chromedriver.chromium.org/downloads
-RUN system_type=$(uname -m) \
+   && apt-get install -y ${CHROME_INSTALL_CMD}; fi \
+   # Get selenium chromedriver TODO: Read from http://chromedriver.chromium.org/downloads
+   && system_type=$(uname -m) \
    && RUN echo $system_type \
    && echo $CHROME_DRIVER_VER \
    && if [ $CHROME_DRIVER_VER = "latest" ]; then chrome_ver="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`"; fi \
@@ -75,10 +74,9 @@ RUN system_type=$(uname -m) \
    && curl "https://chromedriver.storage.googleapis.com/${chrome_ver}/chromedriver_linux${bit}.zip" > /tmp/chromedriver/chromedriver.zip \
    && unzip -qqo /tmp/chromedriver/chromedriver chromedriver -d /usr/local/bin/ \
    && rm -rf /tmp/chromedriver \
-   && chmod +x /usr/local/bin/chromedriver
-
-RUN echo google-chrome --version
-RUN echo /usr/local/bin/chromium-browser --version
+   && chmod +x /usr/local/bin/chromedriver \
+   && echo google-chrome --version \
+   && echo /usr/local/bin/chromium-browser --version
 
 # #===============
 # # Google Chrome
@@ -140,9 +138,6 @@ RUN echo /usr/local/bin/chromium-browser --version
 #   && ln -s chromedriver-${CHROME_DRIVER_VERSION} \
 #            chromedriver \
 #   && sudo ln -s /home/seluser/chromedriver /usr/bin
-
-RUN echo google-chrome --version
-RUN echo /usr/local/bin/chromium-browser --version
 
 FROM tiessoftware/feepay_tests:updates
 
