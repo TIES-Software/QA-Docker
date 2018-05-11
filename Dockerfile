@@ -34,8 +34,8 @@ RUN apt-get update && apt-get install -y \
         libdbus-1-3 \
         libgdk-pixbuf2.0-0 \
         libgtk-3-0 \
-        chromium-codecs-ffmpeg-extra \
-        chromium-codecs-ffmpeg
+        chromium-codecs-ffmpeg-extra 
+#        chromium-codecs-ffmpeg
 
 RUN pip install pytest \
         selenium \
