@@ -36,6 +36,7 @@ RUN echo $CHROME_VERSION \
    && if [ $CHROME_VERSION = 'previous' ]; then cd /tmp \
    && mkdir deb \
    && cd deb \
+   && echo pwd \
    && sh -c echo http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu1_amd64.deb >> /etc/apt/sources.list.d/google-chrome-${CHROME_RELEASE}.list; fi \
    && if [ $CHROME_VERSION = 'previous' ]; then curl http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu1_amd64.deb --output /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu1_amd64.deb \
    && dpkg -i tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu1_amd64.deb; fi \
