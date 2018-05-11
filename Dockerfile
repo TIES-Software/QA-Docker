@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y \
         unzip \
         wget \
         apt-transport-https \
-    	ca-certificates
+    	ca-certificates \
         libgconf-2-4 \
         libasound2 \
         libatk-bridge2.0-0 \
