@@ -17,7 +17,10 @@ RUN apt-get update && apt-get install -y \
         wget \
         apt-transport-https \
     	ca-certificates \
-        libgconf-2-4
+        libgconf-2-4 \
+        libasound2 \
+        libatk-bridge2.0-0 \
+        libatk1.0-0 
 
 RUN pip install pytest \
         selenium \
