@@ -19,9 +19,14 @@ RUN apt-get update && apt-get install -y \
         apt-transport-https \
     	ca-certificates \
         libgconf-2-4 \
+        libnspr4 \
         libasound2 \
         libatk-bridge2.0-0 \
+        libnspr4 \
+        xdg-utils \
         libatk1.0-0 \
+        libxss1 \
+        libx11-xcb1 \
         libc6 \
         libcairo2 \
         libcups2 \
