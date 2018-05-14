@@ -7,6 +7,11 @@ ARG CHROME_REPO=main
 ARG CHROME_DRIVER_VER
 ARG DRIVER_VER
 ENV DISPLAY=:99
+ENV CHROME_RELEASE='bionic'
+ENV CHROME_REPO='universe'
+ENV CHROME_VERSION='previous'
+ENV CHROME_DRIVER_VER='2.37'
+ENV DRIVER_VER='2.37'
 
 RUN echo "---------------------------------------" \
     && echo $CHROME_VERSION \
