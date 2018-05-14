@@ -74,7 +74,7 @@ RUN apt-get update && apt-get install -y \
     && echo "---------------------------------------" \
     && echo "---------------------------------------" \
     && echo /usr/local/bin/chromium-browser --version
-    && echo "---------------------------------------" \
+    && echo "---------------------------------------" 
 
 
 FROM tiessoftware/feepay_tests:updates
