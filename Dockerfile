@@ -57,24 +57,24 @@ RUN apt-get update && apt-get install -y \
     && echo $CHROME_DRIVER_VER \
 #    && if [ $CHROME_DRIVER_VER = "latest" ]; then chrome_ver="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`"; fi \
     && if [ ! $CHROME_DRIVER_VER = "latest" ]; then chrome_ver="${DRIVER_VER}"; fi \
-    && echo "---------------------------------------"
-    && echo "WHAT VERSION OF THE CHROMEDRIVER DO I GET"
-    && echo "---------------------------------------"
+    && echo "---------------------------------------" \
+    && echo "WHAT VERSION OF THE CHROMEDRIVER DO I GET" \
+    && echo "---------------------------------------" \
     && if [ $system_type = "i686" ]; then bit='32'; elif [ $system_type = 'x86_64' ]; then bit='64'; fi \
     && mkdir -p /tmp/chromedriver \
-    && echo "---------------------------------------"
+    && echo "---------------------------------------" \
     && echo $chrome_ver \
-    && echo "---------------------------------------"
+    && echo "---------------------------------------" \
     && curl "https://chromedriver.storage.googleapis.com/${chrome_ver}/chromedriver_linux${bit}.zip" > /tmp/chromedriver/chromedriver.zip \
     && unzip -qqo /tmp/chromedriver/chromedriver chromedriver -d /usr/local/bin/ \
     && rm -rf /tmp/chromedriver \
     && chmod +x /usr/local/bin/chromedriver \
-    && echo "---------------------------------------"
+    && echo "---------------------------------------" \
     && echo google-chrome --version \
-    && echo "---------------------------------------"
-    && echo "---------------------------------------"
+    && echo "---------------------------------------" \
+    && echo "---------------------------------------" \
     && echo /usr/local/bin/chromium-browser --version
-    && echo "---------------------------------------"
+    && echo "---------------------------------------" \
 
 
 FROM tiessoftware/feepay_tests:updates
