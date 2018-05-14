@@ -8,6 +8,12 @@ ARG CHROME_DRIVER_VER
 ARG DRIVER_VER
 ENV DISPLAY=:99
 
+CMD echo "---------------------------------------"
+CMD echo $CHROME_VERSION
+CMD echo "---------------------------------------"
+CMD echo $CHROME_RELEASE
+CMD echo "---------------------------------------"
+
 RUN apt-get update && apt-get install -y \
         python \
         python-pip \
