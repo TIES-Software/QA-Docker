@@ -75,7 +75,7 @@ RUN echo "---------------------------------------" \
     && rm -rf /tmp/chromedriver \
     && chmod +x /usr/local/bin/chromedriver
 
-FROM tiessoftware/feepay_tests:updates
+# FROM tiessoftware/feepay_tests:updates
 
 # Define default command.
 CMD ["bash"]
