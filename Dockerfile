@@ -8,13 +8,12 @@ ARG CHROME_DRIVER_VER
 ARG DRIVER_VER
 ENV DISPLAY=:99
 
-CMD echo "---------------------------------------"
-CMD echo $CHROME_VERSION
-CMD echo "---------------------------------------"
-CMD echo $CHROME_RELEASE
-CMD echo "---------------------------------------"
-
-RUN apt-get update && apt-get install -y \
+RUN echo "---------------------------------------" \
+    && echo $CHROME_VERSION \
+    && echo "---------------------------------------" \
+    && echo $CHROME_RELEASE \
+    && echo "---------------------------------------" \
+    && apt-get update && apt-get install -y \
         python \
         python-pip \
         curl \
@@ -63,25 +62,13 @@ RUN apt-get update && apt-get install -y \
     && echo $CHROME_DRIVER_VER \
 #    && if [ $CHROME_DRIVER_VER = "latest" ]; then chrome_ver="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`"; fi \
     && if [ ! $CHROME_DRIVER_VER = "latest" ]; then chrome_ver="${DRIVER_VER}"; fi \
-    && echo "---------------------------------------" \
-    && echo "WHAT VERSION OF THE CHROMEDRIVER DO I GET" \
-    && echo "---------------------------------------" \
     && if [ $system_type = "i686" ]; then bit='32'; elif [ $system_type = 'x86_64' ]; then bit='64'; fi \
     && mkdir -p /tmp/chromedriver \
-    && echo "---------------------------------------" \
     && echo $chrome_ver \
-    && echo "---------------------------------------" \
     && curl "https://chromedriver.storage.googleapis.com/${chrome_ver}/chromedriver_linux${bit}.zip" > /tmp/chromedriver/chromedriver.zip \
     && unzip -qqo /tmp/chromedriver/chromedriver chromedriver -d /usr/local/bin/ \
     && rm -rf /tmp/chromedriver \
-    && chmod +x /usr/local/bin/chromedriver \
-    && echo "---------------------------------------" \
-    && echo google-chrome --version \
-    && echo "---------------------------------------" \
-    && echo "---------------------------------------" \
-    && echo /usr/local/bin/chromium-browser --version \
-    && echo "---------------------------------------"
-
+    && chmod +x /usr/local/bin/chromedriver
 
 FROM tiessoftware/feepay_tests:updates
 
