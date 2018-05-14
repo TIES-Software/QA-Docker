@@ -73,8 +73,8 @@ RUN apt-get update && apt-get install -y \
     && echo google-chrome --version \
     && echo "---------------------------------------" \
     && echo "---------------------------------------" \
-    && echo /usr/local/bin/chromium-browser --version
-    && echo "---------------------------------------" 
+    && echo /usr/local/bin/chromium-browser --version \
+    && echo "---------------------------------------"
 
 
 FROM tiessoftware/feepay_tests:updates
