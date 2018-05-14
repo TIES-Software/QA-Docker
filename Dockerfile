@@ -46,10 +46,15 @@ RUN apt-get update && apt-get install -y \
     && wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
     && if [ $CHROME_VERSION = 'current' ]; then sh -c echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ ${CHROME_RELEASE} ${CHROME_REPO}" >> /etc/apt/sources.list.d/google-chrome-${CHROME_RELEASE}.list ; fi \
     && if [ $CHROME_VERSION = 'previous' ]; then cd /tmp \
+    && echo "------------------------------" \
     && mkdir chrome-deb \
+    && echo "------------------------------" \
     && cd chrome-deb \
-    && sh -c echo http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb >> /etc/apt/sources.list.d/google-chrome-${CHROME_RELEASE}.list; fi \
+    && echo "------------------------------" \
+    && sh -c echo http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb >> /etc/apt/sources.list.d/google-chrome-${CHROME_RELEASE}.list \
+    && echo "------------------------------" \
     && curl http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb --output /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb \
+    && echo "------------------------------" \
     && dpkg -i /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb; fi \
     && echo "------------------------------" \
     && if [ $CHROME_VERSION = 'current' ]; then apt-get -y update apt-get install -y ${CHROME_INSTALL_CMD}; fi \
