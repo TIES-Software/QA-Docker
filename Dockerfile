@@ -34,10 +34,10 @@ RUN apt-get update && apt-get install -y \
         libgtk-3-0 \
         chromium-codecs-ffmpeg-extra \
         pip install pytest \
-        selenium \
-        behave \
+        pip install selenium \
+        pip install behave \
         # Chrome BROWSER version parameters to setup & install
-        && echo $CHROME_VERSION \
+        echo $CHROME_VERSION \
         && if [ $CHROME_VERSION = "previous" ]; then CHROME_RELEASE='bionic'; fi \
         && if [ $CHROME_VERSION = "previous" ]; then CHROME_REPO='universe'; fi \
         && if [ $CHROME_VERSION = "previous" ]; then CHROME_INSTALL_CMD='chromium-browser'; fi \
