@@ -36,7 +36,6 @@ RUN apt-get update && apt-get install -y \
     && pip install pytest \
     && pip install selenium \
     && pip install behave \
-    # Chrome BROWSER version parameters to setup & install
     && echo $CHROME_VERSION \
     && if [ $CHROME_VERSION = "previous" ]; then CHROME_RELEASE='bionic'; fi \
     && if [ $CHROME_VERSION = "previous" ]; then CHROME_REPO='universe'; fi \
@@ -53,7 +52,10 @@ RUN apt-get update && apt-get install -y \
     && curl http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb --output /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb \
     && dpkg -i /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb; fi \
     && if [ $CHROME_VERSION = 'current' ]; then apt-get -y update apt-get install -y ${CHROME_INSTALL_CMD}; fi \
-    # Get selenium chromedriver TODO: Read from http://chromedriver.chromium.org/downloads
+    && echo "------------------------------"
+    && echo "DONE INSTALLING CHROME BROWSER"
+    && echo "NOW INSTALLING CHROMEDRIVER "
+    && echo "------------------------------"
     && system_type=$(uname -m) \
     && echo $system_type \
     && echo $CHROME_DRIVER_VER \
