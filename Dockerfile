@@ -52,10 +52,10 @@ RUN apt-get update && apt-get install -y \
     && curl http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb --output /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb \
     && dpkg -i /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb; fi \
     && if [ $CHROME_VERSION = 'current' ]; then apt-get -y update apt-get install -y ${CHROME_INSTALL_CMD}; fi \
-    && echo "------------------------------"
-    && echo "DONE INSTALLING CHROME BROWSER"
-    && echo "NOW INSTALLING CHROMEDRIVER "
-    && echo "------------------------------"
+    && echo "------------------------------" \
+    && echo "DONE INSTALLING CHROME BROWSER" \
+    && echo "NOW INSTALLING CHROMEDRIVER "   \
+    && echo "------------------------------" \
     && system_type=$(uname -m) \
     && echo $system_type \
     && echo $CHROME_DRIVER_VER \
