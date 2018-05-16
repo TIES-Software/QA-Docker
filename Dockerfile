@@ -83,9 +83,9 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
      && echo $bit \
      && mkdir -p /tmp/chromedriver \
      && curl "https://chromedriver.storage.googleapis.com/${$CHROME_DRIVER_VER}/chromedriver_linux${bit}.zip" > /tmp/chromedriver/chromedriver.zip \
-     && unzip -qqo /tmp/chromedriver/chromedriver chromedriver -d /usr/local/bin/ \
-     && rm -rf /tmp/chromedriver \
-     && chmod +x /usr/local/bin/chromedriver \
+    #  && unzip -qqo /tmp/chromedriver/chromedriver chromedriver -d /usr/local/bin/ \
+    #  && rm -rf /tmp/chromedriver \
+    #  && chmod +x /usr/local/bin/chromedriver \
      && echo "-----------ENDING SYSTEM SETUP------------"
 #
 # Define default command.
