@@ -74,18 +74,18 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     && curl http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb --output /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb \
     && dpkg -i /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb; fi \
 #     && if [ $CHROME_VERSION = "current" ]; then apt-get -y update apt-get install -y ${CHROME_INSTALL_CMD}; fi \
-#     && system_type=$(uname -m) \
-#     && echo $system_type \
-#     && echo $CHROME_DRIVER_VER \
+     && system_type=$(uname -m) \
+     && echo $system_type \
+     && echo $CHROME_DRIVER_VER \
 #     && if [ $CHROME_DRIVER_VER = "latest" ]; then chrome_ver="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`"; fi \
 #     && if [ ! $CHROME_DRIVER_VER = "latest" ]; then chrome_ver="${DRIVER_VER}"; fi \
-#     && if [ $system_type = "i686" ]; then bit="32"; elif [ $system_type = "x86_64" ]; then bit="64"; fi \
-#     && mkdir -p /tmp/chromedriver \
-#     && echo $chrome_ver \
-#     && curl "https://chromedriver.storage.googleapis.com/${chrome_ver}/chromedriver_linux${bit}.zip" > /tmp/chromedriver/chromedriver.zip \
-#     && unzip -qqo /tmp/chromedriver/chromedriver chromedriver -d /usr/local/bin/ \
-#     && rm -rf /tmp/chromedriver \
-#     && chmod +x /usr/local/bin/chromedriver \
+     && if [ $system_type = "i686" ]; then bit="32"; elif [ $system_type = "x86_64" ]; then bit="64"; fi \
+     && mkdir -p /tmp/chromedriver \
+     && echo $chrome_ver \
+     && curl "https://chromedriver.storage.googleapis.com/${chrome_ver}/chromedriver_linux${bit}.zip" > /tmp/chromedriver/chromedriver.zip \
+     && unzip -qqo /tmp/chromedriver/chromedriver chromedriver -d /usr/local/bin/ \
+     && rm -rf /tmp/chromedriver \
+     && chmod +x /usr/local/bin/chromedriver \
      && echo "-----------ENDING SYSTEM SETUP------------"
 #
 # Define default command.
