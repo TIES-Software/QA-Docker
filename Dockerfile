@@ -19,8 +19,6 @@ ARG DRIVER_VER="2.37"
 ENV DISPLAY=:99
 
 RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
-    && echo "Building image for platform type of $PLATFORM" \
-    && echo "---------------------------------------" \
     && echo "Image will be build with Chrome browser verion type of $CHROME_VERSION" \
     && echo "---------------------------------------" \
     && echo "The command to install chrome is $CHROME_INSTALL_CMD" \
