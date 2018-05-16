@@ -1,10 +1,10 @@
 ARG PLATFORM=ubuntu:14.04
-ARG CHROME_VERSION
-ARG CHROME_INSTALL_CMD
-ARG CHROME_RELEASE
-ARG CHROME_REPO
-ARG CHROME_DRIVER_VER
-ARG DRIVER_VER
+ARG CHROME_VERSION='current'
+ARG CHROME_INSTALL_CMD='google-chrome-unstable'
+ARG CHROME_RELEASE='stable'
+ARG CHROME_REPO='repo'
+ARG CHROME_DRIVER_VER='2.37'
+ARG DRIVER_VER='2.37'
 # ENV CHROME_RELEASE='bionic'
 # ENV CHROME_REPO='universe'
 # ENV CHROME_VERSION='previous'
@@ -71,7 +71,7 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     && if [ $CHROME_VERSION = 'previous' ]; then cd /tmp \
     && mkdir chrome-deb \
     && cd chrome-deb \
-    && sh -c echo http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb >> /etc/apt/sources.list.d/google-chrome-${CHROME_RELEASE}.list \
+#    && sh -c echo http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb >> /etc/apt/sources.list.d/google-chrome-${CHROME_RELEASE}.list \
     && curl http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb --output /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb \
     && dpkg -i /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb; fi \
     && if [ $CHROME_VERSION = 'current' ]; then apt-get -y update apt-get install -y ${CHROME_INSTALL_CMD}; fi \
