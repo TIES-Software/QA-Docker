@@ -59,13 +59,13 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     && pip install pytest \
     && pip install selenium \
     && pip install behave \
-    && echo $CHROME_VERSION
+    && echo $CHROME_VERSION \
 #     # && if [ $CHROME_VERSION = "previous" ]; then CHROME_RELEASE="bionic"; fi \
 #     # && if [ $CHROME_VERSION = "previous" ]; then CHROME_REPO="universe"; fi \
 #     # && if [ $CHROME_VERSION = "previous" ]; then CHROME_INSTALL_CMD="chromium-browser"; fi \
 #     # && if [ $CHROME_VERSION = "beta" ]; then CHROME_INSTALL_CMD="google-chrome-beta"; fi \
 #     # && if [ $CHROME_VERSION = "unstable" ]; then CHROME_INSTALL_CMD="google-chrome-unstable"; fi \
-#     # && wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+      && wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
 #     # && if [ $CHROME_VERSION = "current" ]; then sh -c echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ ${CHROME_RELEASE} ${CHROME_REPO}" >> /etc/apt/sources.list.d/google-chrome-${CHROME_RELEASE}.list ; fi \
 #     && if [ $CHROME_VERSION = "previous" ]; then cd /tmp \
 #     && mkdir chrome-deb \
@@ -86,7 +86,7 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
 #     && unzip -qqo /tmp/chromedriver/chromedriver chromedriver -d /usr/local/bin/ \
 #     && rm -rf /tmp/chromedriver \
 #     && chmod +x /usr/local/bin/chromedriver \
-#     && echo "-----------ENDING SYSTEM SETUP------------"
+     && echo "-----------ENDING SYSTEM SETUP------------"
 #
 # Define default command.
 CMD ["bash"]
