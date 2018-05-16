@@ -78,7 +78,7 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
      && echo $system_type \
      && echo $CHROME_DRIVER_VER \
 #     && if [ $CHROME_DRIVER_VER = "latest" ]; then CHROME_DRIVER_VER="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`"; fi \
-#     && if [ ! $CHROME_DRIVER_VER = "latest" ]; then CHROME_DRIVER_VER="${DRIVER_VER}"; fi \
+     && if [ ! $CHROME_DRIVER_VER = "latest" ]; then CHROME_DRIVER_VER="${DRIVER_VER}"; fi \
      && if [ $system_type = 'i686' ]; then bit='32'; elif [ $system_type = 'x86_64' ]; then bit='64'; fi \
      && echo $bit \
      && mkdir -p /tmp/chromedriver \
