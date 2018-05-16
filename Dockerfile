@@ -9,7 +9,7 @@ ARG CHROME_RELEASE="stable"
 ARG CHROME_REPO="repo"
 ARG CHROME_DRIVER_VER="2.37"
 
-# ENV if [ $PLATFORM =- "ubuntu" ]; then PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"; fi
+    # I don't even know what the purpose of this is
 ENV DISPLAY=:99
 
 RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
@@ -70,16 +70,16 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     && if [ $CHROME_VERSION = "current" ]; then apt-get -y update apt-get install -y ${CHROME_INSTALL_CMD}; fi \
     && system_type=$(uname -m) \
     && echo $system_type \
-    && if [ $CHROME_VERSION = "latest" ]; then DRIVER_VER="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`"; fi \
-    && if [ ! $CHROME_VERSION = "latest" ]; then DRIVER_VER="${CHROME_DRIVER_VER}"; fi \
+    && if [ $CHROME_VERSION = "latest" ]; then driver_ver="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`"; fi \
+    && if [ ! $CHROME_VERSION = "latest" ]; then driver_ver="${CHROME_DRIVER_VER}"; fi \
     && if [ $system_type = 'i686' ]; then bit='32'; elif [ $system_type = 'x86_64' ]; then bit='64'; fi \
     && echo $bit \
     && mkdir -p /tmp/chromedriver \
-    && curl "https://chromedriver.storage.googleapis.com/${DRIVER_VER}/chromedriver_linux${bit}.zip" > /tmp/chromedriver/chromedriver.zip \
+    && curl "https://chromedriver.storage.googleapis.com/${driver_ver}/chromedriver_linux${bit}.zip" > /tmp/chromedriver/chromedriver.zip \
     && unzip -qqo /tmp/chromedriver/chromedriver chromedriver -d /usr/local/bin/ \
     && rm -rf /tmp/chromedriver \
     && chmod +x /usr/local/bin/chromedriver \
     && echo "-----------ENDING SYSTEM SETUP------------"
-#
+
 # Define default command.
 CMD ["bash"]
