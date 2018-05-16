@@ -15,23 +15,23 @@ ARG DRIVER_VER="2.37"
 FROM ${PLATFORM}
 
 # ENV if [ $PLATFORM =- "ubuntu" ]; then PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"; fi
-# ENV DISPLAY=:99
-#
-# RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
-#     && echo "Building image for platform type of ${PLATFORM}" \
-#     && echo "---------------------------------------" \
-#     && echo "Image will be build with Chrome browser verion type of ${CHROME_VERSION}" \
-#     && echo "---------------------------------------" \
-#     && echo "The command to install chrome is ${CHROME_INSTALL_CMD}" \
-#     && echo "---------------------------------------" \
-#     && echo "The chrome release is ${CHROME_RELEASE}" \
-#     && echo "---------------------------------------" \
-#     && echo "The chrome repository is $CHROME_REPO" \
-#     && echo "---------------------------------------" \
-#     && echo "The selenium chrome driver version is $CHROME_DRIVER_VER" \
-#     && echo "---------------------------------------" \
-#     && echo "(THIS ONE MAYBE REDUNTANT) The selenium chrome driver version is $DRIVER_VER" \
-#     && echo "---------------------------------------" \
+ENV DISPLAY=:99
+
+RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
+    && echo "Building image for platform type of ${PLATFORM}" \
+    && echo "---------------------------------------" \
+    && echo "Image will be build with Chrome browser verion type of ${CHROME_VERSION}" \
+    && echo "---------------------------------------" \
+    && echo "The command to install chrome is ${CHROME_INSTALL_CMD}" \
+    && echo "---------------------------------------" \
+    && echo "The chrome release is ${CHROME_RELEASE}" \
+    && echo "---------------------------------------" \
+    && echo "The chrome repository is $CHROME_REPO" \
+    && echo "---------------------------------------" \
+    && echo "The selenium chrome driver version is $CHROME_DRIVER_VER" \
+    && echo "---------------------------------------" \
+    && echo "(THIS ONE MAYBE REDUNTANT) The selenium chrome driver version is $DRIVER_VER" \
+    && echo "---------------------------------------" \
 #     && apt-get update && apt-get install -y \
 #         python \
 #         python-pip \
