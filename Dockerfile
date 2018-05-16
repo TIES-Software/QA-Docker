@@ -1,4 +1,4 @@
-ARG PLATFORM=ubuntu:14.04
+ARG PLATFORM='ubuntu:14.04'
 ARG CHROME_VERSION='current'
 ARG CHROME_INSTALL_CMD='google-chrome-unstable'
 ARG CHROME_RELEASE='stable'
