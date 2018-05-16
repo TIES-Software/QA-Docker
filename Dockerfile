@@ -1,10 +1,4 @@
 ARG PLATFORM="ubuntu:14.04"
-ARG CHROME_VERSION="current"
-ARG CHROME_INSTALL_CMD="google-chrome-unstable"
-ARG CHROME_RELEASE="stable"
-ARG CHROME_REPO="repo"
-ARG CHROME_DRIVER_VER="2.37"
-ARG DRIVER_VER="2.37"
 # ENV CHROME_RELEASE="bionic"
 # ENV CHROME_REPO="universe"
 # ENV CHROME_VERSION="previous"
@@ -14,17 +8,24 @@ ARG DRIVER_VER="2.37"
 # FROM ubuntu:14.04
 FROM ${PLATFORM}
 
+ARG CHROME_VERSION="current"
+ARG CHROME_INSTALL_CMD="google-chrome-unstable"
+ARG CHROME_RELEASE="stable"
+ARG CHROME_REPO="repo"
+ARG CHROME_DRIVER_VER="2.37"
+ARG DRIVER_VER="2.37"
+
 # ENV if [ $PLATFORM =- "ubuntu" ]; then PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"; fi
 ENV DISPLAY=:99
 
 RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
-    && echo "Building image for platform type of ${PLATFORM}" \
+    && echo "Building image for platform type of $PLATFORM" \
     && echo "---------------------------------------" \
-    && echo "Image will be build with Chrome browser verion type of ${CHROME_VERSION}" \
+    && echo "Image will be build with Chrome browser verion type of $CHROME_VERSION" \
     && echo "---------------------------------------" \
-    && echo "The command to install chrome is ${CHROME_INSTALL_CMD}" \
+    && echo "The command to install chrome is $CHROME_INSTALL_CMD" \
     && echo "---------------------------------------" \
-    && echo "The chrome release is ${CHROME_RELEASE}" \
+    && echo "The chrome release is $CHROME_RELEASE" \
     && echo "---------------------------------------" \
     && echo "The chrome repository is $CHROME_REPO" \
     && echo "---------------------------------------" \
