@@ -5,7 +5,6 @@ ARG CHROME_RELEASE
 ARG CHROME_REPO
 ARG CHROME_DRIVER_VER
 ARG DRIVER_VER
-ENV DISPLAY=:99
 # ENV CHROME_RELEASE='bionic'
 # ENV CHROME_REPO='universe'
 # ENV CHROME_VERSION='previous'
@@ -16,6 +15,7 @@ ENV DISPLAY=:99
 FROM ${PLATFORM}
 
 # ENV if [ $PLATFORM =- 'ubuntu' ]; then PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"; fi
+ENV DISPLAY=:99
 
 RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     && echo $PLATFORM \
