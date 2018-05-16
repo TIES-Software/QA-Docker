@@ -1,4 +1,4 @@
-ARG PLATFORM='ubuntu:14.04'
+ARG PLATFORM=ubuntu:14.04
 ARG CHROME_VERSION
 ARG CHROME_INSTALL_CMD
 ARG CHROME_RELEASE
@@ -13,7 +13,7 @@ ENV DISPLAY=:99
 # ENV DRIVER_VER
 
 # FROM ubuntu:14.04
-FROM $PLATFORM
+FROM ${PLATFORM}
 
 # ENV if [ $PLATFORM =- 'ubuntu' ]; then PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"; fi
 
