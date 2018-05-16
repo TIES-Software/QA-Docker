@@ -31,35 +31,35 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     && echo "---------------------------------------" \
     && echo "(THIS ONE MAYBE REDUNTANT) The selenium chrome driver version is $DRIVER_VER" \
     && echo "---------------------------------------" \
-#     && apt-get update && apt-get install -y \
-#         python \
-#         python-pip \
-#         curl \
-#         unzip \
-#         wget \
-#         apt-transport-https \
-#     	ca-certificates \
-#         libgconf-2-4 \
-#         libnss3 \
-#         libnspr4 \
-#         libasound2 \
-#         libatk-bridge2.0-0 \
-#         libnspr4 \
-#         xdg-utils \
-#         libatk1.0-0 \
-#         libxss1 \
-#         libx11-xcb1 \
-#         libc6 \
-#         libcairo2 \
-#         libcups2 \
-#         libdbus-1-3 \
-#         libgdk-pixbuf2.0-0 \
-#         libgtk-3-0 \
-#         chromium-codecs-ffmpeg-extra \
-#     && pip install pytest \
-#     && pip install selenium \
-#     && pip install behave \
-#     && echo $CHROME_VERSION \
+    && apt-get update && apt-get install -y \
+        python \
+        python-pip \
+        curl \
+        unzip \
+        wget \
+        apt-transport-https \
+    	ca-certificates \
+        libgconf-2-4 \
+        libnss3 \
+        libnspr4 \
+        libasound2 \
+        libatk-bridge2.0-0 \
+        libnspr4 \
+        xdg-utils \
+        libatk1.0-0 \
+        libxss1 \
+        libx11-xcb1 \
+        libc6 \
+        libcairo2 \
+        libcups2 \
+        libdbus-1-3 \
+        libgdk-pixbuf2.0-0 \
+        libgtk-3-0 \
+        chromium-codecs-ffmpeg-extra \
+    && pip install pytest \
+    && pip install selenium \
+    && pip install behave \
+    && echo $CHROME_VERSION
 #     # && if [ $CHROME_VERSION = "previous" ]; then CHROME_RELEASE="bionic"; fi \
 #     # && if [ $CHROME_VERSION = "previous" ]; then CHROME_REPO="universe"; fi \
 #     # && if [ $CHROME_VERSION = "previous" ]; then CHROME_INSTALL_CMD="chromium-browser"; fi \
@@ -88,5 +88,5 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
 #     && chmod +x /usr/local/bin/chromedriver \
 #     && echo "-----------ENDING SYSTEM SETUP------------"
 #
-# # Define default command.
-# CMD ["bash"]
+# Define default command.
+CMD ["bash"]
