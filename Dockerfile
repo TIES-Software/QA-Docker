@@ -79,7 +79,7 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
      && echo $CHROME_DRIVER_VER \
 #     && if [ $CHROME_DRIVER_VER = "latest" ]; then CHROME_DRIVER_VER="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`"; fi \
 #     && if [ ! $CHROME_DRIVER_VER = "latest" ]; then CHROME_DRIVER_VER="${DRIVER_VER}"; fi \
-     && if [ $system_type = "i686" ]; then bit="32"; elif [ $system_type = "x86_64" ]; then bit="64"; fi \
+     && if [ $system_type = "i686" ]; then bit="32"; elif [ $system_type="x86_64" ]; then bit="64"; fi \
      && mkdir -p /tmp/chromedriver \
      && curl "https://chromedriver.storage.googleapis.com/${$CHROME_DRIVER_VER}/chromedriver_linux${bit}.zip" > /tmp/chromedriver/chromedriver.zip \
      && unzip -qqo /tmp/chromedriver/chromedriver chromedriver -d /usr/local/bin/ \
