@@ -18,19 +18,19 @@ FROM ${PLATFORM}
 ENV DISPLAY=:99
 
 RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
-    && echo $PLATFORM \
+    && echo "Building image for platform type of ${PLATFORM}" \
     && echo "---------------------------------------" \
-    && echo $CHROME_VERSION \
+    && echo "Image will be build with Chrome browser verion type of ${CHROME_VERSION}" \
     && echo "---------------------------------------" \
-    && echo $CHROME_INSTALL_CMD \
+    && echo "The command to install chrome is ${CHROME_INSTALL_CMD}" \
     && echo "---------------------------------------" \
-    && echo $CHROME_RELEASE \
+    && echo "The chrome release is ${CHROME_RELEASE}" \
     && echo "---------------------------------------" \
-    && echo $CHROME_REPO \
+    && echo "The chrome repository is $CHROME_REPO" \
     && echo "---------------------------------------" \
-    && echo $CHROME_DRIVER_VER \
+    && echo "The selenium chrome driver version is $CHROME_DRIVER_VER" \
     && echo "---------------------------------------" \
-    && echo $DRIVER_VER \
+    && echo "(THIS ONE MAYBE REDUNTANT The selenium chrome driver version is $DRIVER_VER" \
     && echo "---------------------------------------" \
     && apt-get update && apt-get install -y \
         python \
