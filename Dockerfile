@@ -3,11 +3,11 @@ ARG PLATFORM="ubuntu:14.04"
 # FROM ubuntu:14.04
 FROM ${PLATFORM}
 
-ARG CHROME_VERSION="current"
-ARG CHROME_INSTALL_CMD="google-chrome-unstable"
-ARG CHROME_RELEASE="stable"
-ARG CHROME_REPO="repo"
-ARG CHROME_DRIVER_VER="2.37"
+ARG CHROME_VERSION="previous"
+ARG CHROME_INSTALL_CMD="chromium-browser"
+ARG CHROME_RELEASE="bionic"
+ARG CHROME_REPO="universe"
+ARG CHROME_DRIVER_VER="2.36"
 
 # I don't even know what the purpose of this is
 ENV DISPLAY=:99
