@@ -8,7 +8,7 @@ ARG CHROME_INSTALL_CMD="chromium-browser"
 ARG CHROME_RELEASE="bionic"
 ARG CHROME_REPO="universe"
 #ARG CHROME_DRIVER_VER="2.36"
-ARG CHROME_DRIVER_VER=""
+ARG CHROME_DRIVER_VER
 
 # I don't even know what the purpose of this is
 ENV DISPLAY=:99
