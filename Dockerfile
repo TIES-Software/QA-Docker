@@ -52,7 +52,9 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     && pip install pytest \
     && pip install selenium \
     && pip install behave \
+    && echo "---------------------------------------" \
     && echo $CHROME_VERSION \
+    && echo "---------------------------------------" \
     && if [ $CHROME_VERSION = "previous" ]; then CHROME_RELEASE="bionic"; fi \
     && if [ $CHROME_VERSION = "previous" ]; then CHROME_REPO="universe"; fi \
     && if [ $CHROME_VERSION = "previous" ]; then CHROME_INSTALL_CMD="chromium-browser"; fi \
@@ -63,18 +65,26 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     && if [ $CHROME_VERSION = "previous" ]; then cd /tmp \
     && mkdir chrome-deb \
     && cd chrome-deb || return\
+    && echo "---------------------------------------" \
     && sh -c echo http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb >> /etc/apt/sources.list.d/google-chrome-${CHROME_RELEASE}.list \
+    && echo "---------------------------------------" \
     && curl http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb --output /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb \
     && dpkg -i /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb; fi \
     && if [ $CHROME_VERSION = "current" ]; then apt-get -y update apt-get install -y ${CHROME_INSTALL_CMD}; fi \
     && system_type=$(uname -m) \
+    && echo "---------------------------------------" \
     && echo $system_type \
+    && echo "---------------------------------------" \
     && if [ $CHROME_VERSION = "latest" ]; then driver_ver="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`"; fi \
     # && if [ $CHROME_VERSION = "beta" ]; then driver_ver="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`"; fi \
     && if [ ! $CHROME_VERSION = "latest" ]; then driver_ver="${CHROME_DRIVER_VER}"; fi \
+    && echo "---------------------------------------" \
     && echo $driver_ver \
+    && echo "---------------------------------------" \
     && if [ $system_type = 'i686' ]; then bit='32'; elif [ $system_type = 'x86_64' ]; then bit='64'; fi \
+    && echo "---------------------------------------" \
     && echo $bit \
+    && echo "---------------------------------------" \
     && mkdir -p /tmp/chromedriver \
     && curl "https://chromedriver.storage.googleapis.com/${driver_ver}/chromedriver_linux${bit}.zip" > /tmp/chromedriver/chromedriver.zip \
     && unzip -qqo /tmp/chromedriver/chromedriver chromedriver -d /usr/local/bin/ \
