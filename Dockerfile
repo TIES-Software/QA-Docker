@@ -60,24 +60,25 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     && if [ $CHROME_VERSION = "previous" ]; then CHROME_INSTALL_CMD="chromium-browser"; fi \
     && if [ $CHROME_VERSION = "beta" ]; then CHROME_INSTALL_CMD="google-chrome-beta"; fi \
     && if [ $CHROME_VERSION = "unstable" ]; then CHROME_INSTALL_CMD="google-chrome-unstable"; fi \
+    && if [ $CHROME_VERSION = "current"  ]; then CHROME_INSTALL_CMD="google-chrome-stable"; fi \
     && wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
-    && if [ $CHROME_VERSION = "current" ]; then sh -c echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ ${CHROME_RELEASE} ${CHROME_REPO}" >> /etc/apt/sources.list.d/google-chrome-${CHROME_RELEASE}.list ; fi \
     && if [ $CHROME_VERSION = "previous" ]; then cd /tmp \
-    && mkdir chrome-deb \
+    && mkdir chrome-de
     && cd chrome-deb || return\
     && echo "---------------------------------------" \
     && sh -c echo http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb >> /etc/apt/sources.list.d/google-chrome-${CHROME_RELEASE}.list \
     && echo "---------------------------------------" \
     && curl http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb --output /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb \
     && dpkg -i /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb; fi \
-    && if [ $CHROME_VERSION = "current" ]; then apt-get  install -y ${CHROME_INSTALL_CMD}; fi \
+    && if [ $CHROME_VERSION = "current" ]; then apt-get -y update \
+    && apt-get install -y ${CHROME_INSTALL_CMD}; fi \
     && system_type=$(uname -m) \
     && echo "---------------------------------------" \
     && echo $system_type \
     && echo "---------------------------------------" \
-    && if [ $CHROME_VERSION = "latest" ]; then driver_ver="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`"; fi \
+    && if [ $CHROME_VERSION = "current" ]; then driver_ver="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`"; fi \
     # && if [ $CHROME_VERSION = "beta" ]; then driver_ver="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`"; fi \
-    && if [ ! $CHROME_VERSION = "latest" ]; then driver_ver="${CHROME_DRIVER_VER}"; fi \
+    && if [ ! $CHROME_VERSION = "current" ]; then driver_ver="${CHROME_DRIVER_VER}"; fi \
     && echo "---------------------------------------" \
     && echo $driver_ver \
     && echo "---------------------------------------" \
