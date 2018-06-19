@@ -83,8 +83,8 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     && echo "---------------------------------------" \
     && echo $system_type \
     && echo "---------------------------------------" \
-    && if [ $CHROME_VERSION = "current" ] || [ $CHROME_VERSION = "beta" ]; then driver_ver="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`"; fi \
-    # && if [ $CHROME_VERSION = "beta" ]; then driver_ver="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`"; fi \
+    && if [ $CHROME_VERSION = "current" ]; then driver_ver="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`"; fi \
+    && if [ $CHROME_VERSION = "beta" ]; then driver_ver="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`"; fi \
     && if [ $CHROME_VERSION = "previous" ]; then driver_ver="${CHROME_DRIVER_VER}"; fi \
     && echo "---------------------------------------" \
     && echo $driver_ver \
