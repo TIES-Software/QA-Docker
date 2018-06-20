@@ -20,8 +20,6 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     && if [ $CHROME_RELEASE = "" ]; then CHROME_RELEASE="stable"; fi \
     && if [ $CHROME_REPO = "" ]; then CHROME_REPO="main"; fi \
     && if [ $CHROME_DRIVER_VER = "" ]; then CHROME_DRIVER_VER="main"; fi \
-
-
     && echo "Image will be built with Chrome browser verion type of $CHROME_VERSION" \
     && echo "---------------------------------------" \
     && echo "The command to install chrome is $CHROME_INSTALL_CMD" \
@@ -98,6 +96,9 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     && unzip -qqo /tmp/chromedriver/chromedriver chromedriver -d /usr/local/bin/ \
     && rm -rf /tmp/chromedriver \
     && chmod +x /usr/local/bin/chromedriver \
+    && if [ $CHROME_VERSION = "previous" ]; then 'ln -snf /usr/local/bin/chromium-browser /usr/bin/google-chrome'; fi \
+    && if [ $CHROME_VERSION = "beta" ]; then 'ln -snf /usr/bin/google-chrome-beta /usr/bin/google-chrome'; fi \
+    && mkdir -p /tmp \
     && echo "-----------ENDING SYSTEM SETUP------------"
 
 # Define default command.
