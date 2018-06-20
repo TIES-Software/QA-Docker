@@ -96,8 +96,8 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     && unzip -qqo /tmp/chromedriver/chromedriver chromedriver -d /usr/local/bin/ \
     && rm -rf /tmp/chromedriver \
     && chmod +x /usr/local/bin/chromedriver \
-    && if [ $CHROME_VERSION = "previous" ]; then 'ln -snf /usr/local/bin/chromium-browser /usr/bin/google-chrome'; fi \
-    && if [ $CHROME_VERSION = "beta" ]; then 'ln -snf /usr/bin/google-chrome-beta /usr/bin/google-chrome'; fi \
+    && if [ $CHROME_VERSION = "previous" ]; then ln -snf '/usr/local/bin/chromium-browser /usr/bin/google-chrome'; fi \
+    && if [ $CHROME_VERSION = "beta" ]; then ln -snf '/usr/bin/google-chrome-beta /usr/bin/google-chrome'; fi \
     && mkdir -p /tmp \
     && echo "-----------ENDING SYSTEM SETUP------------"
 
