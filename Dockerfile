@@ -1,4 +1,4 @@
-ARG PLATFORM="ubuntu:14.04"
+ARG PLATFORM="ubuntu"
 
 # FROM ubuntu:14.04
 FROM ${PLATFORM}
@@ -7,16 +7,12 @@ ARG CHROME_VERSION
 ARG CHROME_INSTALL_CMD
 ARG CHROME_RELEASE
 ARG CHROME_REPO
-#ARG CHROME_DRIVER_VER="2.36"
 ARG CHROME_DRIVER_VER
 
-# I don't even know what the purpose of this is
 ENV DISPLAY=:99
 
 RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     && if [ $CHROME_VERSION = "" ]; then CHROME_VERSION="current"; fi \
-#    && if [ $CHROME_INSTALL_CMD = "" ]; then CHROME_INSTALL_CMD="chromium-browser"; fi  \
-#    && if [ $CHROME_INSTALL_CMD = "" ]; then CHROME_INSTALL_CMD="chrome-stable"; fi  \
     && if [ $CHROME_RELEASE = "" ]; then CHROME_RELEASE="stable"; fi \
     && if [ $CHROME_REPO = "" ]; then CHROME_REPO="main"; fi \
     && if [ $CHROME_DRIVER_VER = "" ]; then CHROME_DRIVER_VER="main"; fi \
