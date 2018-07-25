@@ -98,5 +98,6 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     && mkdir -p /tmp \
     && echo "-----------ENDING SYSTEM SETUP------------"
 
+
 # Define default command.
 CMD ["bash"]
