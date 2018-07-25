@@ -8,6 +8,7 @@ ARG CHROME_INSTALL_CMD
 ARG CHROME_RELEASE
 ARG CHROME_REPO
 ARG CHROME_DRIVER_VER
+ARG PYTHON_VERSION=''
 
 ENV DISPLAY=:99
 
@@ -27,7 +28,7 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     && echo "The selenium chrome driver version is $CHROME_DRIVER_VER" \
     && echo "---------------------------------------" \
     && apt-get update && apt-get install -y \
-        python \
+        python${PYTHON_VERSION} \
         python-pip \
         curl \
         unzip \
