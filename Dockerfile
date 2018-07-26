@@ -27,15 +27,13 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     && echo "---------------------------------------" \
     && echo "The selenium chrome driver version is $CHROME_DRIVER_VER" \
     && echo "---------------------------------------" \
+    && echo "Python version is $PYTHON_VERSION" \
     && apt-get update && apt-get install -y \
-        python-pip \
-        echo "---------------------------------------" \
-        echo "Python version is $PYTHON_VERSION" \
-        python${PYTHON_VERSION} \
-        echo "---------------------------------------" \
         curl \
         unzip \
         wget \
+        python-pip \
+        python${PYTHON_VERSION} \
         apt-transport-https \
     	ca-certificates \
         libgconf-2-4 \
