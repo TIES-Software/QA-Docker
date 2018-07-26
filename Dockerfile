@@ -28,12 +28,12 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     && echo "The selenium chrome driver version is $CHROME_DRIVER_VER" \
     && echo "---------------------------------------" \
     && echo "Python version is $PYTHON_VERSION" \
-    && apt-get update && apt-get install -y \
+    && apt-get update --assume-yes && apt-get install --assume-yes \
         curl \
         unzip \
         wget \
-        python-pip \
-        python \
+#        python-pip \
+#        python \
         apt-transport-https \
     	ca-certificates \
         libgconf-2-4 \
@@ -54,14 +54,12 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
         libgtk-3-0 \
         chromium-codecs-ffmpeg-extra \
     && echo "---------------------------------------" \
-    && if [ $PYTHON_VERSION = ""; then echo "Python 2 was installed"; else echo "Upgrading to Python 3"; fi \
+    && if [ $PYTHON_VERSION = "" ; then echo "Python 2 being installed" ; else echo "Python 3 being installed" ; fi \
     && echo "---------------------------------------" \
-    && if [ $PYTHON_VERSION = "3" ]; then apt-get update && apt-get install python3-pip \
-    && pip install -U selenium; fi \
-    && if [ $PYTHON_VERSION != "3" ]; then apt-get install python-pip python -m pip install -U selenium; fi \
-    && pip install pytest \
-    && echo "---------------------------------------" \
-    && pip install behave \
+    && if [ $PYTHON_VERSION = "3" ] ; then echo "Starting python 3 and selenium install" apt-get update --assume-yes && apt-get install --assume-yes python3-pip \
+    && pip3 install -U selenium behave pytest ; fi \
+    && if [ $PYTHON_VERSION != "3" ]; then echo "Starting python 2 and selenium install" apt-get install --assume-yes python-pip python \
+    && pip install selenium behave pytest ; fi \
     && echo "---------------------------------------" \
     && echo $CHROME_VERSION \
     && echo "---------------------------------------" \
