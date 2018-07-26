@@ -8,7 +8,7 @@ ARG CHROME_INSTALL_CMD
 ARG CHROME_RELEASE
 ARG CHROME_REPO
 ARG CHROME_DRIVER_VER
-ARG PYTHON_VERSION=''
+ARG PYTHON_VERSION="3"
 
 ENV DISPLAY=:99
 
@@ -54,7 +54,8 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
         libgtk-3-0 \
         chromium-codecs-ffmpeg-extra \
     && echo "---------------------------------------" \
-    && echo "Python version is $PYTHON_VERSION" \
+    && if [ $PYTHON_VERSION = ""; then echo "Installing Python 2"; \
+    && else echo "Installing Python 3"; fi \
     && echo "---------------------------------------" \
     && if [ $PYTHON_VERSION = "3" ]; then apt-get update && apt-get install python3-pip; fi \
     && echo "---------------------------------------" \
