@@ -57,7 +57,7 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
         chromium-codecs-ffmpeg-extra \
     && pip install pytest \
     && echo "---------------------------------------" \
-    && echo "Installing selenium"
+    && echo "Installing selenium" \
     && pip install selenium \
     && echo "---------------------------------------" \
     && pip install behave \
