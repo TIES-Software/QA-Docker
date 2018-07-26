@@ -13,10 +13,10 @@ ARG PYTHON_VERSION="3"
 ENV DISPLAY=:99
 
 RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
-    && if [ $CHROME_VERSION = "" ]; then CHROME_VERSION="current"; fi \
-    && if [ $CHROME_RELEASE = "" ]; then CHROME_RELEASE="stable"; fi \
-    && if [ $CHROME_REPO = "" ]; then CHROME_REPO="main"; fi \
-    && if [ $CHROME_DRIVER_VER = "" ]; then CHROME_DRIVER_VER="main"; fi \
+    && if [ "$CHROME_VERSION" = "" ]; then CHROME_VERSION="current"; fi \
+    && if [ "$CHROME_RELEASE" = "" ]; then CHROME_RELEASE="stable"; fi \
+    && if [ "$CHROME_REPO" = "" ]; then CHROME_REPO="main"; fi \
+    && if [ "$CHROME_DRIVER_VER" = "" ]; then CHROME_DRIVER_VER="main"; fi \
     && echo "Image will be built with Chrome browser verion type of $CHROME_VERSION" \
     && echo "---------------------------------------" \
     && echo "The command to install chrome is $CHROME_INSTALL_CMD" \
@@ -54,42 +54,42 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
         libgtk-3-0 \
         chromium-codecs-ffmpeg-extra \
     && echo "---------------------------------------" \
-    && if [ $PYTHON_VERSION = "" ; then echo "Python 2 being installed" ; else echo "Python 3 being installed" ; fi \
+    && if [ "$PYTHON_VERSION" = "" ; then echo "Python 2 being installed" ; else echo "Python 3 being installed" ; fi \
     && echo "---------------------------------------" \
-    && if [ $PYTHON_VERSION = "3" ] ; then echo "Starting python 3 and selenium install" apt-get update --assume-yes && apt-get install --assume-yes python3-pip \
+    && if [ "$PYTHON_VERSION" = "3" ] ; then echo "Starting python 3 and selenium install" apt-get update --assume-yes && apt-get install --assume-yes python3-pip \
     && pip3 install -U selenium behave pytest ; fi \
-    && if [ $PYTHON_VERSION != "3" ]; then echo "Starting python 2 and selenium install" apt-get install --assume-yes python-pip python \
+    && if [ "$PYTHON_VERSION" != "3" ]; then echo "Starting python 2 and selenium install" apt-get install --assume-yes python-pip python \
     && pip install selenium behave pytest ; fi \
     && echo "---------------------------------------" \
     && echo $CHROME_VERSION \
     && echo "---------------------------------------" \
-    && if [ $CHROME_VERSION = "previous" ]; then CHROME_RELEASE="bionic"; fi \
-    && if [ $CHROME_VERSION = "previous" ]; then CHROME_REPO="universe"; fi \
-    && if [ $CHROME_VERSION = "previous" ]; then CHROME_INSTALL_CMD="chromium-browser"; fi \
-    && if [ $CHROME_VERSION = "beta" ]; then CHROME_INSTALL_CMD="google-chrome-beta"; fi \
-    && if [ $CHROME_VERSION = "unstable" ]; then CHROME_INSTALL_CMD="google-chrome-unstable"; fi \
-    && if [ $CHROME_VERSION = "current"  ]; then CHROME_INSTALL_CMD="google-chrome-stable"; fi \
+    && if [ "$CHROME_VERSION" = "previous" ]; then CHROME_RELEASE="bionic"; fi \
+    && if [ "$CHROME_VERSION" = "previous" ]; then CHROME_REPO="universe"; fi \
+    && if [ "$CHROME_VERSION" = "previous" ]; then CHROME_INSTALL_CMD="chromium-browser"; fi \
+    && if [ "$CHROME_VERSION" = "beta" ]; then CHROME_INSTALL_CMD="google-chrome-beta"; fi \
+    && if [ "$CHROME_VERSION" = "unstable" ]; then CHROME_INSTALL_CMD="google-chrome-unstable"; fi \
+    && if [ "$CHROME_VERSION" = "current"  ]; then CHROME_INSTALL_CMD="google-chrome-stable"; fi \
     && wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
-    && if [ $CHROME_VERSION = "previous" ]; then cd /tmp \
+    && if [ "$CHROME_VERSION" = "previous" ]; then cd /tmp \
     && mkdir -p chrome-deb \
     && cd chrome-deb || return \
     && sh -c echo http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb >> /etc/apt/sources.list.d/google-chrome-${CHROME_RELEASE}.list \
     && curl http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb --output /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb \
     && dpkg -i /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb; fi \
-    && if [ $CHROME_VERSION = "current" ] || [ $CHROME_VERSION = "beta" ]; then sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list' \
+    && if [ "$CHROME_VERSION" = "current" ] || [ $CHROME_VERSION = "beta" ]; then sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list' \
     && apt-get -y update \
     && apt-get install -y ${CHROME_INSTALL_CMD}; fi \
     && system_type=$(uname -m) \
     && echo "---------------------------------------" \
     && echo $system_type \
     && echo "---------------------------------------" \
-    && if [ $CHROME_VERSION = "current" ]; then driver_ver="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`"; fi \
-    && if [ $CHROME_VERSION = "beta" ]; then driver_ver="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`"; fi \
-    && if [ $CHROME_VERSION = "previous" ]; then driver_ver="${CHROME_DRIVER_VER}"; fi \
+    && if [ "$CHROME_VERSION" = "current" ]; then driver_ver="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`"; fi \
+    && if [ "$CHROME_VERSION" = "beta" ]; then driver_ver="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`"; fi \
+    && if [ "$CHROME_VERSION" = "previous" ]; then driver_ver="${CHROME_DRIVER_VER}"; fi \
     && echo "---------------------------------------" \
     && echo $driver_ver \
     && echo "---------------------------------------" \
-    && if [ $system_type = 'i686' ]; then bit='32'; elif [ $system_type = 'x86_64' ]; then bit='64'; fi \
+    && if [ "$system_type" = 'i686' ]; then bit='32'; elif [ $system_type = 'x86_64' ]; then bit='64'; fi \
     && echo "---------------------------------------" \
     && echo $bit \
     && echo "---------------------------------------" \
@@ -98,8 +98,8 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     && unzip -qqo /tmp/chromedriver/chromedriver chromedriver -d /usr/local/bin/ \
     && rm -rf /tmp/chromedriver \
     && chmod +x /usr/local/bin/chromedriver \
-    && if [ $CHROME_VERSION = "previous" ]; then ln -snf '/usr/local/bin/chromium-browser /usr/bin/google-chrome'; fi \
-    && if [ $CHROME_VERSION = "beta" ]; then ln -snf '/usr/bin/google-chrome-beta /usr/bin/google-chrome'; fi \
+    && if [ "$CHROME_VERSION" = "previous" ]; then ln -snf '/usr/local/bin/chromium-browser /usr/bin/google-chrome'; fi \
+    && if [ "$CHROME_VERSION" = "beta" ]; then ln -snf '/usr/bin/google-chrome-beta /usr/bin/google-chrome'; fi \
     && mkdir -p /tmp \
     && echo "-----------ENDING SYSTEM SETUP------------"
 
