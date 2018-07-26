@@ -54,7 +54,7 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
         libgtk-3-0 \
         chromium-codecs-ffmpeg-extra \
     && echo "---------------------------------------" \
-    && if [ $PYTHON_VERSION = ""; then echo "Installing Python 2"; elif echo "Installing Python 3"; fi \
+    && if [ $PYTHON_VERSION = ""; then echo "Installing Python 2"; else echo "Installing Python 3"; fi \
     && echo "---------------------------------------" \
     && if [ $PYTHON_VERSION = "3" ]; then apt-get update && apt-get install python3-pip; fi \
     && if [ $PYTHON_VERSION != "3" ]; then apt-get install python-pip python -m pip install -U selenium; fi \
