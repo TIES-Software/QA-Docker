@@ -28,8 +28,11 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     && echo "The selenium chrome driver version is $CHROME_DRIVER_VER" \
     && echo "---------------------------------------" \
     && apt-get update && apt-get install -y \
-        python${PYTHON_VERSION} \
         python-pip \
+        echo "---------------------------------------" \
+        echo "Python version is $PYTHON_VERSION" \
+        python${PYTHON_VERSION} \
+        echo "---------------------------------------" \
         curl \
         unzip \
         wget \
@@ -53,7 +56,10 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
         libgtk-3-0 \
         chromium-codecs-ffmpeg-extra \
     && pip install pytest \
+    && echo "---------------------------------------" \
+    && echo "Installing selenium"
     && pip install selenium \
+    && echo "---------------------------------------" \
     && pip install behave \
     && echo "---------------------------------------" \
     && echo $CHROME_VERSION \
