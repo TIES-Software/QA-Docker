@@ -33,7 +33,7 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
         unzip \
         wget \
         python-pip \
-        python${PYTHON_VERSION} \
+        python \
         apt-transport-https \
     	ca-certificates \
         libgconf-2-4 \
@@ -53,6 +53,10 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
         libgdk-pixbuf2.0-0 \
         libgtk-3-0 \
         chromium-codecs-ffmpeg-extra \
+    && if [ $PYTHON_VERSION == "3" ]; then apt-get update \
+        apt-get install build-essential libpq-dev libssl-dev openssl libffi-dev zlib1g-dev \
+        apt-get install python3-pip python3-dev \
+        apt-get install python3; fi\
     && pip install pytest \
     && echo "---------------------------------------" \
     && echo "Installing selenium" \
