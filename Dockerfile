@@ -53,14 +53,13 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
         libgdk-pixbuf2.0-0 \
         libgtk-3-0 \
         chromium-codecs-ffmpeg-extra \
-    && if [ $PYTHON_VERSION == "3" ]; then apt-get update \
-        apt-get install build-essential libpq-dev libssl-dev openssl libffi-dev zlib1g-dev \
-        apt-get install python3-pip python3-dev \
-        apt-get install python3; fi\
-    && pip install pytest \
     && echo "---------------------------------------" \
-    && echo "Installing selenium" \
-    && pip install selenium \
+    && echo "Python version is $PYTHON_VERSION" \
+    && echo "---------------------------------------" \
+    && if [ $PYTHON_VERSION = "3" ]; then apt-get update && apt-get install python3-pip; fi \
+    && echo "---------------------------------------" \
+    && if [ $PYTHON_VERSION != "3" ]; then apt-get install python-pip python -m pip install -U selenium \
+    && pip install pytest; fi \
     && echo "---------------------------------------" \
     && pip install behave \
     && echo "---------------------------------------" \
