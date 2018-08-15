@@ -51,10 +51,15 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
         libgdk-pixbuf2.0-0 \
         libgtk-3-0 \
         chromium-codecs-ffmpeg-extra \
-        unixodbc-dev \
+    && echo "---------------------------------------" \
+    && echo 'First apt-get update/install is completed' \
+    && echo "---------------------------------------" \
     && curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
     && curl https://packages.microsoft.com/config/ubuntu/14.04/prod.list > /etc/apt/sources.list.d/mssql-release.list \
-    && apt-get update --assume-yes && apt-get install --assume-yes msodbcsql17 mssql-tools \
+    && echo "---------------------------------------" \
+    && echo 'Get odbc packages' \
+    && echo "---------------------------------------" \
+    && apt-get update --assume-yes && apt-get install --assume-yes unixodbc-dev msodbcsql17 mssql-tools \
     && echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile \
     && echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc \
     && echo "---------------------------------------" \
