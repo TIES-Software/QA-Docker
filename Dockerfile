@@ -62,9 +62,10 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     && echo "---------------------------------------" \
     && echo 'Get odbc packages' \
     && echo "---------------------------------------" \
-    && apt-get install -y  msodbcsql17  \
-    && apt-get install -y  mssql-tools \
-    && apt-get install -y  unixodbc-dev \
+    && apt-get update -y \
+    && ACCEPT_EULA=Y apt-get -y install msodbcsql17  \
+    && ACCEPT_EULA=Y apt-get install -y  mssql-tools \
+    && ACCEPT_EULA=Y apt-get install -y  unixodbc-dev \
     && echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile \
     && echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc \
     && echo "---------------------------------------" \
