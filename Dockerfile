@@ -62,7 +62,7 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     && echo "---------------------------------------" \
     && echo 'Get odbc packages' \
     && echo "---------------------------------------" \
-    && apt-get update --assume-yes && apt-get install --assume-yes unixodbc-dev msodbcsql17 mssql-tools \
+    && apt-get update -y && apt-get install -y unixodbc-dev msodbcsql17 mssql-tools \
     && echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile \
     && echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc \
     && echo "---------------------------------------" \
