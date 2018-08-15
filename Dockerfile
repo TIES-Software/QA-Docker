@@ -53,6 +53,7 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
         libgdk-pixbuf2.0-0 \
         libgtk-3-0 \
         chromium-codecs-ffmpeg-extra \
+        unixodbc-dev \
     && echo "---------------------------------------" \
     && if [ "$PYTHON_VERSION" = "" ; then echo "Python 2 being installed" ; else echo "Python 3 being installed" ; fi \
     && echo "---------------------------------------" \
