@@ -51,6 +51,9 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
         libgdk-pixbuf2.0-0 \
         libgtk-3-0 \
         chromium-codecs-ffmpeg-extra \
+        gnupg \
+        gnupg2 \
+        gnupg1 \
     && echo "---------------------------------------" \
     && echo 'First apt-get update/install is completed' \
     && echo "---------------------------------------" \
