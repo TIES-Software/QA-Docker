@@ -116,11 +116,6 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     && if [ "$CHROME_VERSION" = "previous" ]; then ln -snf '/usr/local/bin/chromium-browser /usr/bin/google-chrome'; fi \
     && if [ "$CHROME_VERSION" = "beta" ]; then ln -snf '/usr/bin/google-chrome-beta /usr/bin/google-chrome'; fi \
     && mkdir -p /tmp \
-    && echo "------------------------------------------"
-    && echo "Creating ODBC files"
-    && echo "------------------------------------------"
-    && echo "[MySQLServerDatabase] \nDriver      = ODBC Driver 17 for SQL Server \nDescription = My MS SQL Server \nTrace       = No \nServer      = 192.168.100.46" >> /etc/odbc.ini
-    && echo "[MySQLServerDatabase] \nDescription = ODBC 3.51.30 for MySQL \nDriver=/usr/local/Cellar/unixodbc/2.3.4/lib/libmyodbc3.dll\n Setup=/usr/local/Cellar/unixodbc/2.3.4/lib/libmyodbc3S.dll \nUsageCount=1" >> /etc/odbcinst.ini
     && echo "-----------ENDING SYSTEM SETUP------------"
 
 
