@@ -28,16 +28,10 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     && echo "The selenium chrome driver version is $CHROME_DRIVER_VER" \
     && echo "---------------------------------------" \
     && echo "Python version is $PYTHON_VERSION" \
-    && curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
-    && curl https://packages.microsoft.com/config/ubuntu/14.04/prod.list > /etc/apt/sources.list.d/mssql-release.list \
     && apt-get update --assume-yes && apt-get install --assume-yes \
         curl \
         unzip \
         wget \
-#        python-pip \
-#        python \
-        msodbcsql17 \
-        mssql-tools \
         apt-transport-https \
     	ca-certificates \
         libgconf-2-4 \
@@ -57,7 +51,21 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
         libgdk-pixbuf2.0-0 \
         libgtk-3-0 \
         chromium-codecs-ffmpeg-extra \
-        unixodbc-dev \
+        gnupg \
+        gnupg2 \
+        gnupg1 \
+    && echo "---------------------------------------" \
+    && echo 'First apt-get update/install is completed' \
+    && echo "---------------------------------------" \
+    && curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
+    && curl https://packages.microsoft.com/config/ubuntu/14.04/prod.list > /etc/apt/sources.list.d/mssql-release.list \
+    && echo "---------------------------------------" \
+    && echo 'Get odbc packages' \
+    && echo "---------------------------------------" \
+    && apt-get update -y \
+    && ACCEPT_EULA=Y apt-get -y install msodbcsql17  \
+    && ACCEPT_EULA=Y apt-get install -y  mssql-tools \
+    && ACCEPT_EULA=Y apt-get install -y  unixodbc-dev \
     && echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile \
     && echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc \
     && echo "---------------------------------------" \
