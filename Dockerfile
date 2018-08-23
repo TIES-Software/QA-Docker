@@ -185,8 +185,8 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     #&& if [ "$FIREFOX_VERSION" = "previous" ]; then ln -snf '/usr/local/bin/firefox-browser /usr/bin/firefox'; fi \
     #&& if [ "$FIREFOX_VERSION" = "beta" ]; then ln -snf '/usr/bin/firefox-beta /usr/bin/firefox'; fi \
     && ; fi \
-    && echo "-----------ENDING SYSTEM SETUP------------"
-    && mkdir -p /tmp \
+    && echo "-----------ENDING SYSTEM SETUP------------" \
+    && mkdir -p /tmp
 
 
 # Define default command.
