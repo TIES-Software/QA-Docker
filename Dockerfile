@@ -17,7 +17,7 @@ ARG PYTHON_VERSION="3"
 ENV DISPLAY=:99
 
 RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
-    && if [ "$BROWSER" = ""]; then BROWSER="chrome"; fi \
+    && if [ "$BROWSER" = "" ]; then BROWSER="chrome"; fi \
     && if [ "$BROWSER" = "chrome"]; then \
     && if [ "$CHROME_VERSION" = "" ]; then CHROME_VERSION="current"; fi \
     && if [ "$CHROME_RELEASE" = "" ]; then CHROME_RELEASE="stable"; fi \
