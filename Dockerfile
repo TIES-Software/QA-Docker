@@ -46,7 +46,7 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     #     && echo "---------------------------------------" \
     #     && echo "The Firefox repository is $FIREFOX_REPO" \
     #     && echo "---------------------------------------" \
-    #     && echo "The selenium firefox driver version is $FIREFOX_DRIVER_VER" ;; \
+        && echo "The selenium firefox driver version is $FIREFOX_DRIVER_VER" ;; \
     esac
     # && echo "---------------------------------------" \
     # && echo "Python version is $PYTHON_VERSION" \
