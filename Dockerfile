@@ -31,8 +31,7 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
         && echo "---------------------------------------" \
         && echo "The chrome repository is $CHROME_REPO" \
         && echo "---------------------------------------" \
-        && echo "The selenium chrome driver version is $CHROME_DRIVER_VER" \
-        esac
+        && echo "The selenium chrome driver version is $CHROME_DRIVER_VER" esac
     # && case "$BROWSER" in "firefox" ) \
     #     && if [ "$FIREFOX_VERSION" = "" ]; then FIREFOX_VERSION="current"; fi \
     #     && if [ "$FIREFOX_RELEASE" = "" ]; then FIREFOX_RELEASE="stable"; fi \
