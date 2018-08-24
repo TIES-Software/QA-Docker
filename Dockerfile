@@ -23,14 +23,14 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
             && if [ "$CHROME_RELEASE" = "" ]; then CHROME_RELEASE="stable"; fi \
             && if [ "$CHROME_REPO" = "" ]; then CHROME_REPO="main"; fi \
             && if [ "$CHROME_DRIVER_VER" = "" ]; then CHROME_DRIVER_VER="main"; fi \
-            # && echo "Image will be built with Chrome browser verion type of $CHROME_VERSION" \
-            # && echo "---------------------------------------" \
-            # && echo "The command to install chrome is $CHROME_INSTALL_CMD" \
-            # && echo "---------------------------------------" \
-            # && echo "The chrome release is $CHROME_RELEASE" \
-            # && echo "---------------------------------------" \
-            # && echo "The chrome repository is $CHROME_REPO" \
-            # && echo "---------------------------------------" \
+            && echo "Image will be built with Chrome browser verion type of $CHROME_VERSION" \
+            && echo "---------------------------------------" \
+            && echo "The command to install chrome is $CHROME_INSTALL_CMD" \
+            && echo "---------------------------------------" \
+            && echo "The chrome release is $CHROME_RELEASE" \
+            && echo "---------------------------------------" \
+            && echo "The chrome repository is $CHROME_REPO" \
+            && echo "---------------------------------------" \
             && echo "The selenium chrome driver version is $CHROME_DRIVER_VER" ;; \
     esac \
     && case "$BROWSER" in "firefox" ) \
@@ -55,7 +55,7 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     #     unzip \
     #     wget \
     #     apt-transport-https \
-    # 	ca-certificates \
+    #     ca-certificates \
     #     libgconf-2-4 \
     #     libnss3 \
     #     libnspr4 \
@@ -141,7 +141,7 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     #     && echo "---------------------------------------" \
     #     && echo "End of Chrome and Chrome driver install" \
     #     && echo "---------------------------------------" \
-    #     && esac \
+    # esac \
     # && case "$BROWSER" in "firefox" ) \
     #     && echo "---------------------------------------" \
     #     && echo "Beginning Firefox and Gecko Driver Install" \
@@ -185,8 +185,8 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     #     && chmod +x /usr/local/bin/geckodriver \
     #     # && if [ "$FIREFOX_VERSION" = "previous" ]; then ln -snf "/usr/local/bin/firefox-browser /usr/bin/firefox"; fi \
     #     # && if [ "$FIREFOX_VERSION" = "beta" ]; then ln -snf "/usr/bin/firefox-beta /usr/bin/firefox"; fi \
-    #     && echo "-----------ENDING FIREFOX SETUP------------" \
-    #     && esac \
+    #     && echo "-----------ENDING FIREFOX SETUP------------" ;; \
+    # esac \
     # && echo "-----------ENDING SYSTEM SETUP------------" \
     # && mkdir -p /tmp
 
