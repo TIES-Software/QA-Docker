@@ -20,10 +20,10 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     && if [ "$BROWSER" = "" ]; then BROWSER="chrome"; fi \
     && case "$BROWSER" in "chrome" ) \
             if [ "$CHROME_VERSION" = "" ]; then CHROME_VERSION="current"; fi \
-            && if [ "$CHROME_RELEASE" = "" ]; then CHROME_RELEASE="stable"; fi \
-            && if [ "$CHROME_REPO" = "" ]; then CHROME_REPO="main"; fi \
-            && if [ "$CHROME_DRIVER_VER" = "" ]; then CHROME_DRIVER_VER="main"; fi \
-            && echo "Image will be built with Chrome browser verion type of $CHROME_VERSION" \
+            if [ "$CHROME_RELEASE" = "" ]; then CHROME_RELEASE="stable"; fi \
+            if [ "$CHROME_REPO" = "" ]; then CHROME_REPO="main"; fi \
+            if [ "$CHROME_DRIVER_VER" = "" ]; then CHROME_DRIVER_VER="main"; fi \
+            echo "Image will be built with Chrome browser verion type of $CHROME_VERSION" \
             # && echo "---------------------------------------" \
             # && echo "The command to install chrome is $CHROME_INSTALL_CMD" \
             # && echo "---------------------------------------" \
@@ -31,7 +31,7 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
             # && echo "---------------------------------------" \
             # && echo "The chrome repository is $CHROME_REPO" \
             # && echo "---------------------------------------" \
-            && echo "The selenium chrome driver version is $CHROME_DRIVER_VER" ;; \
+            echo "The selenium chrome driver version is $CHROME_DRIVER_VER" ;; \
     esac
     # && case "$BROWSER" in "firefox" ) \
     #     && if [ "$FIREFOX_VERSION" = "" ]; then FIREFOX_VERSION="current"; fi \
