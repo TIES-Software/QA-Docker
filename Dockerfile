@@ -18,7 +18,7 @@ ENV DISPLAY=:99
 
 RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     && if [ "$BROWSER" = "" ]; then BROWSER="chrome"; fi \
-    && case ( "chrome" in "$BROWSER" ) \
+    && case "chrome" in "$BROWSER" ) \
         && if [ "$CHROME_VERSION" = "" ]; then CHROME_VERSION="current"; fi \
         && if [ "$CHROME_RELEASE" = "" ]; then CHROME_RELEASE="stable"; fi \
         && if [ "$CHROME_REPO" = "" ]; then CHROME_REPO="main"; fi \
@@ -33,7 +33,7 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
         && echo "---------------------------------------" \
         && echo "The selenium chrome driver version is $CHROME_DRIVER_VER" \
         && esac \
-    && case ( "firefox" in "$BROWSER" ) \
+    && case "firefox" in "$BROWSER" ) \
         && if [ "$FIREFOX_VERSION" = "" ]; then FIREFOX_VERSION="current"; fi \
         && if [ "$FIREFOX_RELEASE" = "" ]; then FIREFOX_RELEASE="stable"; fi \
         && if [ "$FIREFOX_REPO" = "" ]; then FIREFOX_REPO="main"; fi \
@@ -98,7 +98,7 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     && if [ "$PYTHON_VERSION" != "3" ]; then echo "Starting python 2 and selenium install" apt-get install --assume-yes python-pip python \
     && pip install selenium behave pytest requests ; fi \
     && echo "---------------------------------------" \
-    && case ( "chrome" in "$BROWSER" ) \
+    && case "chrome" in "$BROWSER" ) \
         && echo $CHROME_VERSION \
         && echo "---------------------------------------" \
         && if [ "$CHROME_VERSION" = "previous" ]; then CHROME_RELEASE="bionic"; fi \
@@ -142,7 +142,7 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
         && echo "End of Chrome and Chrome driver install" \
         && echo "---------------------------------------" \
         && esac \
-    && case ( "firefox" in "$BROWSER" ) \
+    && case "firefox" in "$BROWSER" ) \
         && echo "---------------------------------------" \
         && echo "Beginning Firefox and Gecko Driver Install" \
         && echo "---------------------------------------" \
