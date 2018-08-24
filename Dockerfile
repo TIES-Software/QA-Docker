@@ -18,7 +18,7 @@ ENV DISPLAY=:99
 
 RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     && if [ "$BROWSER" = "" ]; then BROWSER="chrome"; fi \
-    && case "chrome" in "$BROWSER" ) \
+    && case "$BROWSER" in "chrome" ) \
         && if [ "$CHROME_VERSION" = "" ]; then CHROME_VERSION="current"; fi \
         && if [ "$CHROME_RELEASE" = "" ]; then CHROME_RELEASE="stable"; fi \
         && if [ "$CHROME_REPO" = "" ]; then CHROME_REPO="main"; fi \
@@ -33,7 +33,7 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
         && echo "---------------------------------------" \
         && echo "The selenium chrome driver version is $CHROME_DRIVER_VER" \
         && esac \
-    && case "firefox" in "$BROWSER" ) \
+    && case "$BROWSER" in "firefox" ) \
         && if [ "$FIREFOX_VERSION" = "" ]; then FIREFOX_VERSION="current"; fi \
         && if [ "$FIREFOX_RELEASE" = "" ]; then FIREFOX_RELEASE="stable"; fi \
         && if [ "$FIREFOX_REPO" = "" ]; then FIREFOX_REPO="main"; fi \
@@ -88,17 +88,17 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     && ACCEPT_EULA=Y apt-get -y install msodbcsql17  \
     && ACCEPT_EULA=Y apt-get install -y  mssql-tools \
     && ACCEPT_EULA=Y apt-get install -y  unixodbc-dev \
-    && echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile \
-    && echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc \
+    && echo export PATH="$PATH":/opt/mssql-tools/bin >> ~/.bash_profile \
+    && echo export PATH="$PATH":/opt/mssql-tools/bin >> ~/.bashrc \
     && echo "---------------------------------------" \
-    && if [ "$PYTHON_VERSION" = "" ; then echo "Python 2 being installed" ; else echo "Python 3 being installed" ; fi \
+    && if [ "$PYTHON_VERSION" = "" ]; then echo "Python 2 being installed" ; else echo "Python 3 being installed" ; fi \
     && echo "---------------------------------------" \
     && if [ "$PYTHON_VERSION" = "3" ] ; then echo "Starting python 3 and selenium install" apt-get update --assume-yes && apt-get install --assume-yes python3-pip \
     && pip3 install -U selenium behave pytest pyodbc requests ; fi \
     && if [ "$PYTHON_VERSION" != "3" ]; then echo "Starting python 2 and selenium install" apt-get install --assume-yes python-pip python \
     && pip install selenium behave pytest requests ; fi \
     && echo "---------------------------------------" \
-    && case "chrome" in "$BROWSER" ) \
+    && case "$BROWSER" in "chrome" ) \
         && echo $CHROME_VERSION \
         && echo "---------------------------------------" \
         && if [ "$CHROME_VERSION" = "previous" ]; then CHROME_RELEASE="bionic"; fi \
@@ -119,30 +119,30 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
         && apt-get install -y ${CHROME_INSTALL_CMD}; fi \
         && system_type=$(uname -m) \
         && echo "---------------------------------------" \
-        && echo $system_type \
+        && echo "$system_type" \
         && echo "---------------------------------------" \
-        && if [ "$CHROME_VERSION" = "current" ]; then driver_ver="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`"; fi \
-        && if [ "$CHROME_VERSION" = "beta" ]; then driver_ver="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`"; fi \
+        && if [ "$CHROME_VERSION" = "current" ]; then driver_ver="wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE"; fi \
+        && if [ "$CHROME_VERSION" = "beta" ]; then driver_ver="wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE"; fi \
         && if [ "$CHROME_VERSION" = "previous" ]; then driver_ver="${CHROME_DRIVER_VER}"; fi \
         && echo "---------------------------------------" \
         && echo $driver_ver \
         && echo "---------------------------------------" \
-        && if [ "$system_type" = 'i686' ]; then bit='32'; elif [ $system_type = 'x86_64' ]; then bit='64'; fi \
+        && if [ "$system_type" = "i686" ]; then bit="32"; elif [ "$system_type" = "x86_64" ]; then bit="64"; fi \
         && echo "---------------------------------------" \
-        && echo $bit \
+        && echo "$bit" \
         && echo "---------------------------------------" \
         && mkdir -p /tmp/chromedriver \
         && curl "https://chromedriver.storage.googleapis.com/${driver_ver}/chromedriver_linux${bit}.zip" > /tmp/chromedriver/chromedriver.zip \
         && unzip -qqo /tmp/chromedriver/chromedriver chromedriver -d /usr/local/bin/ \
         && rm -rf /tmp/chromedriver \
         && chmod +x /usr/local/bin/chromedriver \
-        && if [ "$CHROME_VERSION" = "previous" ]; then ln -snf '/usr/local/bin/chromium-browser /usr/bin/google-chrome'; fi \
-        && if [ "$CHROME_VERSION" = "beta" ]; then ln -snf '/usr/bin/google-chrome-beta /usr/bin/google-chrome'; fi \
+        && if [ "$CHROME_VERSION" = "previous" ]; then ln -snf "/usr/local/bin/chromium-browser /usr/bin/google-chrome"; fi \
+        && if [ "$CHROME_VERSION" = "beta" ]; then ln -snf "/usr/bin/google-chrome-beta /usr/bin/google-chrome"; fi \
         && echo "---------------------------------------" \
         && echo "End of Chrome and Chrome driver install" \
         && echo "---------------------------------------" \
         && esac \
-    && case "firefox" in "$BROWSER" ) \
+    && case "$BROWSER" in "firefox" ) \
         && echo "---------------------------------------" \
         && echo "Beginning Firefox and Gecko Driver Install" \
         && echo "---------------------------------------" \
@@ -166,25 +166,25 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
         # && apt-get install -y ${FIREFOX_INSTALL_CMD}; fi \
         && system_type=$(uname -m) \
         && echo "---------------------------------------" \
-        && echo $system_type \
+        && echo "$system_type" \
         && echo "---------------------------------------" \
         && if [ "$FIREFOX_REL" = "current" ]; then apt-get update && apt-get install -y firefox; fi \
-        # && if [ "$FIREFOX_VERSION" = "beta" ]; then driver_ver="`wget -qO- http://geckodriver.storage.firefoxapis.com/LATEST_RELEASE`"; fi \
+        # && if [ "$FIREFOX_VERSION" = "beta" ]; then driver_ver="wget -qO- http://geckodriver.storage.firefoxapis.com/LATEST_RELEASE"; fi \
         # && if [ "$FIREFOX_VERSION" = "previous" ]; then driver_ver="${FIREFOX_DRIVER_VER}"; fi \
         && echo "---------------------------------------" \
         # && echo $driver_ver \
         && echo "---------------------------------------" \
-        && if [ "$system_type" = 'i686' ]; then bit='32'; elif [ $system_type = 'x86_64' ]; then bit='64'; fi \
+        && if [ "$system_type" = "i686" ]; then bit="32"; elif [ "$system_type" = "x86_64" ]; then bit="64"; fi \
         && echo "---------------------------------------" \
-        && echo $bit \
+        && echo "$bit" \
         && echo "---------------------------------------" \
         && mkdir -p /tmp/geckodriver \
-        && wget --no-verbose -O /tmp/geckodriver.tar.gz https://github.com/mozilla/geckodriver/releases/download/v$GECKODRIVER_VERSION/geckodriver-v$GECKODRIVER_VERSION-linux64.tar.gz > /tmp/geckodriver.tar.gz \
+        && wget --no-verbose -O https://github.com/mozilla/geckodriver/releases/download/v"$GECKODRIVER_VERSION"/geckodriver-v"$GECKODRIVER_VERSION"-linux64.tar.gz > /tmp/geckodriver.tar.gz \
         && tar -xf /tmp/geckodriver.tar.gz -C /usr/local/bin \
         && rm -rf /tmp/geckodriver.tar.gz \
         && chmod +x /usr/local/bin/geckodriver \
-        # && if [ "$FIREFOX_VERSION" = "previous" ]; then ln -snf '/usr/local/bin/firefox-browser /usr/bin/firefox'; fi \
-        # && if [ "$FIREFOX_VERSION" = "beta" ]; then ln -snf '/usr/bin/firefox-beta /usr/bin/firefox'; fi \
+        # && if [ "$FIREFOX_VERSION" = "previous" ]; then ln -snf "/usr/local/bin/firefox-browser /usr/bin/firefox"; fi \
+        # && if [ "$FIREFOX_VERSION" = "beta" ]; then ln -snf "/usr/bin/firefox-beta /usr/bin/firefox"; fi \
         && echo "-----------ENDING FIREFOX SETUP------------" \
         && esac \
     && echo "-----------ENDING SYSTEM SETUP------------" \
