@@ -126,7 +126,7 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
         && echo "---------------------------------------" \
         && echo "End of Chrome and Chrome driver install" \
         && echo "---------------------------------------" ;;\
-    esac \
+    esac
     # && case "$BROWSER" in "firefox" ) \
     #     && echo "---------------------------------------" \
     #     && echo "Beginning Firefox and Gecko Driver Install" \
