@@ -141,7 +141,7 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     && echo "---------------------------------------" \
     && echo "End of Chrome and Chrome driver install" \
     && echo "---------------------------------------" \
-    && esac
+    && esac \
     && case ( "firefox" in "$BROWSER" ) \
     && echo "---------------------------------------" \
     && echo "Beginning Firefox and Gecko Driver Install" \
@@ -185,7 +185,7 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     && chmod +x /usr/local/bin/geckodriver \
     # && if [ "$FIREFOX_VERSION" = "previous" ]; then ln -snf '/usr/local/bin/firefox-browser /usr/bin/firefox'; fi \
     # && if [ "$FIREFOX_VERSION" = "beta" ]; then ln -snf '/usr/bin/firefox-beta /usr/bin/firefox'; fi \
-    && esac
+    && esac \
     && echo "-----------ENDING FIREFOX SETUP------------" \
     && echo "-----------ENDING SYSTEM SETUP------------" \
     && mkdir -p /tmp
