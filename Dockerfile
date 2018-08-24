@@ -126,54 +126,54 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
         && echo "---------------------------------------" \
         && echo "End of Chrome and Chrome driver install" \
         && echo "---------------------------------------" ;;\
-    esac
-    # && case "$BROWSER" in "firefox" ) \
-    #     && echo "---------------------------------------" \
-    #     && echo "Beginning Firefox and Gecko Driver Install" \
-    #     && echo "---------------------------------------" \
-    #     && echo "$FIREFOX_VER" \
-    #     && echo "---------------------------------------" \
-    #     # && if [ "$FIREFOX_VER" = "previous" ]; then FIREFOX_RELEASE="bionic"; fi \
-    #     # && if [ "$FIREFOX_VER" = "previous" ]; then FIREFOX_REPO="universe"; fi \
-    #     # && if [ "$FIREFOX_VER" = "previous" ]; then FIREFOX_INSTALL_CMD="marionatte-browser-browser"; fi \
-    #     # && if [ "$FIREFOX_VER" = "beta" ]; then FIREFOX_INSTALL_CMD="firefox-beta"; fi \
-    #     # && if [ "$FIREFOX_VER" = "unstable" ]; then FIREFOX_INSTALL_CMD="firefox-unstable"; fi \
-    #     && if [ "$FIREFOX_VER" = "current"  ]; then FIREFOX_INSTALL_CMD="firefox-stable"; fi \
-    #     # && wget -qO- https://dl-ssl.firefox.com/linux/linux_signing_key.pub | apt-key add - \
-    #     # && if [ "$FIREFOX_VERSION" = "previous" ]; then cd /tmp \
-    #     # && mkdir -p firefox-deb \
-    #     # && cd firefox-deb || return \
-    #     # && sh -c echo http://security.ubuntu.com/ubuntu/pool/universe/c/marionatte-browser/marionatte-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb >> /etc/apt/sources.list.d/google-chrome-${FIREFOX_RELEASE}.list \
-    #     # && curl http://security.ubuntu.com/ubuntu/pool/universe/c/marionatte-browser/marionatte-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb --output /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb \
-    #     # && dpkg -i /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb; fi \
-    #     # && if [ "$FIREFOX_VERSION" = "current" ] || [ $FIREFOX_VERSION = "beta" ]; then sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list' \
-    #     # && apt-get -y update \
-    #     # && apt-get install -y ${FIREFOX_INSTALL_CMD}; fi \
-    #     && system_type=$(uname -m) \
-    #     && echo "---------------------------------------" \
-    #     && echo "$system_type" \
-    #     && echo "---------------------------------------" \
-    #     && if [ "$FIREFOX_REL" = "current" ]; then apt-get update && apt-get install -y firefox; fi \
-    #     # && if [ "$FIREFOX_VERSION" = "beta" ]; then driver_ver="wget -qO- http://geckodriver.storage.firefoxapis.com/LATEST_RELEASE"; fi \
-    #     # && if [ "$FIREFOX_VERSION" = "previous" ]; then driver_ver="${FIREFOX_DRIVER_VER}"; fi \
-    #     && echo "---------------------------------------" \
-    #     # && echo $driver_ver \
-    #     && echo "---------------------------------------" \
-    #     && if [ "$system_type" = "i686" ]; then bit="32"; elif [ "$system_type" = "x86_64" ]; then bit="64"; fi \
-    #     && echo "---------------------------------------" \
-    #     && echo "$bit" \
-    #     && echo "---------------------------------------" \
-    #     && mkdir -p /tmp/geckodriver \
-    #     && wget --no-verbose -O https://github.com/mozilla/geckodriver/releases/download/v"$GECKODRIVER_VERSION"/geckodriver-v"$GECKODRIVER_VERSION"-linux64.tar.gz > /tmp/geckodriver.tar.gz \
-    #     && tar -xf /tmp/geckodriver.tar.gz -C /usr/local/bin \
-    #     && rm -rf /tmp/geckodriver.tar.gz \
-    #     && chmod +x /usr/local/bin/geckodriver \
-    #     # && if [ "$FIREFOX_VERSION" = "previous" ]; then ln -snf "/usr/local/bin/firefox-browser /usr/bin/firefox"; fi \
-    #     # && if [ "$FIREFOX_VERSION" = "beta" ]; then ln -snf "/usr/bin/firefox-beta /usr/bin/firefox"; fi \
-    #     && echo "-----------ENDING FIREFOX SETUP------------" ;; \
-    # esac \
-    # && echo "-----------ENDING SYSTEM SETUP------------" \
-    # && mkdir -p /tmp
+    esac \
+    && case "$BROWSER" in "firefox" ) \
+        echo "---------------------------------------" \
+        && echo "Beginning Firefox and Gecko Driver Install" \
+        && echo "---------------------------------------" \
+        && echo "$FIREFOX_VER" \
+        && echo "---------------------------------------" \
+        # && if [ "$FIREFOX_VER" = "previous" ]; then FIREFOX_RELEASE="bionic"; fi \
+        # && if [ "$FIREFOX_VER" = "previous" ]; then FIREFOX_REPO="universe"; fi \
+        # && if [ "$FIREFOX_VER" = "previous" ]; then FIREFOX_INSTALL_CMD="marionatte-browser-browser"; fi \
+        # && if [ "$FIREFOX_VER" = "beta" ]; then FIREFOX_INSTALL_CMD="firefox-beta"; fi \
+        # && if [ "$FIREFOX_VER" = "unstable" ]; then FIREFOX_INSTALL_CMD="firefox-unstable"; fi \
+        && if [ "$FIREFOX_VER" = "current"  ]; then FIREFOX_INSTALL_CMD="firefox-stable"; fi \
+        # && wget -qO- https://dl-ssl.firefox.com/linux/linux_signing_key.pub | apt-key add - \
+        # && if [ "$FIREFOX_VERSION" = "previous" ]; then cd /tmp \
+        # && mkdir -p firefox-deb \
+        # && cd firefox-deb || return \
+        # && sh -c echo http://security.ubuntu.com/ubuntu/pool/universe/c/marionatte-browser/marionatte-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb >> /etc/apt/sources.list.d/google-chrome-${FIREFOX_RELEASE}.list \
+        # && curl http://security.ubuntu.com/ubuntu/pool/universe/c/marionatte-browser/marionatte-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb --output /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb \
+        # && dpkg -i /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb; fi \
+        # && if [ "$FIREFOX_VERSION" = "current" ] || [ $FIREFOX_VERSION = "beta" ]; then sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list' \
+        # && apt-get -y update \
+        # && apt-get install -y ${FIREFOX_INSTALL_CMD}; fi \
+        && system_type=$(uname -m) \
+        && echo "---------------------------------------" \
+        && echo "$system_type" \
+        && echo "---------------------------------------" \
+        && if [ "$FIREFOX_REL" = "current" ]; then apt-get update && apt-get install -y firefox; fi \
+        # && if [ "$FIREFOX_VERSION" = "beta" ]; then driver_ver="wget -qO- http://geckodriver.storage.firefoxapis.com/LATEST_RELEASE"; fi \
+        # && if [ "$FIREFOX_VERSION" = "previous" ]; then driver_ver="${FIREFOX_DRIVER_VER}"; fi \
+        && echo "---------------------------------------" \
+        # && echo $driver_ver \
+        && echo "---------------------------------------" \
+        && if [ "$system_type" = "i686" ]; then bit="32"; elif [ "$system_type" = "x86_64" ]; then bit="64"; fi \
+        && echo "---------------------------------------" \
+        && echo "$bit" \
+        && echo "---------------------------------------" \
+        && mkdir -p /tmp/geckodriver \
+        && wget --no-verbose -O https://github.com/mozilla/geckodriver/releases/download/v"$GECKODRIVER_VERSION"/geckodriver-v"$GECKODRIVER_VERSION"-linux64.tar.gz > /tmp/geckodriver.tar.gz \
+        && tar -xf /tmp/geckodriver.tar.gz -C /usr/local/bin \
+        && rm -rf /tmp/geckodriver.tar.gz \
+        && chmod +x /usr/local/bin/geckodriver \
+        # && if [ "$FIREFOX_VERSION" = "previous" ]; then ln -snf "/usr/local/bin/firefox-browser /usr/bin/firefox"; fi \
+        # && if [ "$FIREFOX_VERSION" = "beta" ]; then ln -snf "/usr/bin/firefox-beta /usr/bin/firefox"; fi \
+        && echo "-----------ENDING FIREFOX SETUP------------" ;; \
+    esac \
+    && echo "-----------ENDING SYSTEM SETUP------------" \
+    && mkdir -p /tmp
 
 
 # Define default command.
