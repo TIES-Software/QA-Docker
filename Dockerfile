@@ -32,7 +32,7 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
         && echo "The chrome repository is $CHROME_REPO" \
         && echo "---------------------------------------" \
        && echo "The selenium chrome driver version is $CHROME_DRIVER_VER" ;; \
-   esac
+   esac \
     && echo "---------------------------------------" \
     && echo "Python version is $PYTHON_VERSION" \
     && apt-get update --assume-yes && apt-get install --assume-yes \
