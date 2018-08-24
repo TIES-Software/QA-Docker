@@ -117,9 +117,9 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
         && echo "$bit" \
         && echo "---------------------------------------" \
         && mkdir -p /tmp/chromedriver \
-        && wget --no-verbose "https://chromedriver.storage.googleapis.com/${driver_ver}/chromedriver_linux${bit}.zip" > /tmp/chromedriver/chromedriver.tar.gz \
-        && tar -xf /tmp/chromedriver/chromedriver.tar.gz -C /usr/local/bin \
-        && rm -rf /tmp/chromedriver/chromedriver.tar.gz \
+        && curl "https://chromedriver.storage.googleapis.com/${driver_ver}/chromedriver_linux${bit}.zip" > /tmp/chromedriver/chromedriver.zip \
+        && unzip -qqo /tmp/chromedriver/chromedriver chromedriver -d /usr/local/bin/ \
+        && rm -rf /tmp/chromedriver/chromedriver.zip \
         && chmod +x /usr/local/bin/chromedriver \
         && if [ "$CHROME_VERSION" = "previous" ]; then ln -snf "/usr/local/bin/chromium-browser /usr/bin/google-chrome"; fi \
         && if [ "$CHROME_VERSION" = "beta" ]; then ln -snf "/usr/bin/google-chrome-beta /usr/bin/google-chrome"; fi \
