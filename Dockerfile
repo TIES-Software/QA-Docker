@@ -33,56 +33,56 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
         && echo "---------------------------------------" \
        && echo "The selenium chrome driver version is $CHROME_DRIVER_VER" ;; \
    esac
-    # && echo "---------------------------------------" \
-    # && echo "Python version is $PYTHON_VERSION" \
-    # && apt-get update --assume-yes && apt-get install --assume-yes \
-    #     curl \
-    #     unzip \
-    #     wget \
-    #     apt-transport-https \
-    #     ca-certificates \
-    #     libgconf-2-4 \
-    #     libnss3 \
-    #     libnspr4 \
-    #     libasound2 \
-    #     libatk-bridge2.0-0 \
-    #     libnspr4 \
-    #     xdg-utils \
-    #     libatk1.0-0 \
-    #     libxss1 \
-    #     libx11-xcb1 \
-    #     libc6 \
-    #     libcairo2 \
-    #     libcups2 \
-    #     libdbus-1-3 \
-    #     libgdk-pixbuf2.0-0 \
-    #     libgtk-3-0 \
-    #     chromium-codecs-ffmpeg-extra \
-    #     gnupg \
-    #     gnupg2 \
-    #     gnupg1 \
-    # && echo "---------------------------------------" \
-    # && echo "First apt-get update/install is completed" \
-    # && echo "---------------------------------------" \
-    # && curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
-    # && curl https://packages.microsoft.com/config/ubuntu/14.04/prod.list > /etc/apt/sources.list.d/mssql-release.list \
-    # && echo "---------------------------------------" \
-    # && echo "Get odbc packages" \
-    # && echo "---------------------------------------" \
-    # && apt-get update -y \
-    # && ACCEPT_EULA=Y apt-get -y install msodbcsql17  \
-    # && ACCEPT_EULA=Y apt-get install -y  mssql-tools \
-    # && ACCEPT_EULA=Y apt-get install -y  unixodbc-dev \
-    # && echo export PATH="$PATH":/opt/mssql-tools/bin >> ~/.bash_profile \
-    # && echo export PATH="$PATH":/opt/mssql-tools/bin >> ~/.bashrc \
-    # && echo "---------------------------------------" \
-    # && if [ "$PYTHON_VERSION" = "" ]; then echo "Python 2 being installed" ; else echo "Python 3 being installed" ; fi \
-    # && echo "---------------------------------------" \
-    # && if [ "$PYTHON_VERSION" = "3" ] ; then echo "Starting python 3 and selenium install" apt-get update --assume-yes && apt-get install --assume-yes python3-pip \
-    # && pip3 install -U selenium behave pytest pyodbc requests ; fi \
-    # && if [ "$PYTHON_VERSION" != "3" ]; then echo "Starting python 2 and selenium install" apt-get install --assume-yes python-pip python \
-    # && pip install selenium behave pytest requests ; fi \
-    # && echo "---------------------------------------" \
+    && echo "---------------------------------------" \
+    && echo "Python version is $PYTHON_VERSION" \
+    && apt-get update --assume-yes && apt-get install --assume-yes \
+        curl \
+        unzip \
+        wget \
+        apt-transport-https \
+        ca-certificates \
+        libgconf-2-4 \
+        libnss3 \
+        libnspr4 \
+        libasound2 \
+        libatk-bridge2.0-0 \
+        libnspr4 \
+        xdg-utils \
+        libatk1.0-0 \
+        libxss1 \
+        libx11-xcb1 \
+        libc6 \
+        libcairo2 \
+        libcups2 \
+        libdbus-1-3 \
+        libgdk-pixbuf2.0-0 \
+        libgtk-3-0 \
+        chromium-codecs-ffmpeg-extra \
+        gnupg \
+        gnupg2 \
+        gnupg1 \
+    && echo "---------------------------------------" \
+    && echo "First apt-get update/install is completed" \
+    && echo "---------------------------------------" \
+    && curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
+    && curl https://packages.microsoft.com/config/ubuntu/14.04/prod.list > /etc/apt/sources.list.d/mssql-release.list \
+    && echo "---------------------------------------" \
+    && echo "Get odbc packages" \
+    && echo "---------------------------------------" \
+    && apt-get update -y \
+    && ACCEPT_EULA=Y apt-get -y install msodbcsql17  \
+    && ACCEPT_EULA=Y apt-get install -y  mssql-tools \
+    && ACCEPT_EULA=Y apt-get install -y  unixodbc-dev \
+    && echo export PATH="$PATH":/opt/mssql-tools/bin >> ~/.bash_profile \
+    && echo export PATH="$PATH":/opt/mssql-tools/bin >> ~/.bashrc \
+    && echo "---------------------------------------" \
+    && if [ "$PYTHON_VERSION" = "" ]; then echo "Python 2 being installed" ; else echo "Python 3 being installed" ; fi \
+    && echo "---------------------------------------" \
+    && if [ "$PYTHON_VERSION" = "3" ] ; then echo "Starting python 3 and selenium install" apt-get update --assume-yes && apt-get install --assume-yes python3-pip \
+    && pip3 install -U selenium behave pytest pyodbc requests ; fi \
+    && if [ "$PYTHON_VERSION" != "3" ]; then echo "Starting python 2 and selenium install" apt-get install --assume-yes python-pip python \
+    && pip install selenium behave pytest requests ; fi \
+    && echo "---------------------------------------"
     # && case "$BROWSER" in "chrome" ) \
     #     && echo $CHROME_VERSION \
     #     && echo "---------------------------------------" \
