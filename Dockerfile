@@ -18,8 +18,8 @@ ENV DISPLAY=:99
 
 RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     && if [ "$BROWSER" = "" ]; then BROWSER="chrome"; fi
-    # && case "$BROWSER" in "chrome" ) \
-    #     && if [ "$CHROME_VERSION" = "" ]; then CHROME_VERSION="current"; fi \
+    && case "$BROWSER" in "chrome" ) \
+        && if [ "$CHROME_VERSION" = "" ]; then CHROME_VERSION="current"; fi \
     #     && if [ "$CHROME_RELEASE" = "" ]; then CHROME_RELEASE="stable"; fi \
     #     && if [ "$CHROME_REPO" = "" ]; then CHROME_REPO="main"; fi \
     #     && if [ "$CHROME_DRIVER_VER" = "" ]; then CHROME_DRIVER_VER="main"; fi \
@@ -46,7 +46,7 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     #     && echo "The Firefox repository is $FIREFOX_REPO" \
     #     && echo "---------------------------------------" \
     #     && echo "The selenium firefox driver version is $FIREFOX_DRIVER_VER" \
-    #     && esac \
+    && esac
     # && echo "---------------------------------------" \
     # && echo "Python version is $PYTHON_VERSION" \
     # && apt-get update --assume-yes && apt-get install --assume-yes \
