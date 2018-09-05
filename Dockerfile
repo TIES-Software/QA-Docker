@@ -164,9 +164,10 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
         && echo "$bit" \
         && echo "---------------------------------------" \
         && mkdir -p /tmp/geckodriver \
-        && wget https://github.com/mozilla/geckodriver/releases/download/v0.21.0/geckodriver-v0.21.0-linux64.tar.gz > /tmp/geckodriver.tar.gz \
-        && sh -c 'tar -x geckodriver -zf /tmp/geckodriver-v0.21.0-linux64.tar.gz -O > /usr/bin/geckodriver' \
-        && rm -rf /tmp/geckodriver.tar.gz \
+        && cd /tmp/geckodriver \
+        && wget -O /tmp/geckodriver/geckodriver.tar.gz https://github.com/mozilla/geckodriver/releases/download/v0.21.0/geckodriver-v0.21.0-linux64.tar.gz \
+        && tar -xf /tmp/geckodriver/geckodriver.tar.gz -C /usr/bin \
+        && rm -rf /tmp/geckodriver/geckodriver.tar.gz \
         && chmod +x /usr/bin/geckodriver \
         # && if [ "$FIREFOX_VERSION" = "previous" ]; then ln -snf "/usr/local/bin/firefox-browser /usr/bin/firefox"; fi \
         # && if [ "$FIREFOX_VERSION" = "beta" ]; then ln -snf "/usr/bin/firefox-beta /usr/bin/firefox"; fi \
