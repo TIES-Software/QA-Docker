@@ -17,6 +17,7 @@ ARG PYTHON_VERSION="3"
 ENV DISPLAY=:99
 
 RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
+    && mkdir -p /tmp
     && if [ "$BROWSER" = "" ]; then BROWSER="chrome"; fi \
     && case "$BROWSER" in "chrome" ) \
         if [ "$CHROME_VERSION" = "" ]; then CHROME_VERSION="current"; fi \
@@ -167,14 +168,13 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
         && cd /tmp/geckodriver \
         && wget -O /tmp/geckodriver/geckodriver.tar.gz https://github.com/mozilla/geckodriver/releases/download/v0.21.0/geckodriver-v0.21.0-linux64.tar.gz \
         && tar -xf /tmp/geckodriver/geckodriver.tar.gz -C /usr/bin \
-        && rm -rf /tmp/geckodriver/geckodriver.tar.gz \
+        && rm -rf /tmp/geckogeckodriver.tar.gz \
         && chmod +x /usr/bin/geckodriver \
         # && if [ "$FIREFOX_VERSION" = "previous" ]; then ln -snf "/usr/local/bin/firefox-browser /usr/bin/firefox"; fi \
         # && if [ "$FIREFOX_VERSION" = "beta" ]; then ln -snf "/usr/bin/firefox-beta /usr/bin/firefox"; fi \
         && echo "-----------ENDING FIREFOX SETUP------------" ;; \
     esac \
-    && echo "-----------ENDING SYSTEM SETUP------------" \
-    && mkdir -p /tmp
+    && echo "-----------ENDING SYSTEM SETUP------------"
 
 
 # Define default command.
