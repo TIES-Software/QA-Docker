@@ -17,7 +17,7 @@ ARG PYTHON_VERSION="3"
 ENV DISPLAY=:99
 
 RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
-  && mkdir -p /tmp
+    && mkdir -p /tmp \
     && if [ "$BROWSER" = "" ]; then BROWSER="chrome"; fi \
     && case "$BROWSER" in "chrome" ) \
         if [ "$CHROME_VERSION" = "" ]; then CHROME_VERSION="current"; fi \
@@ -174,7 +174,7 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
         # && if [ "$FIREFOX_VERSION" = "beta" ]; then ln -snf "/usr/bin/firefox-beta /usr/bin/firefox"; fi \
         && echo "-----------ENDING FIREFOX SETUP------------" ;; \
     esac \
-    echo "-----------ENDING SYSTEM SETUP------------"
+    && echo "-----------ENDING SYSTEM SETUP------------"
 
 
 # Define default command.
