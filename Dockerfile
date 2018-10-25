@@ -61,7 +61,8 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
         chromium-codecs-ffmpeg-extra \
         gnupg \
         gnupg2 \
-        gnupg1 \
+        # Testing to see if it is really needed
+        # gnupg1 \
     && echo "---------------------------------------" \
     && echo "First apt-get update/install is completed" \
     && echo "---------------------------------------" \
