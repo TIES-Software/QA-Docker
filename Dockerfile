@@ -81,7 +81,7 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
     && if [ "$PYTHON_VERSION" = "" ]; then echo "Python 2 being installed" ; else echo "Python 3 being installed" ; fi \
     && echo "---------------------------------------" \
     && if [ "$PYTHON_VERSION" = "3" ] ; then echo "Starting python 3 and selenium install" apt-get update --assume-yes && apt-get install --assume-yes python3-pip \
-    && pip3 install -U selenium behave pytest pyodbc requests ; fi \
+    && pip3 install -U selenium behave pytest pyodbc requests faker; fi \
     && if [ "$PYTHON_VERSION" != "3" ]; then echo "Starting python 2 and selenium install" apt-get install --assume-yes python-pip python \
     && pip install selenium behave pytest requests ; fi \
     && echo "---------------------------------------" \
