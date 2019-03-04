@@ -109,7 +109,14 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
         && echo "$system_type" \
         && echo "---------------------------------------" \
         && if [ "$CHROME_VERSION" = "current" ]; then driver_ver="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`"; fi \
-        && if [ "$CHROME_VERSION" = "beta" ]; then driver_ver="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`"; fi \
+        && if [ "$CHROME_VERSION" = "beta" ]; then beta_version=$(/usr/bin/google-chrome-beta -version) \
+        && IFS=" " \
+        && set $beta_version \
+        && new_version=$3 \
+        && IFS=. \
+        && set $new_version \
+        && beta_url="http://chromedriver.storage.googleapis.com/LATEST_RELEASE_"$1"" \
+        && wget -qO- $beta_url; fi \
         && if [ "$CHROME_VERSION" = "previous" ]; then driver_ver="${CHROME_DRIVER_VER}"; fi \
         && echo "---------------------------------------" \
         && echo "$driver_ver" \
