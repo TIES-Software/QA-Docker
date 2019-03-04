@@ -121,18 +121,18 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
         && echo "---------------------------------------" \
         && echo "$new_version" \
         && echo "---------------------------------------" \
-        # && IFS=. \
-        # && set $new_version \
-        # && echo "---------------------------------------" \
-        # && echo "$1" \
-        # && echo "---------------------------------------" \
-        && beta_url="http://chromedriver.storage.googleapis.com/"$new_version"" \
+        && IFS=. \
+        && set $new_version \
+        && echo "---------------------------------------" \
+        && echo "$1" \
+        && echo "---------------------------------------" \
+        && beta_url="http://chromedriver.storage.googleapis.com/LATEST_RELEASE_"$1"" \
         && echo "---------------------------------------" \
         && echo "$beta_url" \
         && echo "---------------------------------------" \
-        && driver_ver=$(wget -qO- $beta_url); fi \
+        && driver_ver=$(wget -qO- "$beta_url") \
         && echo "---------------------------------------" \
-        && echo "$driver_ver" \
+        && echo "$driver_ver"; fi \
         && echo "---------------------------------------" \
         && if [ "$CHROME_VERSION" = "previous" ]; then driver_ver="${CHROME_DRIVER_VER}"; fi \
         && echo "---------------------------------------" \
