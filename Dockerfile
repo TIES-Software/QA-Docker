@@ -3,6 +3,7 @@ ARG PLATFORM="ubuntu"
 # FROM ubuntu:14.04
 FROM ${PLATFORM}
 
+ARG PLATFORM="ubuntu"
 ARG BROWSER
 ARG CHROME_VERSION
 ARG CHROME_INSTALL_CMD
@@ -16,27 +17,37 @@ ARG PYTHON_VERSION="3"
 
 ENV DISPLAY=:99
 
-RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
-    && mkdir -p /tmp \
-    && if [ "$BROWSER" = "" ]; then BROWSER="chrome"; fi \
-    && case "$BROWSER" in "chrome" ) \
-        if [ "$CHROME_VERSION" = "" ]; then CHROME_VERSION="current"; fi \
+RUN echo "---------------------------------------" \
+    && echo "BEGINNING RUN Command" \
+    && echo "---------------------------------------" \
+    && echo "$PLATFORM" \
+    && echo "---------------------------------------" \
+    && case "$PLATFORM" in "ubuntu:latest" ) \
+      echo "---------------------------------------" \
+      && echo "Linux Image Build Start" \
+      && echo "---------------------------------------" \
+      && mkdir -p /tmp \
+      && if [ "$BROWSER" = "" ]; then BROWSER="chrome"; fi \
+      && case "$BROWSER" in "chrome" ) \
+        echo "---------------------------------------" \
+        && echo "Get commands to Install Chrome" \
+        && echo "---------------------------------------" \
+        && if [ "$CHROME_VERSION" = "" ]; then CHROME_VERSION="current"; fi \
         && if [ "$CHROME_RELEASE" = "" ]; then CHROME_RELEASE="stable"; fi \
         && if [ "$CHROME_REPO" = "" ]; then CHROME_REPO="main"; fi \
         && if [ "$CHROME_DRIVER_VER" = "" ]; then CHROME_DRIVER_VER="main"; fi \
-        && echo "Image will be built with Chrome browser verion type of $CHROME_VERSION" \
         && echo "---------------------------------------" \
-        && echo "The command to install chrome is $CHROME_INSTALL_CMD" \
+        && echo "Chrome install command is $CHROME_INSTALL_CMD" \
         && echo "---------------------------------------" \
         && echo "The chrome release is $CHROME_RELEASE" \
         && echo "---------------------------------------" \
         && echo "The chrome repository is $CHROME_REPO" \
-        && echo "---------------------------------------" \
-       && echo "The selenium chrome driver version is $CHROME_DRIVER_VER" ;; \
-   esac \
-    && echo "---------------------------------------" \
-    && echo "Python version is $PYTHON_VERSION" \
-    && apt-get update --assume-yes && apt-get install --assume-yes \
+        && echo "---------------------------------------" ;; \
+      esac \
+      && echo "---------------------------------------" \
+      && echo "Install needed linux stuff/libraries" \
+      && echo "---------------------------------------" \
+      && apt-get update --assume-yes && apt-get install --assume-yes \
         curl \
         unzip \
         wget \
@@ -63,74 +74,94 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
         gnupg2 \
         # Testing to see if it is really needed
         # gnupg1 \
-    && echo "---------------------------------------" \
-    && echo "First apt-get update/install is completed" \
-    && echo "---------------------------------------" \
-    && curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
-    && curl https://packages.microsoft.com/config/ubuntu/14.04/prod.list > /etc/apt/sources.list.d/mssql-release.list \
-    && echo "---------------------------------------" \
-    && echo "Get odbc packages" \
-    && echo "---------------------------------------" \
-    && apt-get update -y \
-    && ACCEPT_EULA=Y apt-get -y install msodbcsql17  \
-    && ACCEPT_EULA=Y apt-get install -y  mssql-tools \
-    && ACCEPT_EULA=Y apt-get install -y  unixodbc-dev \
-    && echo export PATH="$PATH":/opt/mssql-tools/bin >> ~/.bash_profile \
-    && echo export PATH="$PATH":/opt/mssql-tools/bin >> ~/.bashrc \
-    && echo "---------------------------------------" \
-    && if [ "$PYTHON_VERSION" = "" ]; then echo "Python 2 being installed" ; else echo "Python 3 being installed" ; fi \
-    && echo "---------------------------------------" \
-    && if [ "$PYTHON_VERSION" = "3" ] ; then echo "Starting python 3 and selenium install" apt-get update --assume-yes && apt-get install --assume-yes python3-pip \
-    && pip3 install -U selenium behave pytest pyodbc requests faker; fi \
-    && if [ "$PYTHON_VERSION" != "3" ]; then echo "Starting python 2 and selenium install" apt-get install --assume-yes python-pip python \
-    && pip install selenium behave pytest requests ; fi \
-    && echo "---------------------------------------" \
-    && case "$BROWSER" in "chrome" ) \
-        echo $CHROME_VERSION \
+      && echo "---------------------------------------" \
+      && echo "First apt-get update/install is completed" \
+      && echo "---------------------------------------" \
+      && echo "Get ODBC packages" \
+      && echo "---------------------------------------" \
+      && curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
+      && curl https://packages.microsoft.com/config/ubuntu/14.04/prod.list > /etc/apt/sources.list.d/mssql-release.list \
+      && echo "---------------------------------------" \
+      && echo "Install ODBC packages" \
+      && echo "---------------------------------------" \
+      && apt-get update -y \
+      && ACCEPT_EULA=Y apt-get -y install msodbcsql17  \
+      && ACCEPT_EULA=Y apt-get install -y  mssql-tools \
+      && ACCEPT_EULA=Y apt-get install -y  unixodbc-dev \
+      && echo export PATH="$PATH":/opt/mssql-tools/bin >> ~/.bash_profile \
+      && echo export PATH="$PATH":/opt/mssql-tools/bin >> ~/.bashrc \
+      && echo "---------------------------------------" \
+      && if [ "$PYTHON_VERSION" = "" ]; then echo "Python 2 being installed" ; else echo "Python 3 being installed" ; fi \
+      && echo "---------------------------------------" \
+      && if [ "$PYTHON_VERSION" = "3" ] ; then echo "Starting python 3 and selenium install" apt-get update --assume-yes && apt-get install --assume-yes python3-pip \
+      && echo "---------------------------------------" \
+      && pip3 install -U selenium behave pytest pyodbc requests faker; fi \
+      && echo "---------------------------------------" \
+      && if [ "$PYTHON_VERSION" != "3" ]; then echo "Starting python 2 and selenium install" apt-get install --assume-yes python-pip python \
+      && echo "---------------------------------------" \
+      && pip install selenium behave pytest requests faker ; fi \
+      && case "$BROWSER" in "chrome" ) \
+        echo "---------------------------------------" \
+        && echo "Install chromedriver per chrome browser version installed" \
         && echo "---------------------------------------" \
-        && if [ "$CHROME_VERSION" = "previous" ]; then CHROME_RELEASE="bionic"; fi \
-        && if [ "$CHROME_VERSION" = "previous" ]; then CHROME_REPO="universe"; fi \
-        && if [ "$CHROME_VERSION" = "previous" ]; then CHROME_INSTALL_CMD="chromium-browser"; fi \
-        && if [ "$CHROME_VERSION" = "beta" ]; then CHROME_INSTALL_CMD="google-chrome-beta"; fi \
-        && if [ "$CHROME_VERSION" = "unstable" ]; then CHROME_INSTALL_CMD="google-chrome-unstable"; fi \
-        && if [ "$CHROME_VERSION" = "current"  ]; then CHROME_INSTALL_CMD="google-chrome-stable"; fi \
+        && echo $CHROME_VERSION \
+        && echo "---------------------------------------" \
+        && if [ "$CHROME_VERSION" = "previous" ]; then CHROME_RELEASE="xenial" CHROME_REPO="universe" CHROME_INSTALL_CMD="chromium-browser"; fi \
+#        && if [ "$CHROME_VERSION" = "previous" ]; then CHROME_REPO="universe"; fi \
+#        && if [ "$CHROME_VERSION" = "previous" ]; then CHROME_INSTALL_CMD="chromium-browser"; fi \
+        && if [ "$CHROME_VERSION" = "beta" ]; then CHROME_INSTALL_CMD="google-chrome-beta" CHROME_RELEASE="stable" CHROME_REPO="main"; fi \
+        && if [ "$CHROME_VERSION" = "unstable" ]; then CHROME_INSTALL_CMD="google-chrome-unstable" CHROME_RELEASE="stable" CHROME_REPO="main"; fi \
+        && if [ "$CHROME_VERSION" = "current"  ]; then CHROME_INSTALL_CMD="google-chrome-stable" CHROME_RELEASE="stable" CHROME_REPO="main"; fi \
         && wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
-        && if [ "$CHROME_VERSION" = "previous" ]; then cd /tmp \
-        && mkdir -p chrome-deb \
-        && cd chrome-deb || return \
-        && sh -c echo http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb >> /etc/apt/sources.list.d/google-chrome-${CHROME_RELEASE}.list \
-        && curl http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb --output /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb \
-        && dpkg -i /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb; fi \
-        && if [ "$CHROME_VERSION" = "current" ] || [ $CHROME_VERSION = "beta" ]; then sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list' \
+        # && if [ "$CHROME_VERSION" = "previous" ]; then cd /tmp \
+        # driver_ver="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`" \
+        # && echo "---------------------------------------" \
+        # && echo "Setting up chromedriver for previous version of Chrome" \
+        # && echo "---------------------------------------" \
+        # && mkdir -p chrome-deb \
+        # && cd chrome-deb || return \
+        # && sh -c echo http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_72.0.3626.121-0ubuntu1_amd64.deb >> /etc/apt/sources.list.d/google-chrome-${CHROME_RELEASE}.list \
+        # #&& sh -c echo http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb >> /etc/apt/sources.list.d/google-chrome-${CHROME_RELEASE}.list \
+        # #&& curl http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb --output /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb \
+        # && curl http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_72.0.3626.121-0ubuntu1_amd64.deb --output /tmp/chrome-deb/chromium-browser_72.0.3626.121-0ubuntu1_amd64.deb \
+        # && apt install -y chromium-browser; fi \
+        # && dpkg -i /tmp/chrome-deb/chromium-browser_72.0.3626.121-0ubuntu1_amd64.deb; fi \
+        && if [ "$CHROME_VERSION" = "current" ] || [ "$CHROME_VERSION" = "beta" ]; then sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list' \
         && apt-get -y update \
         && apt-get install -y ${CHROME_INSTALL_CMD}; fi \
+        && if [ "$CHROME_VERSION" = "previous" ]; then apt-get install -y ${CHROME_INSTALL_CMD}; fi \
         && system_type=$(uname -m) \
         && echo "---------------------------------------" \
         && echo "$system_type" \
         && echo "---------------------------------------" \
         && echo "$CHROME_VERSION" \
         && echo "---------------------------------------" \
-        && if [ "$CHROME_VERSION" = "current" ]; then driver_ver="`wget -qO- http://chromedriver.storage.googleapis.com/LATEST_RELEASE`"; fi \
-        && if [ "$CHROME_VERSION" = "beta" ]; then beta_version=$(/usr/bin/google-chrome-beta -version) \
         && echo "---------------------------------------" \
-        && echo "$beta_version" \
+        && echo "Get the chrome browser version currently setup and extract the version" \
+        && echo "Use that extract version to get the chromedriver needed" \
+        && echo "---------------------------------------" \
+        && if [ "$CHROME_VERSION" = "beta" ]; then version=$(/usr/bin/google-chrome-beta -version); fi \
+        && if [ "$CHROME_VERSION" = "current" ]; then version=$(/usr/bin/google-chrome -version); fi \
+        && if [ "$CHROME_VERSION" = "previous" ]; then version=$(/usr/bin/google-chrome-beta -version); fi \
+        && echo "---------------------------------------" \
+        && echo "$version" \
         && echo "---------------------------------------" \
         && IFS=" " \
-        && set $beta_version \
+        && set $version \
         && new_version=$3 \
         && echo "---------------------------------------" \
         && echo "$new_version" \
         && echo "---------------------------------------" \
-        # && IFS=. \
-        # && set $new_version \
-        # && echo "---------------------------------------" \
-        # && echo "$1" \
-        # && echo "---------------------------------------" \
-        && beta_url="http://chromedriver.storage.googleapis.com/"$new_version"" \
+        && IFS=. \
+        && set $new_version \
         && echo "---------------------------------------" \
-        && echo "$beta_url" \
+        && echo "$1" \
         && echo "---------------------------------------" \
-        && driver_ver=$(wget -qO- $beta_url); fi \
+        && url="http://chromedriver.storage.googleapis.com/LATEST_RELEASE_"$1"" \
+        && echo "---------------------------------------" \
+        && echo "$url" \
+        && echo "---------------------------------------" \
+        && driver_ver=$(wget -qO- "$url") \
         && echo "---------------------------------------" \
         && echo "$driver_ver" \
         && echo "---------------------------------------" \
@@ -152,8 +183,8 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
         && echo "---------------------------------------" \
         && echo "End of Chrome and Chrome driver install" \
         && echo "---------------------------------------" ;;\
-    esac \
-    && case "$BROWSER" in "firefox" ) \
+      esac \
+      && case "$BROWSER" in "firefox" ) \
         echo "---------------------------------------" \
         && echo "Beginning Firefox and Gecko Driver Install" \
         && echo "---------------------------------------" \
@@ -198,8 +229,9 @@ RUN echo "-----------BEGINNING SYSTEM SETUP------------" \
         # && if [ "$FIREFOX_VERSION" = "previous" ]; then ln -snf "/usr/local/bin/firefox-browser /usr/bin/firefox"; fi \
         # && if [ "$FIREFOX_VERSION" = "beta" ]; then ln -snf "/usr/bin/firefox-beta /usr/bin/firefox"; fi \
         && echo "-----------ENDING FIREFOX SETUP------------" ;; \
-    esac \
-    && echo "-----------ENDING SYSTEM SETUP------------"
+      esac \
+      && echo "-----------ENDING Linux SETUP------------" ;; \
+    esac
 
 
 # Define default command.
