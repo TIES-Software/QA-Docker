@@ -4,12 +4,12 @@ ARG PLATFORM="ubuntu"
 FROM ${PLATFORM}
 
 ARG PLATFORM="ubuntu"
-ARG BROWSER
-ARG CHROME_VERSION
-ARG CHROME_INSTALL_CMD
-ARG CHROME_RELEASE
-ARG CHROME_REPO
-ARG CHROME_DRIVER_VER
+ARG BROWSER="chrome"
+ARG CHROME_VERSION="current"
+ARG CHROME_INSTALL_CMD="google-chrome"
+ARG CHROME_RELEASE="stable"
+ARG CHROME_REPO="main"
+ARG CHROME_DRIVER_VER="72"
 ARG FIREFOX_REL
 ARG FIREFOX_VER
 ARG GECKODRIVER_VER
@@ -121,11 +121,11 @@ RUN echo "---------------------------------------" \
         # && mkdir -p chrome-deb \
         # && cd chrome-deb || return \
         # && sh -c echo http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_72.0.3626.121-0ubuntu1_amd64.deb >> /etc/apt/sources.list.d/google-chrome-${CHROME_RELEASE}.list \
-        # #&& sh -c echo http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb >> /etc/apt/sources.list.d/google-chrome-${CHROME_RELEASE}.list \
-        # #&& curl http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb --output /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb \
+        # && sh -c echo http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb >> /etc/apt/sources.list.d/google-chrome-${CHROME_RELEASE}.list \
+        # && curl http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb --output /tmp/chrome-deb/chromium-browser_65.0.3325.181-0ubuntu0.14.04.1_amd64.deb \
         # && curl http://security.ubuntu.com/ubuntu/pool/universe/c/chromium-browser/chromium-browser_72.0.3626.121-0ubuntu1_amd64.deb --output /tmp/chrome-deb/chromium-browser_72.0.3626.121-0ubuntu1_amd64.deb \
         # && apt install -y chromium-browser; fi \
-        # && dpkg -i /tmp/chrome-deb/chromium-browser_72.0.3626.121-0ubuntu1_amd64.deb; fi \
+        # && dpkg -i /tmp/chrome-deb/chromium-browser_72.0.3626.121-0ubuntu1_amd64.deb \
         && if [ "$CHROME_VERSION" = "current" ] || [ "$CHROME_VERSION" = "beta" ]; then sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list' \
         && apt-get -y update \
         && apt-get install -y ${CHROME_INSTALL_CMD}; fi \
@@ -135,7 +135,6 @@ RUN echo "---------------------------------------" \
         && echo "$system_type" \
         && echo "---------------------------------------" \
         && echo "$CHROME_VERSION" \
-        && echo "---------------------------------------" \
         && echo "---------------------------------------" \
         && echo "Get the chrome browser version currently setup and extract the version" \
         && echo "Use that extract version to get the chromedriver needed" \
@@ -163,7 +162,7 @@ RUN echo "---------------------------------------" \
         && echo "---------------------------------------" \
         && driver_ver=$(wget -qO- "$url") \
         && echo "---------------------------------------" \
-        && echo "$driver_ver"; fi \
+        && echo "$driver_ver" \
         && echo "---------------------------------------" \
         && if [ "$CHROME_VERSION" = "previous" ]; then driver_ver="${CHROME_DRIVER_VER}"; fi \
         && echo "---------------------------------------" \
