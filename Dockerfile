@@ -178,7 +178,8 @@ RUN echo "---------------------------------------" \
         && rm -rf /tmp/chromedriver/chromedriver.zip \
         && chmod +x /usr/local/bin/chromedriver \
         && if [ "$CHROME_VERSION" = "previous" ]; then ln -snf "/usr/local/bin/chromium-browser /usr/bin/google-chrome"; fi \
-        && if [ "$CHROME_VERSION" = "beta" ]; then ln -snf "/usr/bin/google-chrome-beta /usr/bin/google-chrome"; fi \
+        && if [ "$CHROME_VERSION" = "beta" ]; then ln -snf "/usr/bin/google-chrome-beta /usr/bin/google-chrome-beta"; fi \
+        && if [ "$CHROME_VERSION" = "current" ]; then ln -snf "/usr/bin/google-chrome /usr/bin/google-chrome"; fi \
         && echo "---------------------------------------" \
         && echo "End of Chrome and Chrome driver install" \
         && echo "---------------------------------------" ;;\
